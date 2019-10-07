@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ProjetoNADD.Models.Curso>
+
+@{
+    ViewData["Title"] = "Cursos";
+}
+
+<h2>Cursos</h2>
+
+<p>
+    <a asp-action="Create">Inserir Curso</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome_Curso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AreaId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome_Curso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area.Nome_Area)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id_Curso">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id_Curso">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id_Curso">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

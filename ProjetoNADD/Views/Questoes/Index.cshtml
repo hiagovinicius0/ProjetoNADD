@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ProjetoNADD.Models.Questao>
+
+@{
+    ViewData["Title"] = "Questões";
+}
+
+<h2>Questões</h2>
+
+<p>
+    <a asp-action="Create">Inserir Questão</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Avaliacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contextualizacao_Questao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clareza_Questao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Complexidade_Questao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observacoes_Questao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Avaliacao.Nome_Avaliacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contextualizacao_Questao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clareza_Questao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Complexidade_Questao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observacoes_Questao)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id_Questao">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id_Questao">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id_Questao">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

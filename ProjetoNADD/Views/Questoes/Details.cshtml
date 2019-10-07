@@ -1,0 +1,54 @@
+﻿@model ProjetoNADD.Models.Questao
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Questão</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Numero)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id_Numero)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Avaliacao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Avaliacao.Nome_Avaliacao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Contextualizacao_Questao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Contextualizacao_Questao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Clareza_Questao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Clareza_Questao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Complexidade_Questao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Complexidade_Questao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Observacoes_Questao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Observacoes_Questao)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id_Questao">Editar</a> |
+    <a asp-action="Index">Voltar para Questões</a>
+</div>

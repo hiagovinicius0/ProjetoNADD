@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ProjetoNADD.Models.Disciplina>
+
+@{
+    ViewData["Title"] = "Disciplinas";
+}
+
+<h2>Disciplinas</h2>
+
+<p>
+    <a asp-action="Create">Inserir Disciplina</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome_Disciplina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Periodo_Disciplina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ano_Disciplina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Curso)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome_Disciplina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Periodo_Disciplina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ano_Disciplina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curso.Nome_Curso)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id_Disciplina">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id_Disciplina">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id_Disciplina">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

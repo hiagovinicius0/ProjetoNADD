@@ -1,0 +1,30 @@
+﻿@model ProjetoNADD.Models.Curso
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Curso</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome_Curso)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome_Curso)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AreaId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Area.Id_Area)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id_Curso">Editar</a> |
+    <a asp-action="Index">Voltar para Cursos</a>
+</div>

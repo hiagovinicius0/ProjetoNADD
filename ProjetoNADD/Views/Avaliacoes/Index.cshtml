@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ProjetoNADD.Models.Avaliacao>
+
+@{
+    ViewData["Title"] = "Avaliações";
+}
+
+<h2>Avaliações</h2>
+
+<p>
+    <a asp-action="Create">Inserir Avaliação</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome_Avaliacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observacoes_Avaliacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Disciplina)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome_Avaliacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observacoes_Avaliacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disciplina.Nome_Disciplina)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id_Avaliacao">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id_Avaliacao">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id_Avaliacao">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

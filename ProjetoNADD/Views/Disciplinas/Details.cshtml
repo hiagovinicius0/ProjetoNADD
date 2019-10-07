@@ -1,0 +1,42 @@
+﻿@model ProjetoNADD.Models.Disciplina
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Disciplina</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome_Disciplina)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome_Disciplina)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Periodo_Disciplina)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Periodo_Disciplina)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ano_Disciplina)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ano_Disciplina)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Curso)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Curso.Nome_Curso)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id_Disciplina">Editar</a> |
+    <a asp-action="Index">Voltar para Disciplinas</a>
+</div>

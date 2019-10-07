@@ -1,0 +1,108 @@
+﻿@model ProjetoNADD.Models.Avaliacao
+
+@{
+    ViewData["Title"] = "Inserir Avaliação";
+}
+
+<h2>Inserir</h2>
+
+<h4>Avaliação</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nome_Avaliacao" class="control-label"></label>
+                <input asp-for="Nome_Avaliacao" class="form-control" />
+                <span asp-validation-for="Nome_Avaliacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ValorExplicitoProva_Avaliacao" /> @Html.DisplayNameFor(model => model.ValorExplicitoProva_Avaliacao)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ValorExplicitoQuestoes_Avaliacao" /> @Html.DisplayNameFor(model => model.ValorExplicitoQuestoes_Avaliacao)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="SomatorioQuestoes_Avaliacao" /> @Html.DisplayNameFor(model => model.SomatorioQuestoes_Avaliacao)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Referencias_Avaliacao" /> @Html.DisplayNameFor(model => model.Referencias_Avaliacao)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="QuestoesMEeD_Avaliacao" /> @Html.DisplayNameFor(model => model.QuestoesMEeD_Avaliacao)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValorProva_Avaliacao" class="control-label"></label>
+                <input asp-for="ValorProva_Avaliacao" class="form-control" />
+                <span asp-validation-for="ValorProva_Avaliacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroQuestoes_Avaliacao" class="control-label"></label>
+                <input asp-for="NumeroQuestoes_Avaliacao" class="form-control" />
+                <span asp-validation-for="NumeroQuestoes_Avaliacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="EquilibrioValorQuestoes_Avaliacao" /> @Html.DisplayNameFor(model => model.EquilibrioValorQuestoes_Avaliacao)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Diversificacao_Avaliacao" /> @Html.DisplayNameFor(model => model.Diversificacao_Avaliacao)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Contextualidade_Avaliacao" /> @Html.DisplayNameFor(model => model.Contextualidade_Avaliacao)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Observacoes_Avaliacao" class="control-label"></label>
+                <input asp-for="Observacoes_Avaliacao" class="form-control" />
+                <span asp-validation-for="Observacoes_Avaliacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisciplinaId" class="control-label"></label>
+                <select asp-for="DisciplinaId" class ="form-control" asp-items="ViewBag.DisciplinaId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Inserir" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para Avaliações</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
