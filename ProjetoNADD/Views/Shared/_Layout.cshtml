@@ -76,6 +76,8 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
+    @RenderSection("ScriptPage", required: false)
+    @RenderSection("Styles", required: false)
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -49,6 +50,7 @@ namespace ProjetoNADD.Controllers
         public IActionResult Create()
         {
             ViewData["CursoId"] = new SelectList(_context.Curso, "Id_Curso", "Nome_Curso");
+            ViewData["ProfessoresId"] = new SelectList(_context.Professor, "Id_Professor", "Nome_Professor");
             return View();
         }
 
@@ -56,7 +58,30 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        public string Create(int[] professores, string Nome_Disciplina, int Periodo_Disciplina, int Ano_Disciplina, int CursoId)
+        {
+            Disciplina disciplina = new Disciplina();
+            disciplina.Nome_Disciplina = Nome_Disciplina;
+            disciplina.Periodo_Disciplina = Periodo_Disciplina;
+            disciplina.Ano_Disciplina = Ano_Disciplina;
+            disciplina.CursoId = CursoId;
+            _context.Add(disciplina);
+            _context.SaveChanges();
+            if (professores.Count() > 0)
+            {
+                for (int i = 0; i < professores.Count(); i++)
+                {
+                    DisciplinaProfessor disciplinaProf = new DisciplinaProfessor();
+                    disciplinaProf.Disciplina_id = disciplina.Id_Disciplina;
+                    disciplinaProf.Professor_id = professores[i];
+                    _context.Add(disciplinaProf);
+                    _context.SaveChanges();
+                }
+            }
+            return "SUCCESS";
+        }
+        /*[ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Create([Bind("Id_Disciplina,Nome_Disciplina,Periodo_Disciplina,Ano_Disciplina,CursoId")] Disciplina disciplina)
         {
             if (ModelState.IsValid)
@@ -65,9 +90,29 @@ namespace ProjetoNADD.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            var lstProfessor = Request.Form["Professor_id"];
+            if (!string.IsNullOrEmpty(lstProfessor))
+            {
+                int[] splProfessor = lstProfessor.Select(int.Parse).ToArray();
+                if(splProfessor.Count() > 0)
+                {
+                    for (int i = 0; i < splProfessor.Count(); i++)
+                    {
+                        var Disciplinaprof = new DisciplinaProfessor();
+                        Disciplinaprof.Disciplina_id = disciplina.Id_Disciplina;
+                        Disciplinaprof.Professor_id = splProfessor[i];
+                        _context.Add(Disciplinaprof);
+                        _context.SaveChanges();
+                    }
+                    
+                    
+                }
+            }
+
             ViewData["CursoId"] = new SelectList(_context.Curso, "Id_Curso", "Nome_Curso", disciplina.CursoId);
+            string professores = 
             return View(disciplina);
-        }
+        }*/
 
         // GET: Disciplinas/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -82,6 +127,8 @@ namespace ProjetoNADD.Controllers
             {
                 return NotFound();
             }
+            ViewData["ProfessoresId"] = new SelectList(_context.Professor, "Id_Professor", "Nome_Professor");
+            ViewData["ProfessoresMarcados"] = new SelectList(_context.DisciplinaProfessor, "Professor_id", "", disciplina.Id_Disciplina);
             ViewData["CursoId"] = new SelectList(_context.Curso, "Id_Curso", "Nome_Curso", disciplina.CursoId);
             return View(disciplina);
         }
