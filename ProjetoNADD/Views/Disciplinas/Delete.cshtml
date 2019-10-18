@@ -1,44 +1,38 @@
 ﻿@model ProjetoNADD.Models.Disciplina
 
-@{
-    ViewData["Title"] = "Excluir";
-}
-
-<h2>Excluir</h2>
-
-<h3>Tem certeza que deseja excluir essa Disciplina</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome_Disciplina)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome_Disciplina)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Periodo_Disciplina)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Periodo_Disciplina)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Ano_Disciplina)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Ano_Disciplina)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Curso)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Curso.Nome_Curso)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id_Disciplina" />
-        <input type="submit" value="Excluir" class="btn btn-default" /> |
-        <a asp-action="Index">Voltar para Disciplinas</a>
-    </form>
+<div id="cabecalho">
+    <h5>Excluir Disciplina</h5>
+</div>
+<div id="conteudo_create">
+    <h6>Tem certeza que deseja excluir essa Disciplina? </h6>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <input type="hidden" value="@Html.DisplayFor(model => model.Id_Disciplina)" id="Id_Disciplina"/>
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome_Disciplina)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nome_Disciplina)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Periodo_Disciplina)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Periodo_Disciplina)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Ano_Disciplina)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Ano_Disciplina)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Curso)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Curso.Nome_Curso)
+            </dd>
+        </dl>
+    </div>
 </div>

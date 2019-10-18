@@ -21,10 +21,22 @@ namespace ProjetoNADD.Controllers
         }
 
         // GET: Disciplinas
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var projetoNADDContext = _context.Disciplina.Include(d => d.Curso);
-            return View(await projetoNADDContext.ToListAsync());
+            return View();
+        }
+        [HttpPost]
+        public object GetDisciplinas()
+        {
+            var query = _context.Disciplina.Join(_context.Curso, d => d.CursoId, c => c.Id_Curso, (d, c) =>
+            new {
+                Id_Disciplina = d.Id_Disciplina,
+                Nome_Disciplina = d.Nome_Disciplina,
+                Periodo_Disciplina = d.Periodo_Disciplina,
+                Ano_Disciplina = d.Ano_Disciplina,
+                Nome_Curso = c.Nome_Curso
+            }).ToList();
+            return query;
         }
 
         // GET: Disciplinas/Details/5
@@ -90,39 +102,6 @@ namespace ProjetoNADD.Controllers
             }).ToList();
             return query;
         }
-        /*[ValidateAntiForgeryToken]
-        
-        public async Task<IActionResult> Create([Bind("Id_Disciplina,Nome_Disciplina,Periodo_Disciplina,Ano_Disciplina,CursoId")] Disciplina disciplina)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(disciplina);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            var lstProfessor = Request.Form["Professor_id"];
-            if (!string.IsNullOrEmpty(lstProfessor))
-            {
-                int[] splProfessor = lstProfessor.Select(int.Parse).ToArray();
-                if(splProfessor.Count() > 0)
-                {
-                    for (int i = 0; i < splProfessor.Count(); i++)
-                    {
-                        var Disciplinaprof = new DisciplinaProfessor();
-                        Disciplinaprof.Disciplina_id = disciplina.Id_Disciplina;
-                        Disciplinaprof.Professor_id = splProfessor[i];
-                        _context.Add(Disciplinaprof);
-                        _context.SaveChanges();
-                    }
-                    
-                    
-                }
-            }
-
-            ViewData["CursoId"] = new SelectList(_context.Curso, "Id_Curso", "Nome_Curso", disciplina.CursoId);
-            string professores = 
-            return View(disciplina);
-        }*/
 
         // GET: Disciplinas/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -196,14 +175,16 @@ namespace ProjetoNADD.Controllers
         }
 
         // POST: Disciplinas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public string Delete(int id)
         {
-            var disciplina = await _context.Disciplina.FindAsync(id);
+            var cliente = _context.DisciplinaProfessor.Where(c => c.Disciplina_id == id).ToList();
+            _context.DisciplinaProfessor.RemoveRange(cliente);
+            _context.SaveChanges();
+            var disciplina =  _context.Disciplina.Where(c => c.Id_Disciplina == id).FirstOrDefault();
             _context.Disciplina.Remove(disciplina);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            _context.SaveChanges();
+            return "SUCESS";
         }
 
         private bool DisciplinaExists(int id)
