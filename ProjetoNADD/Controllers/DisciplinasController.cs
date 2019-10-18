@@ -80,6 +80,16 @@ namespace ProjetoNADD.Controllers
             }
             return "SUCCESS";
         }
+        [HttpPost]
+        public object ProfessoresMarcados(int disciplina)
+        {
+            /*List<DisciplinaProfessor> result = _context.DisciplinaProfessor.FromSql("SELECT Professor_id FROM dbo.DisciplinaProfessor WHERE Disciplina_id = "+disciplina).ToList();
+            return result.ToString();*/
+            var query = _context.DisciplinaProfessor.Where(d => d.Disciplina_id == disciplina).Select(st => new {
+                Id = st.Professor_id
+            }).ToList();
+            return query;
+        }
         /*[ValidateAntiForgeryToken]
         
         public async Task<IActionResult> Create([Bind("Id_Disciplina,Nome_Disciplina,Periodo_Disciplina,Ano_Disciplina,CursoId")] Disciplina disciplina)
@@ -137,36 +147,33 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Disciplina,Nome_Disciplina,Periodo_Disciplina,Ano_Disciplina,CursoId")] Disciplina disciplina)
+        public string  Edit(int Id_Disciplina, string Nome_Disciplina, int Periodo_Disciplina, int Ano_Disciplina, int CursoId, int[] professores)
         {
-            if (id != disciplina.Id_Disciplina)
-            {
-                return NotFound();
-            }
+            Disciplina disciplina = _context.Disciplina.Where(d => d.Id_Disciplina == Id_Disciplina).FirstOrDefault<Disciplina>(); ;
+            disciplina.Id_Disciplina = Id_Disciplina;
+            disciplina.Nome_Disciplina = Nome_Disciplina;
+            disciplina.Periodo_Disciplina = Periodo_Disciplina;
+            disciplina.Ano_Disciplina = Ano_Disciplina;
+            disciplina.CursoId = CursoId;
+            _context.Update(disciplina);
+            _context.SaveChanges();
 
-            if (ModelState.IsValid)
+            var cliente = _context.DisciplinaProfessor.Where(c => c.Disciplina_id == Id_Disciplina).ToList();
+
+            _context.DisciplinaProfessor.RemoveRange(cliente);
+            _context.SaveChanges();
+            if (professores.Count() > 0)
             {
-                try
+                for (int i = 0; i < professores.Count(); i++)
                 {
-                    _context.Update(disciplina);
-                    await _context.SaveChangesAsync();
+                    DisciplinaProfessor disciplinaProf = new DisciplinaProfessor();
+                    disciplinaProf.Disciplina_id = disciplina.Id_Disciplina;
+                    disciplinaProf.Professor_id = professores[i];
+                    _context.Add(disciplinaProf);
+                    _context.SaveChanges();
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DisciplinaExists(disciplina.Id_Disciplina))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["CursoId"] = new SelectList(_context.Curso, "Id_Curso", "Nome_Curso", disciplina.CursoId);
-            return View(disciplina);
+            return "SUCCESS";
         }
 
         // GET: Disciplinas/Delete/5
