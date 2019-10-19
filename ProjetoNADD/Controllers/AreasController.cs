@@ -24,7 +24,12 @@ namespace ProjetoNADD.Controllers
         {
             return View(await _context.Area.ToListAsync());
         }
-
+        [HttpPost]
+        public object GetAreas()
+        {
+            var query = _context.Area.ToList();
+            return query;
+        }
         // GET: Areas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -53,16 +58,13 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id_Area,Nome_Area")] Area area)
+        public string Create(string Nome_Area)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(area);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(area);
+            Area area = new Area();
+            area.Nome_Area = Nome_Area;
+            _context.Add(area);
+            _context.SaveChanges();
+            return "SUCCESS";
         }
 
         // GET: Areas/Edit/5
@@ -85,35 +87,14 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Area,Nome_Area")] Area area)
+        public string Edit(int Id_Area, string Nome_Area)
         {
-            if (id != area.Id_Area)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(area);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AreaExists(area.Id_Area))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(area);
+            Area area = _context.Area.Where(d => d.Id_Area == Id_Area).FirstOrDefault<Area>(); ;
+            area.Id_Area = Id_Area;
+            area.Nome_Area = Nome_Area;
+            _context.Update(area);
+            _context.SaveChanges();
+            return "SUCCESS";
         }
 
         // GET: Areas/Delete/5
@@ -135,14 +116,13 @@ namespace ProjetoNADD.Controllers
         }
 
         // POST: Areas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public string Delete(int id)
         {
-            var area = await _context.Area.FindAsync(id);
+            var area = _context.Area.Where(c => c.Id_Area == id).FirstOrDefault();
             _context.Area.Remove(area);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            _context.SaveChanges();
+            return "SUCESS";
         }
 
         private bool AreaExists(int id)
