@@ -6,8 +6,8 @@
         type: "POST",
         url: "../Disciplinas/GetDisciplinas",
         success: function (dados) {
+            $("#corpoTabela").html('')
             if (dados.length > 0) {
-                $("#corpoTabela").html('')
                 for (var i = 0; i < dados.length; i++) {
                     $("#corpoTabela").append("<tr><td>" + dados[i].nome_Disciplina + "</td><td>" + dados[i].periodo_Disciplina + "</td><td>" + dados[i].ano_Disciplina + "</td><td>" + dados[i].nome_Curso + "</td><td><a class='btn btn-success btn-xs' href='#' onclick='BuscaModal(" + dados[i].id_Disciplina + ", \"SHOW\")' title='Visualizar'>Detalhes</a>&nbsp;<a class='btn btn-warning btn-xs glyphicon glyphicon-pencil' href='#' onclick='BuscaModal(" + dados[i].id_Disciplina + ", \"EDIT\")' title='Editar'>Editar</a>&nbsp;<a class='btn btn-danger  glyphicon glyphicon-remove btn-xs'  href='#' onclick='BuscaModal(" + dados[i].id_Disciplina+", \"DEL\")' title='Excluir'>Excluir</a></td></tr>")
                 }

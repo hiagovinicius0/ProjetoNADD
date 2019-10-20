@@ -6,8 +6,8 @@
         type: "POST",
         url: "../Professores/GetProfessores",
         success: function (dados) {
+            $("#corpoTabela").html('')
             if (dados.length > 0) {
-                $("#corpoTabela").html('')
                 for (var i = 0; i < dados.length; i++) {
                     $("#corpoTabela").append("<tr><td>" + dados[i].nome_Professor + "</td><td><a class='btn btn-success btn-xs' href='#' onclick='BuscaModal(" + dados[i].id_Professor + ", \"SHOW\")' title='Visualizar'>Detalhes</a>&nbsp;<a class='btn btn-warning btn-xs glyphicon glyphicon-pencil' href='#' onclick='BuscaModal(" + dados[i].id_Professor + ", \"EDIT\")' title='Editar'>Editar</a>&nbsp;<a class='btn btn-danger  glyphicon glyphicon-remove btn-xs'  href='#' onclick='BuscaModal(" + dados[i].id_Professor + ", \"DEL\")' title='Excluir'>Excluir</a></td></tr>")
                 }
