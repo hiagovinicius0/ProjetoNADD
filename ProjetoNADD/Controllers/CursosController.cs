@@ -25,7 +25,17 @@ namespace ProjetoNADD.Controllers
             var projetoNADDContext = _context.Curso.Include(c => c.Area);
             return View(await projetoNADDContext.ToListAsync());
         }
-
+        [HttpPost]
+        public object GetCursos()
+        {
+            var query = _context.Curso.Join(_context.Area, d => d.AreaId, c => c.Id_Area, (d, c) =>
+            new {
+                Id_Curso = d.Id_Curso,
+                Nome_Curso = d.Nome_Curso,
+                Nome_Area = c.Nome_Area
+            }).ToList();
+            return query;
+        }
         // GET: Cursos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -56,17 +66,14 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id_Curso,Nome_Curso,AreaId")] Curso curso)
+        public string Create(string Nome_Curso, int AreaId)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(curso);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AreaId"] = new SelectList(_context.Area, "Id_Area", "Nome_Area", curso.AreaId);
-            return View(curso);
+            Curso curso = new Curso();
+            curso.Nome_Curso = Nome_Curso;
+            curso.AreaId = AreaId;
+            _context.Add(curso);
+            _context.SaveChanges();
+            return "SUCCESS";
         }
 
         // GET: Cursos/Edit/5
@@ -90,36 +97,14 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Curso,Nome_Curso,AreaId")] Curso curso)
+        public string Edit(int Id_Curso, string Nome_Curso, int AreaId)
         {
-            if (id != curso.Id_Curso)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(curso);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CursoExists(curso.Id_Curso))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AreaId"] = new SelectList(_context.Area, "Id_Area", "Nome_Area", curso.AreaId);
-            return View(curso);
+            Curso curso = _context.Curso.Where(d => d.Id_Curso == Id_Curso).FirstOrDefault<Curso>(); ;
+            curso.Nome_Curso = Nome_Curso;
+            curso.AreaId = AreaId;
+            _context.Update(curso);
+            _context.SaveChanges();
+            return "SUCCESS";
         }
 
         // GET: Cursos/Delete/5
@@ -142,14 +127,13 @@ namespace ProjetoNADD.Controllers
         }
 
         // POST: Cursos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public string Delete(int id)
         {
-            var curso = await _context.Curso.FindAsync(id);
+            var curso = _context.Curso.Where(c => c.Id_Curso == id).FirstOrDefault();
             _context.Curso.Remove(curso);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            _context.SaveChanges();
+            return "SUCESS";
         }
 
         private bool CursoExists(int id)

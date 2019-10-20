@@ -3,39 +3,71 @@
 @{
     ViewData["Title"] = "Cursos";
 }
+@section Styles{
 
+    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
+    <link href="~/css/site.css" />
+    <script src="~/lib/select2/js/select2.js"></script>
+    <link rel="stylesheet" href="./lib/DataTables/datatables.css" />
+    <script src="./lib/DataTables/datatables.min.js"></script>
+
+}
 <h2>Cursos</h2>
 
-<p>
-    <a asp-action="Create">Inserir Curso</a>
-</p>
-<table class="table">
+<div style="padding-top:20px; cursor:pointer;" class="col-sm-3">
+    <div class="panel panel-default">
+        <button type="button" class="btn btn-outline-primary" onclick="BuscaModal(0,'CAD')">Cadastrar Curso</button>
+    </div>
+</div>
+<br />
+<table class="table table-hover table-striped" id="tabelaCursos" style="cursor: pointer">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome_Curso)
+                Nome
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AreaId)
+                Área
             </th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome_Curso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area.Nome_Area)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id_Curso">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id_Curso">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id_Curso">Excluir</a>
-            </td>
-        </tr>
-}
+    <tbody id="corpoTabela">
     </tbody>
 </table>
+<div class="modal" tabindex="-1" role="dialog" data-target=".bd-example-modal-lg" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Título do modal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Texto do corpo do modal, é aqui.</p>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+@section ScriptPage{
+    <environment include="Development">
+        <script src="./lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="./lib/DataTables/datatables.min.js"></script>
+    </environment>
+    <link rel="stylesheet" href="./lib/DataTables/datatables.css" />
+
+    <link href="./lib/select2/css/select2.css" rel="stylesheet" />
+
+    <script src="./lib/select2/js/select2.js"></script>
+
+    <script src="./js/Cursos.js"></script>
+    <script>
+        $(document).ready(function () {
+            ListarCursos()
+        })
+    </script>
+}

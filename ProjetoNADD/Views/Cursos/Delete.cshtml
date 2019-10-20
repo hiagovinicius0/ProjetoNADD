@@ -1,15 +1,12 @@
 ﻿@model ProjetoNADD.Models.Curso
-
-@{
-    ViewData["Title"] = "Excluir Curso";
-}
-
-<h2>Excluir Curso</h2>
-
-<h3>Tem certeza que deseja excluir esse curso?</h3>
-<div>
+<div id="cabecalho">
+    <h5>Excluir Curso</h5>
+</div>
+<div id="conteudo_create">
+    <h6>Tem certeza que deseja excluir esse Curso?</h6>
     <hr />
     <dl class="dl-horizontal">
+        <input type="hidden" value="@Html.DisplayFor(model => model.Id_Curso)" id="Id_Curso" />
         <dt>
             @Html.DisplayNameFor(model => model.Nome_Curso)
         </dt>
@@ -20,13 +17,7 @@
             @Html.DisplayNameFor(model => model.AreaId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Area.Id_Area)
+            @Html.DisplayFor(model => model.Area.Nome_Area)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id_Curso" />
-        <input type="submit" value="Excluir" class="btn btn-default" /> |
-        <a asp-action="Index">Voltar para Cursos</a>
-    </form>
 </div>
