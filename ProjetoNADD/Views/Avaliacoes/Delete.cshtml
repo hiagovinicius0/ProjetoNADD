@@ -1,97 +1,91 @@
 ﻿@model ProjetoNADD.Models.Avaliacao
 
-@{
-    ViewData["Title"] = "Excluir";
-}
-
-<h2>Excluir</h2>
-
-<h3>Tem certeza que deseja excluir essa Avaliação?</h3>
-<div>    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome_Avaliacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome_Avaliacao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ValorExplicitoProva_Avaliacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ValorExplicitoProva_Avaliacao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ValorExplicitoQuestoes_Avaliacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ValorExplicitoQuestoes_Avaliacao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SomatorioQuestoes_Avaliacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SomatorioQuestoes_Avaliacao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Referencias_Avaliacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Referencias_Avaliacao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.QuestoesMEeD_Avaliacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.QuestoesMEeD_Avaliacao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ValorProva_Avaliacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ValorProva_Avaliacao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NumeroQuestoes_Avaliacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NumeroQuestoes_Avaliacao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EquilibrioValorQuestoes_Avaliacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EquilibrioValorQuestoes_Avaliacao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Diversificacao_Avaliacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Diversificacao_Avaliacao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Contextualidade_Avaliacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Contextualidade_Avaliacao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Observacoes_Avaliacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Observacoes_Avaliacao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Disciplina)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Disciplina.Nome_Disciplina)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id_Avaliacao" />
-        <input type="submit" value="Excluir" class="btn btn-default" /> |
-        <a asp-action="Index">Voltar para Avaliações</a>
-    </form>
+<div id="cabecalho">
+    <h5>Excluir Avaliação</h5>
+</div>
+<div id="conteudo_create">
+    <h6>Tem certeza que deseja excluir essa Avaliação?</h6>
+    <div>
+        <dl class="dl-horizontal">
+            <input type="hidden" value="@Html.DisplayFor(model => model.Id_Avaliacao)" id="Id_Avaliacao" />
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome_Avaliacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nome_Avaliacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ValorExplicitoProva_Avaliacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ValorExplicitoProva_Avaliacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ValorExplicitoQuestoes_Avaliacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ValorExplicitoQuestoes_Avaliacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SomatorioQuestoes_Avaliacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SomatorioQuestoes_Avaliacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Referencias_Avaliacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Referencias_Avaliacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.QuestoesMEeD_Avaliacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.QuestoesMEeD_Avaliacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ValorProva_Avaliacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ValorProva_Avaliacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NumeroQuestoes_Avaliacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NumeroQuestoes_Avaliacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EquilibrioValorQuestoes_Avaliacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EquilibrioValorQuestoes_Avaliacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Diversificacao_Avaliacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Diversificacao_Avaliacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Contextualidade_Avaliacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Contextualidade_Avaliacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Observacoes_Avaliacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Observacoes_Avaliacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Disciplina)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Disciplina.Nome_Disciplina)
+            </dd>
+        </dl>
+    </div>
 </div>

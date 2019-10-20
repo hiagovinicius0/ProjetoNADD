@@ -1,14 +1,9 @@
 ﻿@model ProjetoNADD.Models.Avaliacao
 
-@{
-    ViewData["Title"] = "Detalhes";
-}
-
-<h2>Detalhes</h2>
-
-<div>
-    <h4>Avaliação</h4>
-    <hr />
+<div id="cabecalho">
+    <h5>Visualizar Avaliação</h5>
+</div>
+<div id="conteudo_create">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Nome_Avaliacao)
@@ -89,8 +84,4 @@
             @Html.DisplayFor(model => model.Disciplina.Nome_Disciplina)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id_Avaliacao">Editar</a> |
-    <a asp-action="Index">Voltar para Avaliações</a>
 </div>

@@ -25,7 +25,18 @@ namespace ProjetoNADD.Controllers
             var projetoNADDContext = _context.Avaliacao.Include(a => a.Disciplina);
             return View(await projetoNADDContext.ToListAsync());
         }
-
+        [HttpPost]
+        public object GetAvaliacoes()
+        {
+            var query = _context.Avaliacao.Join(_context.Disciplina, d => d.DisciplinaId, c => c.Id_Disciplina, (d, c) =>
+            new {
+                Id_Avaliacao = d.Id_Avaliacao,
+                Nome_Avaliacao = d.Nome_Avaliacao,
+                Observacoes_Avaliacao = d.Observacoes_Avaliacao,
+                Nome_Disciplina = c.Nome_Disciplina
+            }).ToList();
+            return query;
+        }
         // GET: Avaliacoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -56,17 +67,25 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id_Avaliacao,Nome_Avaliacao,ValorExplicitoProva_Avaliacao,ValorExplicitoQuestoes_Avaliacao,SomatorioQuestoes_Avaliacao,Referencias_Avaliacao,QuestoesMEeD_Avaliacao,ValorProva_Avaliacao,NumeroQuestoes_Avaliacao,EquilibrioValorQuestoes_Avaliacao,Diversificacao_Avaliacao,Contextualidade_Avaliacao,Observacoes_Avaliacao,DisciplinaId")] Avaliacao avaliacao)
+        public string Create(string Nome_Avaliacao, bool ValorExplicitoProva_Avaliacao, bool ValorExplicitoQuestoes_Avaliacao, bool SomatorioQuestoes_Avaliacao, bool Referencias_Avaliacao, bool QuestoesMEeD_Avaliacao, double ValorProva_Avaliacao, int NumeroQuestoes_Avaliacao, bool EquilibrioValorQuestoes_Avaliacao, bool Diversificacao_Avaliacao, bool Contextualidade_Avaliacao, string Observacoes_Avaliacao, int DisciplinaId)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(avaliacao);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["DisciplinaId"] = new SelectList(_context.Disciplina, "Id_Disciplina", "Nome_Disciplina", avaliacao.DisciplinaId);
-            return View(avaliacao);
+            Avaliacao avaliacao = new Avaliacao();
+            avaliacao.Nome_Avaliacao = Nome_Avaliacao;
+            avaliacao.ValorExplicitoProva_Avaliacao = ValorExplicitoProva_Avaliacao;
+            avaliacao.ValorExplicitoQuestoes_Avaliacao = ValorExplicitoQuestoes_Avaliacao;
+            avaliacao.SomatorioQuestoes_Avaliacao = SomatorioQuestoes_Avaliacao;
+            avaliacao.Referencias_Avaliacao = Referencias_Avaliacao;
+            avaliacao.QuestoesMEeD_Avaliacao = QuestoesMEeD_Avaliacao;
+            avaliacao.ValorProva_Avaliacao = ValorProva_Avaliacao;
+            avaliacao.NumeroQuestoes_Avaliacao = NumeroQuestoes_Avaliacao;
+            avaliacao.EquilibrioValorQuestoes_Avaliacao = EquilibrioValorQuestoes_Avaliacao;
+            avaliacao.Diversificacao_Avaliacao = Diversificacao_Avaliacao;
+            avaliacao.Contextualidade_Avaliacao = Contextualidade_Avaliacao;
+            avaliacao.Observacoes_Avaliacao = Observacoes_Avaliacao;
+            avaliacao.DisciplinaId = DisciplinaId;
+            _context.Add(avaliacao);
+            _context.SaveChanges();
+            return "SUCCESS";
         }
 
         // GET: Avaliacoes/Edit/5
@@ -90,36 +109,25 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Avaliacao,Nome_Avaliacao,ValorExplicitoProva_Avaliacao,ValorExplicitoQuestoes_Avaliacao,SomatorioQuestoes_Avaliacao,Referencias_Avaliacao,QuestoesMEeD_Avaliacao,ValorProva_Avaliacao,NumeroQuestoes_Avaliacao,EquilibrioValorQuestoes_Avaliacao,Diversificacao_Avaliacao,Contextualidade_Avaliacao,Observacoes_Avaliacao,DisciplinaId")] Avaliacao avaliacao)
+        public string Edit(int Id_Avaliacao, string Nome_Avaliacao, bool ValorExplicitoProva_Avaliacao, bool ValorExplicitoQuestoes_Avaliacao, bool SomatorioQuestoes_Avaliacao, bool Referencias_Avaliacao, bool QuestoesMEeD_Avaliacao, double ValorProva_Avaliacao, int NumeroQuestoes_Avaliacao, bool EquilibrioValorQuestoes_Avaliacao, bool Diversificacao_Avaliacao, bool Contextualidade_Avaliacao, string Observacoes_Avaliacao, int DisciplinaId)
         {
-            if (id != avaliacao.Id_Avaliacao)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(avaliacao);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AvaliacaoExists(avaliacao.Id_Avaliacao))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["DisciplinaId"] = new SelectList(_context.Disciplina, "Id_Disciplina", "Nome_Disciplina", avaliacao.DisciplinaId);
-            return View(avaliacao);
+            Avaliacao avaliacao = _context.Avaliacao.Where(d => d.Id_Avaliacao == Id_Avaliacao).FirstOrDefault<Avaliacao>(); ;
+            avaliacao.Nome_Avaliacao = Nome_Avaliacao;
+            avaliacao.ValorExplicitoProva_Avaliacao = ValorExplicitoProva_Avaliacao;
+            avaliacao.ValorExplicitoQuestoes_Avaliacao = ValorExplicitoQuestoes_Avaliacao;
+            avaliacao.SomatorioQuestoes_Avaliacao = SomatorioQuestoes_Avaliacao;
+            avaliacao.Referencias_Avaliacao = Referencias_Avaliacao;
+            avaliacao.QuestoesMEeD_Avaliacao = QuestoesMEeD_Avaliacao;
+            avaliacao.ValorProva_Avaliacao = ValorProva_Avaliacao;
+            avaliacao.NumeroQuestoes_Avaliacao = NumeroQuestoes_Avaliacao;
+            avaliacao.EquilibrioValorQuestoes_Avaliacao = EquilibrioValorQuestoes_Avaliacao;
+            avaliacao.Diversificacao_Avaliacao = Diversificacao_Avaliacao;
+            avaliacao.Contextualidade_Avaliacao = Contextualidade_Avaliacao;
+            avaliacao.Observacoes_Avaliacao = Observacoes_Avaliacao;
+            avaliacao.DisciplinaId = DisciplinaId;
+            _context.Update(avaliacao);
+            _context.SaveChanges();
+            return "SUCCESS";
         }
 
         // GET: Avaliacoes/Delete/5
@@ -142,14 +150,13 @@ namespace ProjetoNADD.Controllers
         }
 
         // POST: Avaliacoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public string Delete(int id)
         {
-            var avaliacao = await _context.Avaliacao.FindAsync(id);
+            var avaliacao = _context.Avaliacao.Where(c => c.Id_Avaliacao == id).FirstOrDefault();
             _context.Avaliacao.Remove(avaliacao);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            _context.SaveChanges();
+            return "SUCESS";
         }
 
         private bool AvaliacaoExists(int id)
