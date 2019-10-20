@@ -1,14 +1,9 @@
 ﻿@model ProjetoNADD.Models.Professor
 
-@{
-    ViewData["Title"] = "Detalhes Professor";
-}
-
-<h2>Detalhes</h2>
-
-<div>
-    <h4>Professor</h4>
-    <hr />
+<div id="cabecalho">
+    <h5>Visualizar Professor</h5>
+</div>
+<div id="conteudo_create">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Nome_Professor)
@@ -17,8 +12,4 @@
             @Html.DisplayFor(model => model.Nome_Professor)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id_Professor">Editar</a> |
-    <a asp-action="Index">Voltar para Professores</a>
 </div>

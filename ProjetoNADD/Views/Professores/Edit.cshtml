@@ -1,34 +1,21 @@
 ﻿@model ProjetoNADD.Models.Professor
 
-@{
-    ViewData["Title"] = "Editar Professor";
-}
+<div id="cabecalho">
 
-<h2>Editar</h2>
-
-<h4>Professor</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id_Professor" />
-            <div class="form-group">
-                <label asp-for="Nome_Professor" class="control-label"></label>
-                <input asp-for="Nome_Professor" class="form-control" />
-                <span asp-validation-for="Nome_Professor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-default" />
-            </div>
-        </form>
+    <h5>Editar Professor</h5>
+</div>
+<div id="conteudo_create">
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id_Professor" id="Id_Professor" />
+                <div class="form-group">
+                    <label asp-for="Nome_Professor" class="control-label"></label>
+                    <input asp-for="Nome_Professor" class="form-control" />
+                    <span asp-validation-for="Nome_Professor" class="text-danger"></span>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Voltar para Professores</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

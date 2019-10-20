@@ -24,7 +24,12 @@ namespace ProjetoNADD.Controllers
         {
             return View(await _context.Professor.ToListAsync());
         }
-
+        [HttpPost]
+        public object GetProfessores()
+        {
+            var query = _context.Professor.ToList();
+            return query;
+        }
         // GET: Professores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -53,16 +58,13 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id_Professor,Nome_Professor")] Professor professor)
+        public string Create(string Nome_Professor)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(professor);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(professor);
+            Professor professor = new Professor();
+            professor.Nome_Professor = Nome_Professor;
+            _context.Add(professor);
+            _context.SaveChanges();
+            return "SUCCESS";
         }
 
         // GET: Professores/Edit/5
@@ -85,35 +87,14 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Professor,Nome_Professor")] Professor professor)
+        public string Edit(int Id_Professor, string Nome_Professor)
         {
-            if (id != professor.Id_Professor)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(professor);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProfessorExists(professor.Id_Professor))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(professor);
+            Professor professor = _context.Professor.Where(d => d.Id_Professor == Id_Professor).FirstOrDefault<Professor>(); ;
+            professor.Id_Professor = Id_Professor;
+            professor.Nome_Professor = Nome_Professor;
+            _context.Update(professor);
+            _context.SaveChanges();
+            return "SUCCESS";
         }
 
         // GET: Professores/Delete/5
@@ -135,14 +116,13 @@ namespace ProjetoNADD.Controllers
         }
 
         // POST: Professores/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public string Delete(int id)
         {
-            var professor = await _context.Professor.FindAsync(id);
+            var professor = _context.Professor.Where(c => c.Id_Professor == id).FirstOrDefault();
             _context.Professor.Remove(professor);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            _context.SaveChanges();
+            return "SUCESS";
         }
 
         private bool ProfessorExists(int id)

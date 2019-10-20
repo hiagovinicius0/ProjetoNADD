@@ -1,26 +1,20 @@
 ﻿@model ProjetoNADD.Models.Professor
 
-@{
-    ViewData["Title"] = "Excluir";
-}
-
-<h2>Excluir</h2>
-
-<h3>Tem certeza que deseja excluir esse professor?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome_Professor)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome_Professor)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id_Professor" />
-        <input type="submit" value="Excluir" class="btn btn-default" /> |
-        <a asp-action="Index">Voltar para Professores</a>
-    </form>
+<div id="cabecalho">
+    <h5>Excluir Professor</h5>
+</div>
+<div id="conteudo_create">
+    <h6>Tem certeza que deseja excluir esse professor?</h6>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <input type="hidden" value="@Html.DisplayFor(model => model.Id_Professor)" id="Id_Professor" />
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome_Professor)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nome_Professor)
+            </dd>
+        </dl>
+    </div>
 </div>
