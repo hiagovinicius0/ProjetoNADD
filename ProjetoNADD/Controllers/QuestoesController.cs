@@ -25,7 +25,19 @@ namespace ProjetoNADD.Controllers
             var projetoNADDContext = _context.Questao.Include(q => q.Avaliacao);
             return View(await projetoNADDContext.ToListAsync());
         }
-
+        [HttpPost]
+        public object GetQuestoes()
+        {
+            var query = _context.Questao.Join(_context.Avaliacao, d => d.Id_Avaliacao, c => c.Id_Avaliacao, (d, c) =>
+            new
+            {
+                Nome_Avaliacao = c.Nome_Avaliacao,
+                Id_Numero = d.Id_Numero,
+                Observacoes_Questao = d.Observacoes_Questao,
+                Id_Questao = d.Id_Questao
+            }).ToList();
+            return query;
+        }
         // GET: Questoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -56,17 +68,18 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id_Questao,Id_Numero,Id_Avaliacao,Contextualizacao_Questao,Clareza_Questao,Complexidade_Questao,Observacoes_Questao")] Questao questao)
+        public string Create(int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, bool Complexidade_Questao, string Observacoes_Questao)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(questao);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["Id_Avaliacao"] = new SelectList(_context.Avaliacao, "Id_Avaliacao", "Nome_Avaliacao", questao.Id_Avaliacao);
-            return View(questao);
+            Questao questao = new Questao();
+            questao.Id_Numero = Id_Numero;
+            questao.Id_Avaliacao = Id_Avaliacao;
+            questao.Contextualizacao_Questao = Contextualizacao_Questao;
+            questao.Clareza_Questao = Clareza_Questao;
+            questao.Complexidade_Questao = Complexidade_Questao;
+            questao.Observacoes_Questao = Observacoes_Questao;
+            _context.Add(questao);
+            _context.SaveChanges();
+            return "SUCCESS";
         }
 
         // GET: Questoes/Edit/5
@@ -90,36 +103,18 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Questao,Id_Numero,Id_Avaliacao,Contextualizacao_Questao,Clareza_Questao,Complexidade_Questao,Observacoes_Questao")] Questao questao)
+        public string Edit(int Id_Questao, int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, bool Complexidade_Questao, string Observacoes_Questao)
         {
-            if (id != questao.Id_Questao)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(questao);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!QuestaoExists(questao.Id_Questao))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["Id_Avaliacao"] = new SelectList(_context.Avaliacao, "Id_Avaliacao", "Nome_Avaliacao", questao.Id_Avaliacao);
-            return View(questao);
+            Questao questao = _context.Questao.Where(d => d.Id_Questao == Id_Questao).FirstOrDefault<Questao>(); ;
+            questao.Id_Numero = Id_Numero;
+            questao.Id_Avaliacao = Id_Avaliacao;
+            questao.Contextualizacao_Questao = Contextualizacao_Questao;
+            questao.Clareza_Questao = Clareza_Questao;
+            questao.Complexidade_Questao = Complexidade_Questao;
+            questao.Observacoes_Questao = Observacoes_Questao;
+            _context.Update(questao);
+            _context.SaveChanges();
+            return "SUCCESS";
         }
 
         // GET: Questoes/Delete/5
@@ -142,14 +137,13 @@ namespace ProjetoNADD.Controllers
         }
 
         // POST: Questoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public string Delete(int id)
         {
-            var questao = await _context.Questao.FindAsync(id);
+            var questao = _context.Questao.Where(c => c.Id_Questao == id).FirstOrDefault();
             _context.Questao.Remove(questao);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            _context.SaveChanges();
+            return "SUCESS";
         }
 
         private bool QuestaoExists(int id)

@@ -1,15 +1,13 @@
 ﻿@model ProjetoNADD.Models.Questao
 
-@{
-    ViewData["Title"] = "Excluir";
-}
+<div id="cabecalho">
+    <h5>Excluir Questão</h5>
+</div>
 
-<h2>Excluir</h2>
-
-<h3>Tem certeza que deseja excluir essa questão?</h3>
-<div>
-    <hr />
+<div id="conteudo_create">
+    <h6>Tem certeza que deseja excluir essa questão?</h6>
     <dl class="dl-horizontal">
+        <input type="hidden" value="@Html.DisplayFor(model => model.Id_Questao)" id="Id_Questao" />
         <dt>
             @Html.DisplayNameFor(model => model.Id_Numero)
         </dt>
@@ -47,10 +45,4 @@
             @Html.DisplayFor(model => model.Observacoes_Questao)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id_Questao" />
-        <input type="submit" value="Excluir" class="btn btn-default" /> |
-        <a asp-action="Index">Voltar para Questões</a>
-    </form>
 </div>

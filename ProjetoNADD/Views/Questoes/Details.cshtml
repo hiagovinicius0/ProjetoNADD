@@ -1,14 +1,9 @@
 ﻿@model ProjetoNADD.Models.Questao
 
-@{
-    ViewData["Title"] = "Detalhes";
-}
-
-<h2>Detalhes</h2>
-
-<div>
-    <h4>Questão</h4>
-    <hr />
+<div id="cabecalho">
+    <h5>Visualizar Questão</h5>
+</div>
+<div id="conteudo_create">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Id_Numero)
@@ -17,7 +12,7 @@
             @Html.DisplayFor(model => model.Id_Numero)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Avaliacao)
+            Avaliação
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Avaliacao.Nome_Avaliacao)
@@ -47,8 +42,4 @@
             @Html.DisplayFor(model => model.Observacoes_Questao)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id_Questao">Editar</a> |
-    <a asp-action="Index">Voltar para Questões</a>
 </div>
