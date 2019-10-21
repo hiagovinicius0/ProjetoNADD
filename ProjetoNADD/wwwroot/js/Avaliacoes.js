@@ -9,8 +9,12 @@
             $("#corpoTabela").html('')  
             if (dados.length > 0) {
                 for (var i = 0; i < dados.length; i++) {
+                    var envioQuestoes = {
+                        id_Avaliacao : dados[i].id_Avaliacao,
+                        nome_Avaliacao : dados[i].nome_Avaliacao
+                    }
                     var observacoes = dados[i].observacoes_Avaliacao !== null ? dados[i].observacoes_Avaliacao : ''
-                    $("#corpoTabela").append("<tr><td>" + dados[i].nome_Avaliacao + "</td><td>" + observacoes+ "</td><td>" + dados[i].nome_Disciplina + "</td><td><a class='btn btn-success btn-xs' href='#' onclick='BuscaModal(" + dados[i].id_Avaliacao + ", \"SHOW\")' title='Visualizar'>Detalhes</a>&nbsp;<a class='btn btn-warning btn-xs glyphicon glyphicon-pencil' href='#' onclick='BuscaModal(" + dados[i].id_Avaliacao + ", \"EDIT\")' title='Editar'>Editar</a>&nbsp;<a class='btn btn-danger  glyphicon glyphicon-remove btn-xs'  href='#' onclick='BuscaModal(" + dados[i].id_Avaliacao + ", \"DEL\")' title='Excluir'>Excluir</a></td></tr>")
+                    $("#corpoTabela").append("<tr><td>" + dados[i].nome_Avaliacao + "</td><td>" + observacoes + "</td><td>" + dados[i].nome_Disciplina + "</td><td><a class='btn btn-success btn-xs' href='#' onclick='BuscaModal(" + dados[i].id_Avaliacao + ", \"SHOW\")' title='Visualizar'>Detalhes</a>&nbsp;<a class='btn btn-primary btn-xs' href='#' onclick='sendQuestoes(" + JSON.stringify(envioQuestoes)+")' title='Questões'>Quetões</a>&nbsp;<a class='btn btn-warning btn-xs glyphicon glyphicon-pencil' href='#' onclick='BuscaModal(" + dados[i].id_Avaliacao + ", \"EDIT\")' title='Editar'>Editar</a>&nbsp;<a class='btn btn-danger  glyphicon glyphicon-remove btn-xs'  href='#' onclick='BuscaModal(" + dados[i].id_Avaliacao + ", \"DEL\")' title='Excluir'>Excluir</a></td></tr>")
                 }
             }
             $("#tabelaAvaliacoes").DataTable({
@@ -172,4 +176,23 @@ function Excluir() {
             $("#myModal").modal('hide');
         }
     });
+}
+window.sendQuestoes = function (obj) {
+    //Define o formulário
+    var myForm = document.createElement("form");
+    myForm.action = "/Questoes";
+    myForm.method = "POST";
+    myForm.target = "_blank";
+    myForm.enctype = "multipart/form-data"
+    for (var key in obj) {
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.value = obj[key];
+        input.name = key;
+        myForm.appendChild(input);
+    }
+    //Adiciona o form ao corpo do documento
+    document.body.appendChild(myForm).visibility = "hidden";
+    //Envia o formulário
+    myForm.submit();
 }

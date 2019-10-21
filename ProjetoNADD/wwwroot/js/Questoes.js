@@ -1,15 +1,16 @@
-﻿function ListarQuestoes() {
+﻿function ListarQuestoes(id) {
     if ($.fn.DataTable.isDataTable('#tabelaQuestoes')) {
         $('#tabelaQuestoes').DataTable().destroy();
     }
     $.ajax({
         type: "POST",
         url: "../Questoes/GetQuestoes",
+        data: { Id_Avaliacao: id},
         success: function (dados) {
             $("#corpoTabela").html('')
             if (dados.length > 0) {
                 for (var i = 0; i < dados.length; i++) {
-                    $("#corpoTabela").append("<tr><td>" + dados[i].nome_Avaliacao + "</td><td>" + dados[i].id_Numero + "</td><td>" + dados[i].observacoes_Questao + "</td><td><a class='btn btn-success btn-xs' href='#' onclick='BuscaModal(" + dados[i].id_Questao + ", \"SHOW\")' title='Visualizar'>Detalhes</a>&nbsp;<a class='btn btn-warning btn-xs glyphicon glyphicon-pencil' href='#' onclick='BuscaModal(" + dados[i].id_Questao + ", \"EDIT\")' title='Editar'>Editar</a>&nbsp;<a class='btn btn-danger  glyphicon glyphicon-remove btn-xs'  href='#' onclick='BuscaModal(" + dados[i].id_Questao + ", \"DEL\")' title='Excluir'>Excluir</a></td></tr>")
+                    $("#corpoTabela").append("<tr><td>" + dados[i].nome_Avaliacao + "</td><td>" + dados[i].id_Numero + "</td><td>" + dados[i].observacoes_Questao + "</td><td><a class='btn btn-success btn-xs' href='#' onclick='BuscaModal(" + id + "," + dados[i].id_Questao + ", \"SHOW\")' title='Visualizar'>Detalhes</a>&nbsp;<a class='btn btn-warning btn-xs glyphicon glyphicon-pencil' href='#' onclick='BuscaModal(" + id + "," + dados[i].id_Questao + ", \"EDIT\")' title='Editar'>Editar</a>&nbsp;<a class='btn btn-danger  glyphicon glyphicon-remove btn-xs'  href='#' onclick='BuscaModal(" + id + "," + dados[i].id_Questao + ", \"DEL\")' title='Excluir'>Excluir</a></td></tr>")
                 }
             }
             $("#tabelaQuestoes").DataTable({
@@ -48,6 +49,7 @@
     });
 }
 function Salvar() {
+    var id = $('#myModal #Id_Avaliacao').val() = $('#myModal #Id_Avaliacao').val();
     var dataString = {
         Id_Numero: $('#myModal #Id_Numero').val(),
         Id_Avaliacao: $('#myModal #Id_Avaliacao').val(),
@@ -62,11 +64,11 @@ function Salvar() {
         data: dataString,
         success: function (dados) {
             $("#myModal").modal('hide');
-            ListarQuestoes();
+            ListarQuestoes(id);
         }
     });
 }
-function BuscaModal(ID, TIPO) {
+function BuscaModal(IDAvaliacao, ID, TIPO) {
     if (TIPO === 'CAD') {
         $.ajax({
             url: 'Questoes/Create',
@@ -76,6 +78,7 @@ function BuscaModal(ID, TIPO) {
                 $("#myModal .modal-title").html(cabecalho)
                 var conteudo = $(res).find("#conteudo_create")
                 $("#myModal .modal-body").html(conteudo);
+                $("#myModal .modal-body").append('<input type="hidden" id="Id_Avaliacao" value="'+IDAvaliacao+'"/>')
                 $("#myModal .modal-footer").html('<button type = "button" class= "btn btn-primary" onclick="Salvar()">Cadatrar Questão</button>')
                 $('#myModal').modal('show')
             }
@@ -104,7 +107,7 @@ function BuscaModal(ID, TIPO) {
                 $("#myModal .modal-title").html(cabecalho)
                 var conteudo = $(res).find("#conteudo_create")
                 $("#myModal .modal-body").html(conteudo);
-                $("#myModal .modal-footer").html('<button type = "button" class= "btn btn-primary" onclick="Editar()">Editar Questão</button>')
+                $("#myModal .modal-footer").html('<button type = "button" class= "btn btn-primary" onclick="Editar(' + IDAvaliacao+')">Editar Questão</button>')
                 $('#myModal').modal('show')
             }
         });
@@ -118,13 +121,13 @@ function BuscaModal(ID, TIPO) {
                 $("#myModal .modal-title").html(cabecalho)
                 var conteudo = $(res).find("#conteudo_create")
                 $("#myModal .modal-body").html(conteudo);
-                $("#myModal .modal-footer").html('<button type = "button" class= "btn btn-danger" onclick="Excluir()">Excluir Questão</button>')
+                $("#myModal .modal-footer").html('<button type = "button" class= "btn btn-danger" onclick="Excluir(' + IDAvaliacao+')">Excluir Questão</button>')
                 $('#myModal').modal('show')
             }
         });
     }
 }
-function Editar() {
+function Editar(avaliacao) {
     var dataString = {
         Id_Questao: $('#myModal #Id_Questao').val(),
         Id_Numero: $('#myModal #Id_Numero').val(),
@@ -139,12 +142,12 @@ function Editar() {
         url: "Questoes/Edit",
         data: dataString,
         success: function (dados) {
-            ListarQuestoes();
+            ListarQuestoes(avaliacao)
             $("#myModal").modal('hide');
         }
     });
 }
-function Excluir() {
+function Excluir(IdAvaliacao) {
     var curso = $('#Id_Questao').val()
     $.ajax({
         type: "POST",
@@ -153,8 +156,11 @@ function Excluir() {
             id: curso
         },
         success: function (dados) {
-            ListarQuestoes();
+            ListarQuestoes(IdAvaliacao)
             $("#myModal").modal('hide');
         }
     });
+}
+function BuscaAvaliacao() {
+    return $('#Id_AvaliacaoDiv').val()
 }

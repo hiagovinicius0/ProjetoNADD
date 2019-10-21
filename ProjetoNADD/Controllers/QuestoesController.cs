@@ -19,16 +19,17 @@ namespace ProjetoNADD.Controllers
             _context = context;
         }
 
-        // GET: Questoes
-        public async Task<IActionResult> Index()
+        [HttpPost]
+        public IActionResult Index(int id_Avaliacao, string nome_Avaliacao)
         {
-            var projetoNADDContext = _context.Questao.Include(q => q.Avaliacao);
-            return View(await projetoNADDContext.ToListAsync());
+            ViewBag.Id = id_Avaliacao;
+            ViewBag.Nome = nome_Avaliacao;
+            return View();
         }
         [HttpPost]
-        public object GetQuestoes()
+        public JsonResult GetQuestoes(int Id_Avaliacao)
         {
-            var query = _context.Questao.Join(_context.Avaliacao, d => d.Id_Avaliacao, c => c.Id_Avaliacao, (d, c) =>
+            var query = _context.Questao.Where(c => c.Id_Avaliacao == Id_Avaliacao).Join(_context.Avaliacao, d => d.Id_Avaliacao, c => c.Id_Avaliacao, (d, c) =>
             new
             {
                 Nome_Avaliacao = c.Nome_Avaliacao,
@@ -36,7 +37,7 @@ namespace ProjetoNADD.Controllers
                 Observacoes_Questao = d.Observacoes_Questao,
                 Id_Questao = d.Id_Questao
             }).ToList();
-            return query;
+            return Json(query);
         }
         // GET: Questoes/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -107,7 +108,6 @@ namespace ProjetoNADD.Controllers
         {
             Questao questao = _context.Questao.Where(d => d.Id_Questao == Id_Questao).FirstOrDefault<Questao>(); ;
             questao.Id_Numero = Id_Numero;
-            questao.Id_Avaliacao = Id_Avaliacao;
             questao.Contextualizacao_Questao = Contextualizacao_Questao;
             questao.Clareza_Questao = Clareza_Questao;
             questao.Complexidade_Questao = Complexidade_Questao;

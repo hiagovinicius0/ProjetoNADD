@@ -1,21 +1,20 @@
-﻿@model IEnumerable<ProjetoNADD.Models.Questao>
-
+﻿
 @section Styles{
 
     <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
     <link href="~/css/site.css" />
     <script src="~/lib/select2/js/select2.js"></script>
-    <link rel="stylesheet" href="./lib/DataTables/datatables.css" />
-    <script src="./lib/DataTables/datatables.min.js"></script>
+    <link rel="stylesheet" href="~/lib/DataTables/datatables.css" />
+    <script src="~/lib/DataTables/datatables.min.js"></script>
 
 }
-<h2>Questões</h2>
-
+<h2>Questões da Avaliação @ViewBag.Nome</h2>
 <div style="padding-top:20px; cursor:pointer;" class="col-sm-3">
     <div class="panel panel-default">
-        <button type="button" class="btn btn-outline-primary" onclick="BuscaModal(0,'CAD')">Cadastrar Questão</button>
+        <button type="button" class="btn btn-outline-primary" onclick="BuscaModal(@ViewBag.Id, 0,'CAD')">Cadastrar Questão</button>
     </div>
 </div>
+<div id="Id_AvaliacaoDiv" style="display: none;">@ViewBag.Id</div>
 <br />
 <table class="table table-hover table-striped" id="tabelaQuestoes" style="cursor: pointer">
     <thead>
@@ -27,12 +26,14 @@
                 Numero
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Observacoes_Questao)
+                Observações
             </th>
             <th></th>
         </tr>
     </thead>
-    <tbody id="corpoTabela"></tbody>
+    <tbody id="corpoTabela">
+
+    </tbody>
 </table>
 <div class="modal" tabindex="-1" role="dialog" data-target=".bd-example-modal-lg" id="myModal">
     <div class="modal-dialog" role="document">
@@ -66,7 +67,7 @@
     <script src="~/js/Questoes.js"></script>
     <script>
         $(document).ready(function () {
-            ListarQuestoes()
+            ListarQuestoes(@ViewBag.Id)
         })
     </script>
 }
