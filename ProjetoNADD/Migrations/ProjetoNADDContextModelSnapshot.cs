@@ -166,6 +166,26 @@ namespace ProjetoNADD.Migrations
                     b.ToTable("Questao");
                 });
 
+            modelBuilder.Entity("ProjetoNADD.Models.Usuario", b =>
+                {
+                    b.Property<int>("Id_Usuario")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Login_Usuario")
+                        .IsRequired();
+
+                    b.Property<string>("Nome_Usuario")
+                        .IsRequired();
+
+                    b.Property<string>("Senha_Usuario")
+                        .IsRequired();
+
+                    b.HasKey("Id_Usuario");
+
+                    b.ToTable("Usuario");
+                });
+
             modelBuilder.Entity("ProjetoNADD.Models.Avaliacao", b =>
                 {
                     b.HasOne("ProjetoNADD.Models.Disciplina", "Disciplina")

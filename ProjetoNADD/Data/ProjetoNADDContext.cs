@@ -15,6 +15,7 @@ namespace ProjetoNADD.Data
         public DbSet<Professor> Professor { get; set; }
         public DbSet<Questao> Questao { get; set; }
         public DbSet<DisciplinaProfessor> DisciplinaProfessor { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DisciplinaProfessor>().HasKey(dp =>
