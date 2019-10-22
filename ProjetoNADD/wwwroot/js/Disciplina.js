@@ -76,8 +76,7 @@ function ProfessoresMarcados(ID) {
     });
 }
 function Salvar() {
-    var professores = $('#Professorcad').val()
-    var nome
+    var professores = $('#Professor_id').val()
     if (professores.length > 0) {
         professores2 = [];
         for (var i = 0; i < professores.length; i++) {
@@ -101,6 +100,7 @@ function Salvar() {
         }
     });
     $("#myModal").modal('hide');
+    ListarDisciplinas();
 }
 function BuscaModal(ID, TIPO) {
     if (TIPO === 'CAD') {

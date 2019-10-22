@@ -49,7 +49,7 @@
     });
 }
 function Salvar() {
-    var id = $('#myModal #Id_Avaliacao').val() = $('#myModal #Id_Avaliacao').val();
+    var id = $('#myModal #Id_Avaliacao').val();
     var dataString = {
         Id_Numero: $('#myModal #Id_Numero').val(),
         Id_Avaliacao: $('#myModal #Id_Avaliacao').val(),
