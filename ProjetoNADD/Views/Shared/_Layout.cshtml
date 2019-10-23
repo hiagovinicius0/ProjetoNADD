@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -34,8 +36,31 @@
                         <a asp-area="" asp-controller="Professores" asp-action="Index" class="dropdown-item">Professores</a>
                         <a asp-area="" asp-controller="Disciplinas" asp-action="Index" class="dropdown-item">Disciplinas</a>
                         <a asp-area="" asp-controller="Avaliacoes" asp-action="Index" class="dropdown-item">Avaliacões</a>
+                        
                     </div>
                 </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <form method="POST" asp-action="logout" asp-controller="Registro">
+                            <button type="submit" class="btn btn-info nav-link btn-link py-0" style="width:auto;color:white;">
+                                @User.Identity.Name Sair
+                            </button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a asp-action="index" asp-controller="Registro" class="nav-link">Registro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="Login" asp-controller="Account" class="nav-link">Login</a>
+                    </li>
+                }
+
             </ul>
         </div>
     </nav>

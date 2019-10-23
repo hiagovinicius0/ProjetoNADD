@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ProjetoNADD.Models;
 
 namespace ProjetoNADD.Data
 {
-    public class ProjetoNADDContext : DbContext
+    public class ProjetoNADDContext : IdentityDbContext
     {
         public ProjetoNADDContext(DbContextOptions<ProjetoNADDContext> options) : base(options)
         {
@@ -18,6 +19,7 @@ namespace ProjetoNADD.Data
         public DbSet<Usuario> Usuario { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<DisciplinaProfessor>().HasKey(dp =>
                 new { dp.Disciplina_id, dp.Professor_id });
         }
