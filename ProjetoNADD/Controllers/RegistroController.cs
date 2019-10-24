@@ -29,7 +29,7 @@ namespace ProjetoNADD.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = model.Nome, Email = model.Email };
+                var user = new IdentityUser { UserName = model.Email, Email = model.Email, NormalizedUserName = model.Nome};
                 var result = await userManager.CreateAsync(user, model.Senha);
                 if (result.Succeeded)
                 {
