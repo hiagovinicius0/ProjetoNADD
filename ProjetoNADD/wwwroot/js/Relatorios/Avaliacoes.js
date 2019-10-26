@@ -41,6 +41,30 @@ function BuscaDisciplinas() {
         }
     });
 }
+function BuscaAvaliacao() {
+    var curso = $('#Id_Disciplina').val();
+    $.ajax({
+        type: "POST",
+        url: "../Relatorios/BuscaDisciplinas",
+        data: {
+            Id_Curso: curso
+        },
+        success: function (dados) {
+            $('#Id_Disciplina').html('');
+            $('#Id_Disciplina').append('<option value =""></option>');
+            if (dados.length > 0) {
+                var limite = dados.length;
+                for (var i = 0; i < limite; i++) {
+                    $('#Id_Disciplina').append('<option value ="' + dados[i].id + '">' + dados[i].nome + '</option>');
+                }
+            }
+            $("#Id_Disciplina").select2({
+                placeholder: "Selecione a Disciplina"
+            });
+            $('#divDIsciplinas').css('display', 'block')
+        }
+    });
+}
 function BuscaRelatorio() {
     var disciplina = $('#Id_Disciplina').val();
     var curso = $('#Id_Curso').val();

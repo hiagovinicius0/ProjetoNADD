@@ -1,0 +1,174 @@
+﻿
+@{
+    ViewBag.Title = "Relatório Professor";
+}
+@section Styles{
+
+    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
+    <link href="~/css/site.css" />
+    <script src="~/lib/select2/js/select2.js"></script>
+    <link rel="stylesheet" href="~/lib/DataTables/datatables.css" />
+    <script src="~/lib/DataTables/datatables.min.js"></script>
+
+}
+<h2>Relatório de Avaliações</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="control-label" style="font-weight: bold;">Curso</label>
+            <select id="Id_Curso" class="form-control" onchange="BuscaDisciplinas()"></select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group" id="divDIsciplinas" style="display: none;">
+            <label class="control-label" style="font-weight: bold;">Disciplina</label>
+            <select id="Id_Disciplina" class="form-control" style="width:100%" onchange="BuscaAvaliacao()"></select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group" id="divAvaliacao" style="display: none;">
+            <label class="control-label" style="font-weight: bold;">Disciplina</label>
+            <select id="Id_Avaliacao" class="form-control" style="width:100%" onchange="BuscaRelatorio()"></select>
+        </div>
+    </div>
+    <hr />
+    <div class="col-md-2">
+    </div>
+    <style>
+        #tabelaRelatorio td{
+            width: 400px;
+        }
+    </style>
+    <div id="conteudo_relatorio" class="col-md-8" align="center" style="display: none;">
+        <table id="tabelaRelatorio" style="cursor: pointer; font-family: Calibri; font-size: 11pt; width: 782px;" border="1" class="table-striped">
+            <thead>
+                <tr>
+                    <th colspan="2" style="text-align: center">AVALIAÇÃO DE PROVAS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Semestre</td>
+                    <td id="Semestre"></td>
+                </tr>
+                <tr>
+                    <td>Curso</td>
+                    <td id="Curso"></td>
+                </tr>
+                <tr>
+                    <td>Área</td>
+                    <td id="Area"></td>
+                </tr>
+                <tr>
+                    <td>Disciplina</td>
+                    <td id="Disciplina"></td>
+                </tr>
+                <tr>
+                    <td>Professor</td>
+                    <td id="Professor"></td>
+                </tr>
+                <tr>
+                    <td>Período/Ano</td>
+                    <td id="PeriodoAno"></td>
+                </tr>
+                <tr>
+                    <td>Valor da prova explícito</td>
+                    <td id="ValorExplicito"></td>
+                </tr>
+                <tr>
+                    <td>Valor das questões explícitos</td>
+                    <td id="ValorQuestoes"></td>
+                </tr>
+                <tr>
+                    <td>Somatório dos valores das questões</td>
+                    <td id="Somatorio"></td>
+                <tr>
+                    <td>Referências bibliográficas</td>
+                    <td id="Referencias"></td>
+                </tr>
+                <tr>
+                    <td>Possui questões de múltipla escolhas e discursivas</td>
+                    <td id="QuestoesMEED"></td>
+                <tr>
+                    <td>Valor total da prova</td>
+                    <td id="ValorTotalProva"></td>
+                <tr>
+                    <td>Número de questões</td>
+                    <td id="NumeroQuestoes"></td>
+                </tr>
+                <tr>
+                    <td>Equilíbrio nas distribuições dos valores das questões</td>
+                    <td id="EquilibrioValores"></td>
+                <tr>
+                    <td>Apresenta, explicitamente, diversificação na avaliação?</td>
+                    <td id="DiversificacaoAvaliacao"></td>
+                </tr>
+                <tr>
+                    <td>A prova possui, pelo menos, uma questão contextualizada?</td>
+                    <td id="QuestaoContextualizadaAvaliacao"></td>
+                </tr>
+                <tr>
+                    <td>Observações</td>
+                    <td id="ObservacoesAvaliacao"></td>
+                </tr>
+                <div id="Questoes">
+                </div>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr style="text-align: center; font-weight: bold;">
+                    <td>Coordenador</td>
+                    <td>Professor</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td>&nbsp;</td>
+                    <td>Maria Cristina de Tomaso</td>
+                </tr>
+                <tr style="text-align: center;font-weight: bold;">
+                    <td>Avaliador</td>
+                    <td>Responsável SPI</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td colspan="2">Carlos José Pacheco</td>
+                </tr>
+                <tr style="text-align: center;font-weight: bold;">
+                    <td colspan="2">Pró-Reitor Acadêmico</td>
+                </tr>
+            </tbody>
+            <tbody id="corpoTabelaRelatorio"></tbody>
+        </table>
+    </div>
+    <div class="col-md-2">
+    </div>
+</div>
+
+@section ScriptPage{
+    <environment include="Development">
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/DataTables/datatables.min.js"></script>
+    </environment>
+    <link rel="stylesheet" href="~/lib/DataTables/datatables.css" />
+
+    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
+    <script src="~/lib/select2/js/select2.js"></script>
+    <script src="~/js/Relatorios/Professor.js"></script>
+    <script>
+        $(document).ready(function () {
+            GetCursos();
+        })
+    </script>
+}
