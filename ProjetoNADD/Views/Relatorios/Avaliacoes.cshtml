@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Relatório Avaliações";
+}
+@section Styles{
+
+    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
+    <link href="~/css/site.css" />
+    <script src="~/lib/select2/js/select2.js"></script>
+    <link rel="stylesheet" href="~/lib/DataTables/datatables.css" />
+    <script src="~/lib/DataTables/datatables.min.js"></script>
+
+}
+<h2>Relatório de Avaliações</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="control-label" style="font-weight: bold;">Curso</label>
+            <select id="Id_Curso" class="form-control" onchange="BuscaDisciplinas()"></select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group" id="divDIsciplinas" style="display: none;">
+            <label class="control-label" style="font-weight: bold;">Disciplina</label>
+            <select id="Id_Disciplina" class="form-control" style="width:100%" onchange="BuscaRelatorio()"></select>
+        </div>
+    </div>
+    <div id="conteudo_relatorio" style="display: none;">
+        <hr />
+        <table id="tabelaRelatorio" class="table table-hover table-striped" id="tabelaAreas" style="cursor: pointer">
+            <thead>
+                <tr>
+                    <th>Nome Avaliação</th>
+                    <th>Ano</th>
+                    <th>Curso</th>
+                    <th>Período</th>
+                    <th>Área</th>
+                    <th>Contextualização</th>
+                    <th>Clareza e objetividade dos comandos</th>
+                    <th>Complexidade</th>
+                </tr>
+            </thead>
+            <tbody id="corpoTabelaRelatorio">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section ScriptPage{
+    <environment include="Development">
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/DataTables/datatables.min.js"></script>
+    </environment>
+    <link rel="stylesheet" href="~/lib/DataTables/datatables.css" />
+
+    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
+    <script src="~/lib/select2/js/select2.js"></script>
+    <script src="~/js/Relatorios/Avaliacoes.js"></script>
+    <script>
+        $(document).ready(function () {
+            GetCursos();
+        })
+    </script>
+}
