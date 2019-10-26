@@ -68,7 +68,7 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public string Create(string Nome_Avaliacao, bool ValorExplicitoProva_Avaliacao, bool ValorExplicitoQuestoes_Avaliacao, bool SomatorioQuestoes_Avaliacao, bool Referencias_Avaliacao, bool QuestoesMEeD_Avaliacao, double ValorProva_Avaliacao, int NumeroQuestoes_Avaliacao, bool EquilibrioValorQuestoes_Avaliacao, bool Diversificacao_Avaliacao, bool Contextualidade_Avaliacao, string Observacoes_Avaliacao, int DisciplinaId)
+        public string Create(string Nome_Avaliacao, bool ValorExplicitoProva_Avaliacao, bool ValorExplicitoQuestoes_Avaliacao, bool SomatorioQuestoes_Avaliacao, bool Referencias_Avaliacao, bool QuestoesMEeD_Avaliacao, double ValorProva_Avaliacao, int NumeroQuestoes_Avaliacao, bool EquilibrioValorQuestoes_Avaliacao, bool Diversificacao_Avaliacao, bool Contextualidade_Avaliacao, string Observacoes_Avaliacao, int DisciplinaId, bool Clareza_Avaliacao, string Complexidade_Avaliacao)
         {
             Avaliacao avaliacao = new Avaliacao();
             avaliacao.Nome_Avaliacao = Nome_Avaliacao;
@@ -84,6 +84,8 @@ namespace ProjetoNADD.Controllers
             avaliacao.Contextualidade_Avaliacao = Contextualidade_Avaliacao;
             avaliacao.Observacoes_Avaliacao = Observacoes_Avaliacao;
             avaliacao.DisciplinaId = DisciplinaId;
+            avaliacao.Complexidade_Avaliacao = Complexidade_Avaliacao;
+            avaliacao.Clareza_Avaliacao = Clareza_Avaliacao;
             _context.Add(avaliacao);
             _context.SaveChanges();
             return "SUCCESS";
@@ -110,7 +112,7 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public string Edit(int Id_Avaliacao, string Nome_Avaliacao, bool ValorExplicitoProva_Avaliacao, bool ValorExplicitoQuestoes_Avaliacao, bool SomatorioQuestoes_Avaliacao, bool Referencias_Avaliacao, bool QuestoesMEeD_Avaliacao, double ValorProva_Avaliacao, int NumeroQuestoes_Avaliacao, bool EquilibrioValorQuestoes_Avaliacao, bool Diversificacao_Avaliacao, bool Contextualidade_Avaliacao, string Observacoes_Avaliacao, int DisciplinaId)
+        public string Edit(int Id_Avaliacao, string Nome_Avaliacao, bool ValorExplicitoProva_Avaliacao, bool ValorExplicitoQuestoes_Avaliacao, bool SomatorioQuestoes_Avaliacao, bool Referencias_Avaliacao, bool QuestoesMEeD_Avaliacao, double ValorProva_Avaliacao, int NumeroQuestoes_Avaliacao, bool EquilibrioValorQuestoes_Avaliacao, bool Diversificacao_Avaliacao, bool Contextualidade_Avaliacao, string Observacoes_Avaliacao, int DisciplinaId, bool Clareza_Avaliacao, string Complexidade_Avaliacao)
         {
             Avaliacao avaliacao = _context.Avaliacao.Where(d => d.Id_Avaliacao == Id_Avaliacao).FirstOrDefault<Avaliacao>(); ;
             avaliacao.Nome_Avaliacao = Nome_Avaliacao;
@@ -126,6 +128,8 @@ namespace ProjetoNADD.Controllers
             avaliacao.Contextualidade_Avaliacao = Contextualidade_Avaliacao;
             avaliacao.Observacoes_Avaliacao = Observacoes_Avaliacao;
             avaliacao.DisciplinaId = DisciplinaId;
+            avaliacao.Complexidade_Avaliacao = Complexidade_Avaliacao;
+            avaliacao.Clareza_Avaliacao = Clareza_Avaliacao;
             _context.Update(avaliacao);
             _context.SaveChanges();
             return "SUCCESS";

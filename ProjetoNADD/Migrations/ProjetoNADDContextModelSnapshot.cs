@@ -199,6 +199,10 @@ namespace ProjetoNADD.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Clareza_Avaliacao");
+
+                    b.Property<string>("Complexidade_Avaliacao");
+
                     b.Property<bool>("Contextualidade_Avaliacao");
 
                     b.Property<int>("DisciplinaId");

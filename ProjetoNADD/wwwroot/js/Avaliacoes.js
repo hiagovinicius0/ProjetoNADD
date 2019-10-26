@@ -66,7 +66,9 @@ function Salvar() {
         Diversificacao_Avaliacao: $('#myModal #Diversificacao_Avaliacao').prop("checked") === true ? true : false,
         Contextualidade_Avaliacao: $('#myModal #Contextualidade_Avaliacao').prop("checked") === true ? true : false,
         Observacoes_Avaliacao: $('#myModal #Observacoes_Avaliacao').val(),
-        DisciplinaId: $('#myModal #DisciplinaId').val()
+        DisciplinaId: $('#myModal #DisciplinaId').val(),
+        Clareza_Avaliacao: $('#myModal #Clareza_Avaliacao').prop("checked") === true ? true : false,
+        Complexidade_Avaliacao: $('#myModal #Complexidade_Avaliacao').val()
     }
     $.ajax({
         type: "POST",
@@ -151,7 +153,9 @@ function Editar() {
         Diversificacao_Avaliacao: $('#myModal #Diversificacao_Avaliacao').prop("checked") === true ? true : false,
         Contextualidade_Avaliacao: $('#myModal #Contextualidade_Avaliacao').prop("checked") === true ? true : false,
         Observacoes_Avaliacao: $('#myModal #Observacoes_Avaliacao').val(),
-        DisciplinaId: $('#myModal #DisciplinaId').val()
+        DisciplinaId: $('#myModal #DisciplinaId').val(),
+        Clareza_Avaliacao: $('#myModal #Clareza_Avaliacao').prop("checked") === true ? true : false,
+        Complexidade_Avaliacao: $('#myModal #Complexidade_Avaliacao').val()
     }
     $.ajax({
         type: "POST",

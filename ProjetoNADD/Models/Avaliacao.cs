@@ -33,6 +33,10 @@ namespace ProjetoNADD.Models
         public bool Diversificacao_Avaliacao { get; set; } //Apresenta, explicitamente, diversificação na avaliação?
         [Display(Name = "Contextualização")]
         public bool Contextualidade_Avaliacao { get; set; } //A prova possui, pelo menos, uma questão contextualizada?
+        [Display(Name = "Clareza")]
+        public bool Clareza_Avaliacao { get; set; } //A prova possui, pelo menos, uma questão contextualizada?
+        [Display(Name = "Complexidade")]
+        public string Complexidade_Avaliacao { get; set; } //A prova possui, pelo menos, uma questão contextualizada?
         [Display(Name = "Observações")]
         public string Observacoes_Avaliacao { get; set; } //Observações
         [Display(Name = "Disciplina")]
