@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoNADD.Data;
 
 namespace ProjetoNADD.Migrations
 {
     [DbContext(typeof(ProjetoNADDContext))]
-    partial class ProjetoNADDContextModelSnapshot : ModelSnapshot
+    [Migration("20191027225350_ComplexidadeString")]
+    partial class ComplexidadeString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

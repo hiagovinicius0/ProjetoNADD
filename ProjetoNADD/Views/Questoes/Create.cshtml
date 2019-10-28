@@ -28,11 +28,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="checkbox">
-                        <label>
-                            <input asp-for="Complexidade_Questao" /> @Html.DisplayNameFor(model => model.Complexidade_Questao)
-                        </label>
-                    </div>
+                    <label asp-for="Complexidade_Questao" class="control-label"></label>
+                    <input asp-for="Complexidade_Questao" class="form-control" />
+                    <span asp-validation-for="Complexidade_Questao" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Observacoes_Questao" class="control-label"></label>

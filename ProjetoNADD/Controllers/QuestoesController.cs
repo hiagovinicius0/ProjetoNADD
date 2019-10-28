@@ -70,7 +70,7 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public string Create(int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, bool Complexidade_Questao, string Observacoes_Questao)
+        public string Create(int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, string Complexidade_Questao, string Observacoes_Questao)
         {
             Questao questao = new Questao();
             questao.Id_Numero = Id_Numero;
@@ -105,7 +105,7 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public string Edit(int Id_Questao, int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, bool Complexidade_Questao, string Observacoes_Questao)
+        public string Edit(int Id_Questao, int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, string Complexidade_Questao, string Observacoes_Questao)
         {
             Questao questao = _context.Questao.Where(d => d.Id_Questao == Id_Questao).FirstOrDefault<Questao>(); ;
             questao.Id_Numero = Id_Numero;

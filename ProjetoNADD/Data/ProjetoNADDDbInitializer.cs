@@ -48,10 +48,10 @@ namespace ProjetoNADD.Data
             };
             var questoes = new Questao[]
             {
-                new Questao{Id_Numero = 1, Id_Avaliacao = 1, Clareza_Questao = true, Complexidade_Questao = true, Contextualizacao_Questao = true, Observacoes_Questao = "Questão Bem Elaborada"},
-                new Questao{Id_Numero = 1, Id_Avaliacao = 2, Clareza_Questao = false, Complexidade_Questao = false, Contextualizacao_Questao = false, Observacoes_Questao = "Questão Mal Elaborada"},
-                new Questao{Id_Numero = 2, Id_Avaliacao = 1, Clareza_Questao = false, Complexidade_Questao = false, Contextualizacao_Questao = false, Observacoes_Questao = "Questão Mal Elaborada"},
-                new Questao{Id_Numero = 2, Id_Avaliacao = 2, Clareza_Questao = true, Complexidade_Questao = true, Contextualizacao_Questao = true, Observacoes_Questao = "Questão Bem Elaborada"}
+                new Questao{Id_Numero = 1, Id_Avaliacao = 1, Clareza_Questao = true, Complexidade_Questao = "Complexo", Contextualizacao_Questao = true, Observacoes_Questao = "Questão Bem Elaborada"},
+                new Questao{Id_Numero = 1, Id_Avaliacao = 2, Clareza_Questao = false, Complexidade_Questao = "Complexo", Contextualizacao_Questao = false, Observacoes_Questao = "Questão Mal Elaborada"},
+                new Questao{Id_Numero = 2, Id_Avaliacao = 1, Clareza_Questao = false, Complexidade_Questao = "Complexo", Contextualizacao_Questao = false, Observacoes_Questao = "Questão Mal Elaborada"},
+                new Questao{Id_Numero = 2, Id_Avaliacao = 2, Clareza_Questao = true, Complexidade_Questao = "Complexo", Contextualizacao_Questao = true, Observacoes_Questao = "Questão Bem Elaborada"}
             };
             foreach (Area area in areas)
             {
