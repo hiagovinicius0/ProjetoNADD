@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Newtonsoft.Json;
 using ProjetoNADD.Data;
@@ -113,6 +112,20 @@ namespace ProjetoNADD.Controllers
                             Diversificacao = av.Diversificacao_Avaliacao,
                             QuestaoContextualizada = av.Contextualidade_Avaliacao,
                             Observacoes = av.Observacoes_Avaliacao
+                        };
+            return query;
+        }
+        [HttpPost]
+        public object BuscaQuestoes(int Id_Avaliacao)
+        {
+            var query = from q in _context.Questao
+                        where q.Id_Avaliacao == Id_Avaliacao
+                        select new
+                        {
+                            Numero = q.Id_Numero,
+                            Contextualizacao = q.Contextualizacao_Questao,
+                            Clareza = q.Clareza_Questao,
+                            Complexidade = q.Complexidade_Questao
                         };
             return query;
         }

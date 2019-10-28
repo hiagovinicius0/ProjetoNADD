@@ -121,7 +121,83 @@ function BuscaRelatorio() {
             $('#DiversificacaoAvaliacao').html(dados[0].diversificacao === true ? "Sim" : "Não")
             $('#QuestaoContextualizadaAvaliacao').html(dados[0].questaoContextualizada === true ? "Sim" : "Não")
             $('#ObservacoesAvaliacao').html(dados[0].Observacoes)
-            $('#conteudo_relatorio').css('display', 'block')
+            $.ajax({
+                type: "POST",
+                url: "../Relatorios/BuscaQuestoes",
+                data: {
+                    Id_Avaliacao: dados[0].id
+                },
+                success: function (dados1) {
+                    if (dados1.length > 0) {
+                        var limite = dados1.length
+                        var htmlQuestoes = ''
+                        var tabela = document.getElementById("tabelaRelatorio");
+                        for (var i = 0; i < limite; i++) {
+                            if (i > 0) {
+                                var contextualizacao = dados1[i].contextualizacao === true ? "Sim" : "Não"
+                                var clareza = dados1[i].clareza === true ? "Sim" : "Não"
+                                // Linha 1 - 20
+                                var linhaInserida = 19 + (i *3)
+                                var linha = tabela.insertRow(linhaInserida);
+                                var celula1 = linha.insertCell(0);
+                                var celula2 = linha.insertCell(1);
+                                celula1.innerHTML = 'Questão ' + dados1[i].numero + ' - Contextualização';
+                                celula2.innerHTML = contextualizacao;
+
+                                // Linha2 - 21
+                                var linhaInserida = 19 + (i * 3) + 1
+                                var linha = tabela.insertRow(linhaInserida);
+                                var celula1 = linha.insertCell(0);
+                                var celula2 = linha.insertCell(1);
+                                celula1.innerHTML = 'Questão ' + dados1[i].numero + ' - Clareza';
+                                celula2.innerHTML = clareza;
+
+                                // Linha 3 - 22
+                                var linhaInserida = 19 + (i * 3) + 1
+                                var linha = tabela.insertRow(linhaInserida);
+                                var celula1 = linha.insertCell(0);
+                                var celula2 = linha.insertCell(1);
+                                celula1.innerHTML = 'Questão ' + dados1[i].numero + ' - Complexidade';
+                                celula2.innerHTML = dados1[i].complexidade;
+                            }
+                            else {
+                                var contextualizacao = dados1[i].contextualizacao === true ? "Sim" : "Não"
+                                var clareza = dados1[i].clareza === true ? "Sim" : "Não"
+                                // Linha 1 - 20
+                                var linhaInserida = 19 + i
+                                var linha = tabela.insertRow(linhaInserida);
+                                var celula1 = linha.insertCell(0);
+                                var celula2 = linha.insertCell(1);
+                                celula1.innerHTML = 'Questão ' + dados1[i].numero + ' - Contextualização';
+                                celula2.innerHTML = contextualizacao;
+
+                                // Linha2 - 21
+                                var linhaInserida = 19 + i + 1
+                                var linha = tabela.insertRow(linhaInserida);
+                                var celula1 = linha.insertCell(0);
+                                var celula2 = linha.insertCell(1);
+                                celula1.innerHTML = 'Questão ' + dados1[i].numero + ' - Clareza';
+                                celula2.innerHTML = clareza;
+
+                                // Linha 3 - 22
+                                var linhaInserida = 19 + i + 1
+                                var linha = tabela.insertRow(linhaInserida);
+                                var celula1 = linha.insertCell(0);
+                                var celula2 = linha.insertCell(1);
+                                celula1.innerHTML = 'Questão ' + dados1[i].numero + ' - Complexidade';
+                                celula2.innerHTML = dados1[i].complexidade;
+                            }
+                        }
+                        $('#Questoes').append(htmlQuestoes)
+                        $('#conteudo_relatorio').css('display', 'block')
+                        $('#divErro').html('')
+                    }
+                    else {
+                        $('#divErro').html('A avaliacação selecionada não tem questões')
+                    }
+                }
+            });
+            
         }
     });
 }
