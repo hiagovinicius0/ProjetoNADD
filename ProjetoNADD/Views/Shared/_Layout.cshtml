@@ -54,7 +54,7 @@
                 @if (signInManager.IsSignedIn(User))
                 {
                     <li class="nav-item">
-                        <form method="POST" asp-action="logout" asp-controller="Registro">
+                        <form method="POST" asp-action="logout" asp-controller="Usuarios">
                             <button type="submit" class="btn btn-info nav-link btn-link py-0" style="width:auto;color:white;">
                                 @User.Identity.Name Sair
                             </button>

@@ -1,36 +1,21 @@
 ﻿@model ProjetoNADD.Models.Usuario
 
-@{
-    ViewData["Title"] = "Details";
-}
-
-<h2>Details</h2>
-
-<div>
-    <h4>Usuario</h4>
-    <hr />
+<div id="cabecalho">
+    <h5>Visualizar Usuário</h5>
+</div>
+<div id="conteudo_create">
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Login_Usuario)
+            @Html.DisplayNameFor(model => model.Nome_User)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Login_Usuario)
+            @Html.DisplayFor(model => model.Nome_User)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Nome_Usuario)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Nome_Usuario)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Senha_Usuario)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Senha_Usuario)
+            @Html.DisplayFor(model => model.Email)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id_Usuario">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>

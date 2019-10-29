@@ -1,39 +1,24 @@
 ﻿@model ProjetoNADD.Models.Usuario
 
-@{
-    ViewData["Title"] = "Delete";
-}
+<div id="cabecalho">
+    <h5>Excluir Usuário</h5>
+</div>
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Usuario</h4>
-    <hr />
+<div id="conteudo_create">
+    <h6>Tem certeza que deseja excluir esse Usuário?</h6>
+    <input type="hidden" value="@Html.DisplayFor(model => model.Id)" id="Id_Usuario" />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Login_Usuario)
+            @Html.DisplayNameFor(model => model.Nome_User)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Login_Usuario)
+            @Html.DisplayFor(model => model.Nome_User)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Nome_Usuario)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Nome_Usuario)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Senha_Usuario)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Senha_Usuario)
+            @Html.DisplayFor(model => model.Email)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id_Usuario" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
 </div>

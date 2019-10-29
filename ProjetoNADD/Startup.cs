@@ -56,11 +56,11 @@ namespace ProjetoNADD
             }).AddEntityFrameworkStores<ProjetoNADDContext>();
             services.ConfigureApplicationCookie(options =>
             {
-                options.AccessDeniedPath = "/Account/Login";
+                options.AccessDeniedPath = "/Usuarios/Login";
                 options.Cookie.Name = "ProjetoNADD";
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromHours(2);
-                options.LoginPath = "/Account/Login";
+                options.LoginPath = "/Usuarios/Login";
                 // ReturnUrlParameter requires 
                 //using Microsoft.AspNetCore.Authentication.Cookies;
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;

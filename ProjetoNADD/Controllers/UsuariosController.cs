@@ -106,8 +106,18 @@ namespace ProjetoNADD.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(Login model)
         {
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+            var query = _context.Usuario.Where(u => u.Email == "administrador@email.com").ToList();
+            if (query.Count == 0)
+            {
+                string senhaAdmin = "Ab12345@1";
+                var usuario = new Usuario
+                {
+                    UserName = "administrador@email.com",
+                    Nome_User = "ADMINISTRADOR",
+                    Email = "administrador@email.com"
+                };
+                var result1 = await userManager.CreateAsync(usuario, senhaAdmin);
+            }
             var result = await signInManager.PasswordSignInAsync(model.Email, model.Senha, model.LembrarMe, lockoutOnFailure: false);
             if (result.Succeeded)
             {
