@@ -62,6 +62,7 @@ namespace ProjetoNADD.Controllers
         // GET: Questoes/Create
         public IActionResult Create()
         {
+            ViewData["TipoQuestao"] = new SelectList(_context.TipoQuestao, "Id_TipoQuestao", "Nome_TipoQuestao");
             ViewData["Id_Avaliacao"] = new SelectList(_context.Avaliacao, "Id_Avaliacao", "Nome_Avaliacao");
             return View();
         }

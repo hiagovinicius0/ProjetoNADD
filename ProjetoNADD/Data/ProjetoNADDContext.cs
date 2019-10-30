@@ -18,6 +18,7 @@ namespace ProjetoNADD.Data
         public DbSet<DisciplinaProfessor> DisciplinaProfessor { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Complexidade> Complexidade { get; set; }
+        public DbSet<TipoQuestao> TipoQuestao { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

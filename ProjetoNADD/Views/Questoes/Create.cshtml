@@ -37,6 +37,10 @@
                     <input asp-for="Observacoes_Questao" class="form-control" />
                     <span asp-validation-for="Observacoes_Questao" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label for="TipoQuestao" class="control-label">Tipo</label>
+                    <select name="TipoQuestao" class="form-control" id="TipoQuestao" asp-items="ViewBag.TipoQuestao"></select>
+                </div>
             </form>
         </div>
     </div>
