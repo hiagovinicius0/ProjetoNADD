@@ -97,10 +97,10 @@ function Salvar() {
         url: "../Disciplinas/Create",
         data: dataString,
         success: function (dados) {
+            ListarDisciplinas();
         }
     });
     $("#myModal").modal('hide');
-    ListarDisciplinas();
 }
 function BuscaModal(ID, TIPO) {
     if (TIPO === 'CAD') {

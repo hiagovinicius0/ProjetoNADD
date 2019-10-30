@@ -32,7 +32,8 @@ namespace ProjetoNADD.Controllers
                     new Complexidade{Nome_Complexidade = "Compreensão"},
                     new Complexidade{Nome_Complexidade = "Aplicação"},
                     new Complexidade{Nome_Complexidade = "Análise"},
-                    new Complexidade{Nome_Complexidade = "Síntese e Avaliação"}
+                    new Complexidade{Nome_Complexidade = "Síntese" },
+                    new Complexidade{Nome_Complexidade = "Avaliação" }
                 };
                 foreach (Complexidade comp1 in comp)
                 {
@@ -124,6 +125,8 @@ namespace ProjetoNADD.Controllers
             questao.TipoID = TipoID;
             _context.Add(questao);
             _context.SaveChanges();
+            Avaliacao ava = new Avaliacao();
+            ava.SicronizarAvaliacoes(Id_Avaliacao, _context);
             return "SUCCESS";
         }
 
@@ -152,6 +155,7 @@ namespace ProjetoNADD.Controllers
         [HttpPost]
         public string Edit(int Id_Questao, int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, int Complexidade_Questao, string Observacoes_Questao, int TipoID)
         {
+
             Questao questao = _context.Questao.Where(d => d.Id_Questao == Id_Questao).FirstOrDefault<Questao>(); ;
             questao.Id_Numero = Id_Numero;
             questao.Contextualizacao_Questao = Contextualizacao_Questao;
@@ -161,6 +165,8 @@ namespace ProjetoNADD.Controllers
             questao.TipoID = TipoID;
             _context.Update(questao);
             _context.SaveChanges();
+            Avaliacao ava = new Avaliacao();
+            ava.SicronizarAvaliacoes(Id_Avaliacao, _context);
             return "SUCCESS";
         }
 

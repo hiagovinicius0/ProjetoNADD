@@ -6,8 +6,8 @@
 <div id="conteudo_create">
     <h6>Tem certeza que deseja excluir essa Avaliação?</h6>
     <div>
+        <input type="hidden" value="@Html.DisplayFor(model => model.Id_Avaliacao)" id="Id_Avaliacao" />
         <dl class="dl-horizontal">
-            <input type="hidden" value="@Html.DisplayFor(model => model.Id_Avaliacao)" id="Id_Avaliacao" />
             <dt>
                 @Html.DisplayNameFor(model => model.Nome_Avaliacao)
             </dt>

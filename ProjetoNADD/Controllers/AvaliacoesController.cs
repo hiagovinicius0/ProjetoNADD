@@ -68,7 +68,7 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public string Create(string Nome_Avaliacao, bool ValorExplicitoProva_Avaliacao, bool ValorExplicitoQuestoes_Avaliacao, bool SomatorioQuestoes_Avaliacao, bool Referencias_Avaliacao, double ValorProva_Avaliacao, int NumeroQuestoes_Avaliacao, bool EquilibrioValorQuestoes_Avaliacao, bool Diversificacao_Avaliacao, bool Contextualidade_Avaliacao, string Observacoes_Avaliacao, int DisciplinaId, bool Clareza_Avaliacao)
+        public string Create(string Nome_Avaliacao, bool ValorExplicitoProva_Avaliacao, bool ValorExplicitoQuestoes_Avaliacao, bool SomatorioQuestoes_Avaliacao, bool Referencias_Avaliacao, double ValorProva_Avaliacao, bool EquilibrioValorQuestoes_Avaliacao, bool Diversificacao_Avaliacao, bool Contextualidade_Avaliacao, string Observacoes_Avaliacao, int DisciplinaId, bool Clareza_Avaliacao)
         {
             Avaliacao avaliacao = new Avaliacao();
             avaliacao.Nome_Avaliacao = Nome_Avaliacao;
@@ -78,7 +78,7 @@ namespace ProjetoNADD.Controllers
             avaliacao.Referencias_Avaliacao = Referencias_Avaliacao;
             avaliacao.QuestoesMEeD_Avaliacao = "Sem Questões";
             avaliacao.ValorProva_Avaliacao = ValorProva_Avaliacao;
-            avaliacao.NumeroQuestoes_Avaliacao = NumeroQuestoes_Avaliacao;
+            avaliacao.NumeroQuestoes_Avaliacao = 0;
             avaliacao.EquilibrioValorQuestoes_Avaliacao = EquilibrioValorQuestoes_Avaliacao;
             avaliacao.Diversificacao_Avaliacao = Diversificacao_Avaliacao;
             avaliacao.Contextualidade_Avaliacao = Contextualidade_Avaliacao;
@@ -121,7 +121,6 @@ namespace ProjetoNADD.Controllers
             avaliacao.SomatorioQuestoes_Avaliacao = SomatorioQuestoes_Avaliacao;
             avaliacao.Referencias_Avaliacao = Referencias_Avaliacao;
             avaliacao.ValorProva_Avaliacao = ValorProva_Avaliacao;
-            avaliacao.NumeroQuestoes_Avaliacao = NumeroQuestoes_Avaliacao;
             avaliacao.EquilibrioValorQuestoes_Avaliacao = EquilibrioValorQuestoes_Avaliacao;
             avaliacao.Diversificacao_Avaliacao = Diversificacao_Avaliacao;
             avaliacao.Contextualidade_Avaliacao = Contextualidade_Avaliacao;

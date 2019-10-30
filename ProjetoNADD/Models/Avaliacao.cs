@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using ProjetoNADD.Data;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace ProjetoNADD.Models
 {
@@ -40,5 +43,65 @@ namespace ProjetoNADD.Models
         public int DisciplinaId { get; set; }
         public Disciplina Disciplina { get; set; }
         public ICollection<Questao> Questoes { get; set; }
+        public void SicronizarAvaliacoes(int id, ProjetoNADDContext _context)
+        {
+            var avaliacao = _context.Questao.Where(q => q.Id_Avaliacao == id).ToList();
+            if(avaliacao.Count() == 0)
+            {
+                return;
+            }
+            else
+            {
+                int marcar = 0;
+                int discursiva = 0;
+                bool contextualizacao = false;
+                bool clareza = false;
+                foreach(var item in avaliacao)
+                {
+                    if(item.TipoID == 1)
+                    {
+                        marcar++;
+                    }
+                    else if(item.TipoID == 2)
+                    {
+                        discursiva++;
+                    }
+                    if(item.Contextualizacao_Questao == true)
+                    {
+                        contextualizacao = true;
+                    }
+                    if(item.Clareza_Questao == true)
+                    {
+                        clareza = true;
+                    }
+                }
+                string QuestoesMeed = "";
+                if(marcar > 0 && discursiva > 0)
+                {
+                    QuestoesMeed = "Apresenta Questões de Múltipla Escolha e Discursivas";
+                }
+                else if(marcar == 0 && discursiva > 0)
+                {
+                    QuestoesMeed = "Apresenta Somente Questões Discursivas";
+                }
+                else if(marcar > 0 && discursiva == 0)
+                {
+                    QuestoesMeed = "Apresenta Somente Questões de Múltipla Escolha";
+                }
+                int quantQuestoes = avaliacao.Count();
+                Avaliacao avaliacaoUpdate = _context.Avaliacao.Where(d => d.Id_Avaliacao == id).FirstOrDefault<Avaliacao>();
+                avaliacaoUpdate.QuestoesMEeD_Avaliacao = QuestoesMeed;
+                avaliacaoUpdate.NumeroQuestoes_Avaliacao = quantQuestoes;
+                avaliacaoUpdate.Contextualidade_Avaliacao = contextualizacao;
+                avaliacaoUpdate.Clareza_Avaliacao = clareza;
+                _context.Update(avaliacaoUpdate);
+                _context.SaveChanges();
+            }
+        }
+
+        internal void SicronizarAvaliacoes()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
