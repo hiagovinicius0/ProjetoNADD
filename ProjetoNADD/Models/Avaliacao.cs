@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjetoNADD.Models
 {
@@ -22,7 +19,7 @@ namespace ProjetoNADD.Models
         [Display(Name = "Referências")]
         public bool Referencias_Avaliacao { get; set; } //Referências bibliográficas
         [Display(Name = "Questões Diversificadas")]
-        public bool QuestoesMEeD_Avaliacao { get; set; } //Possui questões de Múltipla escolha e Discursivas
+        public string QuestoesMEeD_Avaliacao { get; set; } //Possui questões de Múltipla escolha e Discursivas
         [Display(Name = "Valor da Avaliação")]
         public double ValorProva_Avaliacao { get; set; } //Valor total da prova
         [Display(Name = "Número de Questões")]
@@ -36,7 +33,8 @@ namespace ProjetoNADD.Models
         [Display(Name = "Clareza")]
         public bool Clareza_Avaliacao { get; set; } //A prova possui, pelo menos, uma questão contextualizada?
         [Display(Name = "Complexidade")]
-        public string Complexidade_Avaliacao { get; set; } //A prova possui, pelo menos, uma questão contextualizada?
+        public int? ComplexidadeID { get; set; } //A prova possui, pelo menos, uma questão contextualizada?
+        public Complexidade Complexidade { get; set; }
         [Display(Name = "Observações")]
         public string Observacoes_Avaliacao { get; set; } //Observações
         [Display(Name = "Disciplina")]
