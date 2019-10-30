@@ -70,7 +70,7 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public string Create(int[] professores, string Nome_Disciplina, int Periodo_Disciplina, int Ano_Disciplina, int CursoId)
+        public string Create(int[] professores, string Nome_Disciplina, int Periodo_Disciplina, string Ano_Disciplina, int CursoId)
         {
             Disciplina disciplina = new Disciplina();
             disciplina.Nome_Disciplina = Nome_Disciplina;
@@ -126,7 +126,7 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public string  Edit(int Id_Disciplina, string Nome_Disciplina, int Periodo_Disciplina, int Ano_Disciplina, int CursoId, int[] professores)
+        public string  Edit(int Id_Disciplina, string Nome_Disciplina, int Periodo_Disciplina, string Ano_Disciplina, int CursoId, int[] professores)
         {
             Disciplina disciplina = _context.Disciplina.Where(d => d.Id_Disciplina == Id_Disciplina).FirstOrDefault<Disciplina>(); ;
             disciplina.Id_Disciplina = Id_Disciplina;

@@ -34,8 +34,8 @@ namespace ProjetoNADD.Data
             };
             var disciplinas = new Disciplina[]
             {
-                new Disciplina{Id_Disciplina = 1, Nome_Disciplina = "Banco de Dados", Ano_Disciplina = 2019, Periodo_Disciplina = 0, CursoId = 1},
-                new Disciplina{Id_Disciplina = 2, Nome_Disciplina = "Gestão de Projetos", Ano_Disciplina = 2018, Periodo_Disciplina = 0, CursoId = 1}
+                new Disciplina{Id_Disciplina = 1, Nome_Disciplina = "Banco de Dados", Ano_Disciplina = "2019", Periodo_Disciplina = 0, CursoId = 1},
+                new Disciplina{Id_Disciplina = 2, Nome_Disciplina = "Gestão de Projetos", Ano_Disciplina = "2018", Periodo_Disciplina = 0, CursoId = 1}
             };
             var disciplinasProfessores = new DisciplinaProfessor[]
             {

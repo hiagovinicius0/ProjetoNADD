@@ -16,7 +16,7 @@ namespace ProjetoNADD.Models
         [Display(Name = "Período")]
         public int Periodo_Disciplina { get; set; }
         [Display(Name = "Ano")]
-        public int Ano_Disciplina { get; set; }
+        public string Ano_Disciplina { get; set; }
         [Display(Name = "Curso")]
         public int CursoId { get; set; }
         public Curso Curso { get; set; }
