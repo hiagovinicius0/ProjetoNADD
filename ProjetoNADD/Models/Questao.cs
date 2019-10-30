@@ -17,7 +17,11 @@ namespace ProjetoNADD.Models
         [Display(Name = "Clareza")]
         public bool Clareza_Questao { get; set; }
         [Display(Name = "Complexidade")]
-        public string Complexidade_Questao { get; set; }
+        public int? ComplexidadeID { get; set; }
+        public Complexidade Complexidade { get; set; }
+        [Display(Name = "Tipo")]
+        public int? TipoID { get; set; }
+        public TipoQuestao TipoQuestao { get; set; }
         [Display(Name = "Observações")]
         public string Observacoes_Questao { get; set; }
     }

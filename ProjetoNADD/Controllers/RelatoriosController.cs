@@ -71,7 +71,7 @@ namespace ProjetoNADD.Controllers
                             Periodo = d.Periodo_Disciplina,
                             Area = ar.Nome_Area,
                             Contextualidade = av.Contextualidade_Avaliacao,
-                            Complexidade = av.Complexidade_Avaliacao,
+                            Complexidade = av.ComplexidadeID,
                             Clareza = av.Clareza_Avaliacao
                         };
             return query;                
@@ -99,7 +99,7 @@ namespace ProjetoNADD.Controllers
                             Periodo = d.Periodo_Disciplina,
                             Area = ar.Nome_Area,
                             Contextualidade = av.Contextualidade_Avaliacao,
-                            Complexidade = av.Complexidade_Avaliacao,
+                            Complexidade = av.ComplexidadeID,
                             Clareza = av.Clareza_Avaliacao,
                             ValorProvaExplicito = av.ValorExplicitoProva_Avaliacao,
                             ValorQuestoes = av.ValorExplicitoQuestoes_Avaliacao,
@@ -125,7 +125,7 @@ namespace ProjetoNADD.Controllers
                             Numero = q.Id_Numero,
                             Contextualizacao = q.Contextualizacao_Questao,
                             Clareza = q.Clareza_Questao,
-                            Complexidade = q.Complexidade_Questao
+                            Complexidade = q.ComplexidadeID
                         };
             return query;
         }

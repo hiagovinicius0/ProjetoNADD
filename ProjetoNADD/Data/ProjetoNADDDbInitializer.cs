@@ -21,6 +21,7 @@ namespace ProjetoNADD.Data
                 new Area{Id_Area = 2, Nome_Area = "Humanas"},
                 new Area{Id_Area = 3, Nome_Area = "Saúde"}
             };
+
             var professores = new Professor[]
             {
                 new Professor{Id_Professor = 1, Nome_Professor = "Rosenclever"},
@@ -43,40 +44,46 @@ namespace ProjetoNADD.Data
             };
             var avaliacoes = new Avaliacao[]
             {
-                new Avaliacao{Id_Avaliacao = 1, Nome_Avaliacao = "Prova Banco de dados 2019 1º Bimestre", ValorExplicitoProva_Avaliacao = true, ValorExplicitoQuestoes_Avaliacao = true, SomatorioQuestoes_Avaliacao = true, Referencias_Avaliacao = false, QuestoesMEeD_Avaliacao = true, ValorProva_Avaliacao = 7.0, NumeroQuestoes_Avaliacao = 30, EquilibrioValorQuestoes_Avaliacao = false, Diversificacao_Avaliacao = true, Contextualidade_Avaliacao = false, Observacoes_Avaliacao = "Faltou alguns detalhes na Avaliação mas no geral está bom", DisciplinaId = 1},
-                new Avaliacao{Id_Avaliacao = 2, Nome_Avaliacao = "Prova Banco de Gestão de Projetos 2019 2º Bimestre", ValorExplicitoProva_Avaliacao = false, ValorExplicitoQuestoes_Avaliacao = false, SomatorioQuestoes_Avaliacao = false, Referencias_Avaliacao = true, QuestoesMEeD_Avaliacao = false, ValorProva_Avaliacao = 8.0, NumeroQuestoes_Avaliacao = 20, EquilibrioValorQuestoes_Avaliacao = true, Diversificacao_Avaliacao = false, Contextualidade_Avaliacao = true, Observacoes_Avaliacao = "Precisa melhorar", DisciplinaId = 2}
+                new Avaliacao{Id_Avaliacao = 1, Nome_Avaliacao = "Prova Banco de dados 2019 1º Bimestre", ValorExplicitoProva_Avaliacao = true, ValorExplicitoQuestoes_Avaliacao = true, SomatorioQuestoes_Avaliacao = true, Referencias_Avaliacao = false, QuestoesMEeD_Avaliacao = "Não apresenta Questões", ValorProva_Avaliacao = 7.0, NumeroQuestoes_Avaliacao = 30, EquilibrioValorQuestoes_Avaliacao = false, Diversificacao_Avaliacao = true, Contextualidade_Avaliacao = false, Observacoes_Avaliacao = "Faltou alguns detalhes na Avaliação mas no geral está bom", DisciplinaId = 1},
+                new Avaliacao{Id_Avaliacao = 2, Nome_Avaliacao = "Prova Banco de Gestão de Projetos 2019 2º Bimestre", ValorExplicitoProva_Avaliacao = false, ValorExplicitoQuestoes_Avaliacao = false, SomatorioQuestoes_Avaliacao = false, Referencias_Avaliacao = true, QuestoesMEeD_Avaliacao = "Não apresenta Questões", ValorProva_Avaliacao = 8.0, NumeroQuestoes_Avaliacao = 20, EquilibrioValorQuestoes_Avaliacao = true, Diversificacao_Avaliacao = false, Contextualidade_Avaliacao = true, Observacoes_Avaliacao = "Precisa melhorar", DisciplinaId = 2}
             };
             var questoes = new Questao[]
             {
-                new Questao{Id_Numero = 1, Id_Avaliacao = 1, Clareza_Questao = true, Complexidade_Questao = "Complexo", Contextualizacao_Questao = true, Observacoes_Questao = "Questão Bem Elaborada"},
-                new Questao{Id_Numero = 1, Id_Avaliacao = 2, Clareza_Questao = false, Complexidade_Questao = "Complexo", Contextualizacao_Questao = false, Observacoes_Questao = "Questão Mal Elaborada"},
-                new Questao{Id_Numero = 2, Id_Avaliacao = 1, Clareza_Questao = false, Complexidade_Questao = "Complexo", Contextualizacao_Questao = false, Observacoes_Questao = "Questão Mal Elaborada"},
-                new Questao{Id_Numero = 2, Id_Avaliacao = 2, Clareza_Questao = true, Complexidade_Questao = "Complexo", Contextualizacao_Questao = true, Observacoes_Questao = "Questão Bem Elaborada"}
+                new Questao{Id_Numero = 1, Id_Avaliacao = 1, Clareza_Questao = true, ComplexidadeID = 1, Contextualizacao_Questao = true, Observacoes_Questao = "Questão Bem Elaborada"},
+                new Questao{Id_Numero = 1, Id_Avaliacao = 2, Clareza_Questao = false, ComplexidadeID = 1, Contextualizacao_Questao = false, Observacoes_Questao = "Questão Mal Elaborada"},
+                new Questao{Id_Numero = 2, Id_Avaliacao = 1, Clareza_Questao = false, ComplexidadeID = 1, Contextualizacao_Questao = false, Observacoes_Questao = "Questão Mal Elaborada"},
+                new Questao{Id_Numero = 2, Id_Avaliacao = 2, Clareza_Questao = true, ComplexidadeID = 1, Contextualizacao_Questao = true, Observacoes_Questao = "Questão Bem Elaborada"}
             };
             foreach (Area area in areas)
             {
                 context.Area.Add(area);
             }
+            context.SaveChanges();
             foreach (Professor professor in professores)
             {
                 context.Professor.Add(professor);
             }
+            context.SaveChanges();
             foreach (Curso curso in cursos)
             {
                 context.Curso.Add(curso);
             }
+            context.SaveChanges();
             foreach (Disciplina disciplina in disciplinas)
             {
                 context.Disciplina.Add(disciplina);
             }
+            context.SaveChanges();
             foreach (DisciplinaProfessor disciplinaProfessor in disciplinasProfessores)
             {
                 context.DisciplinaProfessor.Add(disciplinaProfessor);
             }
+            context.SaveChanges();
             foreach (Avaliacao avaliacao in avaliacoes)
             {
                 context.Avaliacao.Add(avaliacao);
             }
+            context.SaveChanges();
             foreach (Questao questao in questoes)
             {
                 context.Questao.Add(questao);

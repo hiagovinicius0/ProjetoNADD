@@ -70,14 +70,14 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public string Create(int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, string Complexidade_Questao, string Observacoes_Questao)
+        public string Create(int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, int Complexidade_Questao, string Observacoes_Questao)
         {
             Questao questao = new Questao();
             questao.Id_Numero = Id_Numero;
             questao.Id_Avaliacao = Id_Avaliacao;
             questao.Contextualizacao_Questao = Contextualizacao_Questao;
             questao.Clareza_Questao = Clareza_Questao;
-            questao.Complexidade_Questao = Complexidade_Questao;
+            questao.ComplexidadeID = Complexidade_Questao;
             questao.Observacoes_Questao = Observacoes_Questao;
             _context.Add(questao);
             _context.SaveChanges();
@@ -105,13 +105,13 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public string Edit(int Id_Questao, int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, string Complexidade_Questao, string Observacoes_Questao)
+        public string Edit(int Id_Questao, int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, int Complexidade_Questao, string Observacoes_Questao)
         {
             Questao questao = _context.Questao.Where(d => d.Id_Questao == Id_Questao).FirstOrDefault<Questao>(); ;
             questao.Id_Numero = Id_Numero;
             questao.Contextualizacao_Questao = Contextualizacao_Questao;
             questao.Clareza_Questao = Clareza_Questao;
-            questao.Complexidade_Questao = Complexidade_Questao;
+            questao.ComplexidadeID = Complexidade_Questao;
             questao.Observacoes_Questao = Observacoes_Questao;
             _context.Update(questao);
             _context.SaveChanges();

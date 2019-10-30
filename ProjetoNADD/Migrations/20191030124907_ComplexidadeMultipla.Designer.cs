@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoNADD.Data;
 
 namespace ProjetoNADD.Migrations
 {
     [DbContext(typeof(ProjetoNADDContext))]
-    partial class ProjetoNADDContextModelSnapshot : ModelSnapshot
+    [Migration("20191030124907_ComplexidadeMultipla")]
+    partial class ComplexidadeMultipla
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,7 +224,7 @@ namespace ProjetoNADD.Migrations
 
                     b.Property<string>("Observacoes_Avaliacao");
 
-                    b.Property<string>("QuestoesMEeD_Avaliacao");
+                    b.Property<bool>("QuestoesMEeD_Avaliacao");
 
                     b.Property<bool>("Referencias_Avaliacao");
 
@@ -344,32 +346,13 @@ namespace ProjetoNADD.Migrations
 
                     b.Property<string>("Observacoes_Questao");
 
-                    b.Property<int?>("TipoID");
-
-                    b.Property<int?>("TipoQuestaoId_TipoQuestao");
-
                     b.HasKey("Id_Questao");
 
                     b.HasIndex("ComplexidadeID");
 
                     b.HasIndex("Id_Avaliacao");
 
-                    b.HasIndex("TipoQuestaoId_TipoQuestao");
-
                     b.ToTable("Questao");
-                });
-
-            modelBuilder.Entity("ProjetoNADD.Models.TipoQuestao", b =>
-                {
-                    b.Property<int>("Id_TipoQuestao")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Nome_TipoQuestao");
-
-                    b.HasKey("Id_TipoQuestao");
-
-                    b.ToTable("TipoQuestao");
                 });
 
             modelBuilder.Entity("ProjetoNADD.Models.Usuario", b =>
@@ -478,10 +461,6 @@ namespace ProjetoNADD.Migrations
                         .WithMany("Questoes")
                         .HasForeignKey("Id_Avaliacao")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ProjetoNADD.Models.TipoQuestao", "TipoQuestao")
-                        .WithMany("Questao")
-                        .HasForeignKey("TipoQuestaoId_TipoQuestao");
                 });
 #pragma warning restore 612, 618
         }
