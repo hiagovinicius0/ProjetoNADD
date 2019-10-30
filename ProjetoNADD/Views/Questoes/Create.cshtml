@@ -28,9 +28,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ComplexidadeID" class="control-label"></label>
-                    <input asp-for="ComplexidadeID" class="form-control" />
-                    <span asp-validation-for="ComplexidadeID" class="text-danger"></span>
+                    <label for="ComplexidadeID" class="control-label">Tipo</label>
+                    <select name="ComplexidadeID" class="form-control" id="ComplexidadeID" asp-items="ViewBag.ComplexidadeID"></select>
                 </div>
                 <div class="form-group">
                     <label asp-for="Observacoes_Questao" class="control-label"></label>

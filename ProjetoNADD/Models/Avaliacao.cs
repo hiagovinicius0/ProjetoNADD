@@ -33,8 +33,7 @@ namespace ProjetoNADD.Models
         [Display(Name = "Clareza")]
         public bool Clareza_Avaliacao { get; set; } //A prova possui, pelo menos, uma questão contextualizada?
         [Display(Name = "Complexidade")]
-        public int? ComplexidadeID { get; set; } //A prova possui, pelo menos, uma questão contextualizada?
-        public Complexidade Complexidade { get; set; }
+        public string Complexidade_Avaliacao { get; set; } //A prova possui, pelo menos, uma questão contextualizada?
         [Display(Name = "Observações")]
         public string Observacoes_Avaliacao { get; set; } //Observações
         [Display(Name = "Disciplina")]

@@ -66,8 +66,7 @@ function Salvar() {
         Contextualidade_Avaliacao: $('#myModal #Contextualidade_Avaliacao').prop("checked") === true ? true : false,
         Observacoes_Avaliacao: $('#myModal #Observacoes_Avaliacao').val(),
         DisciplinaId: $('#myModal #DisciplinaId').val(),
-        Clareza_Avaliacao: $('#myModal #Clareza_Avaliacao').prop("checked") === true ? true : false,
-        Complexidade_Avaliacao: $('#myModal #Complexidade_Avaliacao').val()
+        Clareza_Avaliacao: $('#myModal #Clareza_Avaliacao').prop("checked") === true ? true : false
     }
     $.ajax({
         type: "POST",
@@ -152,8 +151,7 @@ function Editar() {
         Contextualidade_Avaliacao: $('#myModal #Contextualidade_Avaliacao').prop("checked") === true ? true : false,
         Observacoes_Avaliacao: $('#myModal #Observacoes_Avaliacao').val(),
         DisciplinaId: $('#myModal #DisciplinaId').val(),
-        Clareza_Avaliacao: $('#myModal #Clareza_Avaliacao').prop("checked") === true ? true : false,
-        Complexidade_Avaliacao: $('#myModal #Complexidade_Avaliacao').val()
+        Clareza_Avaliacao: $('#myModal #Clareza_Avaliacao').prop("checked") === true ? true : false
     }
     $.ajax({
         type: "POST",

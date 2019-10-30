@@ -36,8 +36,12 @@
             @Html.DisplayNameFor(model => model.ComplexidadeID)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ComplexidadeID)
+            @Html.DisplayFor(model => model.Complexidade.Nome_Complexidade)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoID)
+        </dt>
+        <dd>@ViewBag.Tipo</dd>
         <dt>
             @Html.DisplayNameFor(model => model.Observacoes_Questao)
         </dt>

@@ -23,6 +23,37 @@ namespace ProjetoNADD.Controllers
         [HttpPost]
         public IActionResult Index(int id_Avaliacao, string nome_Avaliacao)
         {
+            var complexidade = _context.Complexidade.ToList();
+            if (complexidade.Count() == 0)
+            {
+                var comp = new Complexidade[]
+                {
+                    new Complexidade{Nome_Complexidade = "Conhecimento"},
+                    new Complexidade{Nome_Complexidade = "Compreensão"},
+                    new Complexidade{Nome_Complexidade = "Aplicação"},
+                    new Complexidade{Nome_Complexidade = "Análise"},
+                    new Complexidade{Nome_Complexidade = "Síntese e Avaliação"}
+                };
+                foreach (Complexidade comp1 in comp)
+                {
+                    _context.Complexidade.Add(comp1);
+                }
+                _context.SaveChanges();
+            }
+            var TipoQuestao = _context.TipoQuestao.ToList();
+            if (TipoQuestao.Count() == 0)
+            {
+                var tipo = new TipoQuestao[]
+                {
+                    new TipoQuestao{Nome_TipoQuestao = "Discursiva"},
+                    new TipoQuestao{Nome_TipoQuestao = "Múltipla Escolha"}
+                };
+                foreach (TipoQuestao tipo1 in tipo)
+                {
+                    _context.TipoQuestao.Add(tipo1);
+                }
+                _context.SaveChanges();
+            }
             ViewBag.Id = id_Avaliacao;
             ViewBag.Nome = nome_Avaliacao;
             return View();
@@ -49,19 +80,29 @@ namespace ProjetoNADD.Controllers
             }
 
             var questao = await _context.Questao
-                .Include(q => q.Avaliacao)
-                .FirstOrDefaultAsync(m => m.Id_Questao == id);
+                    .Include(q => q.Avaliacao)
+                    .Include(q => q.TipoQuestao)
+                    .Include(q => q.Complexidade)
+                    .FirstOrDefaultAsync(m => m.Id_Questao == id);
+            var tipo = (from q in _context.Questao
+                        join tp in _context.TipoQuestao on q.TipoID equals tp.Id_TipoQuestao
+                        where q.Id_Questao == id
+                        select new
+                        {
+                            Nome_tipo = tp.Nome_TipoQuestao
+                        }).FirstOrDefault();
             if (questao == null)
             {
                 return NotFound();
             }
-
+            ViewBag.Tipo = tipo.Nome_tipo;
             return View(questao);
         }
 
         // GET: Questoes/Create
         public IActionResult Create()
         {
+            ViewData["ComplexidadeID"] = new SelectList(_context.Complexidade, "Id_Complexidade", "Nome_Complexidade");
             ViewData["TipoQuestao"] = new SelectList(_context.TipoQuestao, "Id_TipoQuestao", "Nome_TipoQuestao");
             ViewData["Id_Avaliacao"] = new SelectList(_context.Avaliacao, "Id_Avaliacao", "Nome_Avaliacao");
             return View();
@@ -71,7 +112,7 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public string Create(int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, int Complexidade_Questao, string Observacoes_Questao)
+        public string Create(int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, int Complexidade_Questao, string Observacoes_Questao, int TipoID)
         {
             Questao questao = new Questao();
             questao.Id_Numero = Id_Numero;
@@ -80,6 +121,7 @@ namespace ProjetoNADD.Controllers
             questao.Clareza_Questao = Clareza_Questao;
             questao.ComplexidadeID = Complexidade_Questao;
             questao.Observacoes_Questao = Observacoes_Questao;
+            questao.TipoID = TipoID;
             _context.Add(questao);
             _context.SaveChanges();
             return "SUCCESS";
@@ -98,6 +140,8 @@ namespace ProjetoNADD.Controllers
             {
                 return NotFound();
             }
+            ViewData["ComplexidadeID"] = new SelectList(_context.Complexidade, "Id_Complexidade", "Nome_Complexidade", questao.ComplexidadeID);
+            ViewData["TipoID"] = new SelectList(_context.TipoQuestao, "Id_TipoQuestao", "Nome_TipoQuestao", questao.TipoID);
             ViewData["Id_Avaliacao"] = new SelectList(_context.Avaliacao, "Id_Avaliacao", "Nome_Avaliacao", questao.Id_Avaliacao);
             return View(questao);
         }
@@ -106,7 +150,7 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public string Edit(int Id_Questao, int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, int Complexidade_Questao, string Observacoes_Questao)
+        public string Edit(int Id_Questao, int Id_Numero, int Id_Avaliacao, bool Contextualizacao_Questao, bool Clareza_Questao, int Complexidade_Questao, string Observacoes_Questao, int TipoID)
         {
             Questao questao = _context.Questao.Where(d => d.Id_Questao == Id_Questao).FirstOrDefault<Questao>(); ;
             questao.Id_Numero = Id_Numero;
@@ -114,6 +158,7 @@ namespace ProjetoNADD.Controllers
             questao.Clareza_Questao = Clareza_Questao;
             questao.ComplexidadeID = Complexidade_Questao;
             questao.Observacoes_Questao = Observacoes_Questao;
+            questao.TipoID = TipoID;
             _context.Update(questao);
             _context.SaveChanges();
             return "SUCCESS";
@@ -129,12 +174,21 @@ namespace ProjetoNADD.Controllers
 
             var questao = await _context.Questao
                 .Include(q => q.Avaliacao)
+                .Include(q => q.TipoQuestao)
+                .Include(q => q.Complexidade)
                 .FirstOrDefaultAsync(m => m.Id_Questao == id);
+            var tipo = (from q in _context.Questao
+                       join tp in _context.TipoQuestao on q.TipoID equals tp.Id_TipoQuestao
+                       where q.Id_Questao == id
+                       select new
+                       {
+                           Nome_tipo = tp.Nome_TipoQuestao
+                       }).FirstOrDefault();
             if (questao == null)
             {
                 return NotFound();
             }
-
+            ViewBag.Tipo = tipo.Nome_tipo;
             return View(questao);
         }
 

@@ -55,8 +55,9 @@ function Salvar() {
         Id_Avaliacao: $('#myModal #Id_Avaliacao').val(),
         Contextualizacao_Questao: $('#myModal #Contextualizacao_Questao').prop("checked") === true ? true : false,
         Clareza_Questao: $('#myModal #Clareza_Questao').prop("checked") === true ? true : false,
-        Complexidade_Questao: $('#myModal #Complexidade_Questao').val(),
-        Observacoes_Questao: $('#myModal #Observacoes_Questao').val()
+        Complexidade_Questao: $('#myModal #ComplexidadeID').val(),
+        Observacoes_Questao: $('#myModal #Observacoes_Questao').val(),
+        TipoID: parseInt($('#myModal #TipoQuestao').val())
     }
     $.ajax({
         type: "POST",
@@ -134,8 +135,9 @@ function Editar(avaliacao) {
         Id_Avaliacao: $('#myModal #Id_Avaliacao').val(),
         Contextualizacao_Questao: $('#myModal #Contextualizacao_Questao').prop("checked") === true ? true : false,
         Clareza_Questao: $('#myModal #Clareza_Questao').prop("checked") === true ? true : false,
-        Complexidade_Questao: $('#myModal #Complexidade_Questao').val(),
-        Observacoes_Questao: $('#myModal #Observacoes_Questao').val()
+        Complexidade_Questao: $('#myModal #ComplexidadeID').val(),
+        Observacoes_Questao: $('#myModal #Observacoes_Questao').val(),
+        TipoID: parseInt($('#myModal #TipoID').val())
     }
     $.ajax({
         type: "POST",
