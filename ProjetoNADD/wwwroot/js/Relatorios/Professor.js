@@ -91,7 +91,7 @@ function BuscaRelatorio() {
         },
         success: function (dados) {
             console.log(dados)
-            $('#Semestre').html(dados[0].ano + "." + dados[0].periodo)
+            $('#Semestre').html(dados[0].ano)
             $('#Curso').html(dados[0].curso)
             $('#Area').html(dados[0].area)
             $('#Disciplina').html(dados[0].disciplina)
@@ -114,7 +114,7 @@ function BuscaRelatorio() {
             $('#ValorQuestoes').html(dados[0].valorQuestoes === true ? "Apresenta adequadamente" : "Não Apresenta Adequadamente")
             $('#Somatorio').html(dados[0].somatorioQuestoes === true ? "Apresenta adequadamente" : "Não Apresenta Adequadamente")
             $('#Referencias').html(dados[0].referencias === true ? "Apresenta adequadamente" : "Não Apresenta Adequadamente")
-            $('#QuestoesMEED').html(dados[0].questoesMEED === true ? "Sim" : "Não")
+            $('#QuestoesMEED').html(dados[0].questoesMEED)
             $('#ValorTotalProva').html(dados[0].valorTotalProva)
             $('#NumeroQuestoes').html(dados[0].numeroQuestoes)
             $('#EquilibrioValores').html(dados[0].equilibrioDistribuicaoValores === true ? "Apresenta adequadamente" : "Não Apresenta Adequadamente")

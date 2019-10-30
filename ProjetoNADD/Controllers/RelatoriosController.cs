@@ -119,13 +119,14 @@ namespace ProjetoNADD.Controllers
         public object BuscaQuestoes(int Id_Avaliacao)
         {
             var query = from q in _context.Questao
+                        join c in _context.Complexidade on q.ComplexidadeID equals c.Id_Complexidade
                         where q.Id_Avaliacao == Id_Avaliacao
                         select new
                         {
                             Numero = q.Id_Numero,
                             Contextualizacao = q.Contextualizacao_Questao,
                             Clareza = q.Clareza_Questao,
-                            Complexidade = q.ComplexidadeID
+                            Complexidade = c.Nome_Complexidade
                         };
             return query;
         }

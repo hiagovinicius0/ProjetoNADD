@@ -125,8 +125,7 @@ namespace ProjetoNADD.Controllers
             questao.TipoID = TipoID;
             _context.Add(questao);
             _context.SaveChanges();
-            Avaliacao ava = new Avaliacao();
-            ava.SicronizarAvaliacoes(Id_Avaliacao, _context);
+            questao.SicronizarAvaliacoes(Id_Avaliacao, _context);
             return "SUCCESS";
         }
 
@@ -165,8 +164,7 @@ namespace ProjetoNADD.Controllers
             questao.TipoID = TipoID;
             _context.Update(questao);
             _context.SaveChanges();
-            Avaliacao ava = new Avaliacao();
-            ava.SicronizarAvaliacoes(Id_Avaliacao, _context);
+            questao.SicronizarAvaliacoes(Id_Avaliacao, _context);
             return "SUCCESS";
         }
 
