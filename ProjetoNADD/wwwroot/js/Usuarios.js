@@ -51,14 +51,16 @@ function Salvar() {
     var dataString = {
         Nome: $('#Nome').val(),
         Email: $('#Email').val(),
-        Senha: $('#Senha').val()
+        Senha: $('#Senha').val(),
+        Role: $('#Role').val()
     }
     $.ajax({
         type: "POST",
         url: "../Usuarios/Create",
         data: dataString,
         success: function (dados) {
-            console.log(dados)
+            ListarUsuarios();
+            $("#myModal").modal('hide');
         }
     });
 }
@@ -122,9 +124,11 @@ function BuscaModal(ID, TIPO) {
 }
 function Editar() {
     var dataString = {
-        Id_Area: $('#Id_Area').val(),
-        Nome_Area: $('#Nome_Area').val()
+        Id_Area: $('#myModal #Id_Area').val(),
+        Nome_Area: $('#myModal #Nome_Area').val(),
+        Role: $('#myModal #Role').val()
     }
+    console.log(dataString)
     $.ajax({
         type: "POST",
         url: "Usuarios/Edit",

@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using ProjetoNADD.Data;
 using ProjetoNADD.Models;
 using System.Linq;
@@ -14,22 +16,41 @@ namespace ProjetoNADD.Controllers
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly ProjetoNADDContext _context;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UsuariosController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ProjetoNADDContext context)
+        public UsuariosController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ProjetoNADDContext context, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             _context = context;
+            _roleManager = roleManager;
         }
 
 
         public IActionResult Index()
         {
+            var roles = _context.Roles.ToList();
+            if(roles.Count() == 0)
+            {
+                var role = new IdentityRole[]
+                {
+                    new IdentityRole{Name = "NADD", NormalizedName = "NADD"},
+                    new IdentityRole{Name = "Coordenador", NormalizedName = "COORDENADOR"},
+                    new IdentityRole{Name = "Pró-Reitoria", NormalizedName = "PRO-REITORIA"}
+                };
+                foreach (IdentityRole comp1 in role)
+                {
+                    _context.Roles.Add(comp1);
+                }
+                _context.SaveChanges();
+            }
             return View();
         }
         public IActionResult Create()
         {
-            return View();
+            var roles = _roleManager.Roles;
+            ViewBag.Roles = new SelectList(_context.Roles.ToList(), "Name", "Name");
+            return View(roles);
         }
         public async Task<IActionResult> Details(string id)
         {
@@ -44,7 +65,8 @@ namespace ProjetoNADD.Controllers
             {
                 return NotFound();
             }
-
+            var usuario2 = _context.Usuario.Where(u => u.Id == id).First();
+            ViewBag.Roles = string.Join(",",await userManager.GetRolesAsync(usuario2));
             return View(usuario);
         }
 
@@ -60,16 +82,31 @@ namespace ProjetoNADD.Controllers
             return p;
         }
         [HttpPost]
-        public async  Task<object> Create(string Email, string Nome, string Senha)
+        public async  Task<object> Create(string Email, string Nome, string Senha, string Role)
         {
-            var user = new Usuario()
+            var user = new Usuario
             {
                 UserName = Email,
                 Nome_User = Nome,
                 Email = Email
             };
             var result = await userManager.CreateAsync(user, Senha);
-            return result;
+            if (result.Succeeded)
+            {
+                if (!await userManager.IsInRoleAsync(user, Role))
+                {
+                    var userResult = await userManager.AddToRoleAsync(user, Role);
+                    return userResult;
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            else
+            {
+                return user;
+            }
         }
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
@@ -85,7 +122,8 @@ namespace ProjetoNADD.Controllers
             {
                 return NotFound();
             }
-
+            var usuario2 = _context.Usuario.Where(u => u.Id == id).First();
+            ViewBag.Roles = string.Join(",", await userManager.GetRolesAsync(usuario2));
             return View(usuario);
         }
 
