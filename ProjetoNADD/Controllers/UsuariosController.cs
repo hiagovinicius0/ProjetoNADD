@@ -29,21 +29,6 @@ namespace ProjetoNADD.Controllers
 
         public IActionResult Index()
         {
-            var roles = _context.Roles.ToList();
-            if(roles.Count() == 0)
-            {
-                var role = new IdentityRole[]
-                {
-                    new IdentityRole{Name = "NADD", NormalizedName = "NADD"},
-                    new IdentityRole{Name = "Coordenador", NormalizedName = "COORDENADOR"},
-                    new IdentityRole{Name = "Pró-Reitoria", NormalizedName = "PRO-REITORIA"}
-                };
-                foreach (IdentityRole comp1 in role)
-                {
-                    _context.Roles.Add(comp1);
-                }
-                _context.SaveChanges();
-            }
             return View();
         }
         public IActionResult Create()
@@ -69,7 +54,14 @@ namespace ProjetoNADD.Controllers
             ViewBag.Roles = string.Join(",",await userManager.GetRolesAsync(usuario2));
             return View(usuario);
         }
+        [HttpPost]
+        public async Task<string> GetRolesLogado()
+        {
+            var Usuariouser = await userManager.GetUserAsync(User);
 
+            var roles =  string.Join(",", await userManager.GetRolesAsync(Usuariouser));
+            return roles;
+        }
         [HttpPost]
         public object GetUsuarios()
         {
@@ -144,6 +136,21 @@ namespace ProjetoNADD.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(Login model)
         {
+            var roles = _context.Roles.ToList();
+            if (roles.Count() == 0)
+            {
+                var role = new IdentityRole[]
+                {
+                    new IdentityRole{Name = "NADD", NormalizedName = "NADD"},
+                    new IdentityRole{Name = "Coordenador", NormalizedName = "COORDENADOR"},
+                    new IdentityRole{Name = "Pró-Reitoria", NormalizedName = "PRO-REITORIA"}
+                };
+                foreach (IdentityRole comp1 in role)
+                {
+                    _context.Roles.Add(comp1);
+                }
+                _context.SaveChanges();
+            }
             var query = _context.Usuario.Where(u => u.Email == "administrador@email.com").ToList();
             if (query.Count == 0)
             {
@@ -155,6 +162,13 @@ namespace ProjetoNADD.Controllers
                     Email = "administrador@email.com"
                 };
                 var result1 = await userManager.CreateAsync(usuario, senhaAdmin);
+                if (result1.Succeeded)
+                {
+                    if (!await userManager.IsInRoleAsync(usuario, "NADD"))
+                    {
+                        var userResult = await userManager.AddToRoleAsync(usuario, "NADD");
+                    }
+                }
             }
             var result = await signInManager.PasswordSignInAsync(model.Email, model.Senha, model.LembrarMe, lockoutOnFailure: false);
             if (result.Succeeded)
