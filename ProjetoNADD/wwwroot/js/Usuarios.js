@@ -52,8 +52,19 @@ function Salvar() {
         Nome: $('#Nome').val(),
         Email: $('#Email').val(),
         Senha: $('#Senha').val(),
-        Role: $('#Role').val()
+        Role: $('#Role').val(),
+        Curso : null
     }
+    var Divcurso = $('#divCurso').css('display');
+    if (Divcurso === 'block') {
+        var curso = $('#Curso').val()
+        if (curso === '') {
+            alert('Preencha o Curso')
+            return;
+        }
+        dataString.Curso = curso;
+    }
+    console.log(dataString)
     $.ajax({
         type: "POST",
         url: "../Usuarios/Create",
@@ -128,7 +139,6 @@ function Editar() {
         Nome_Area: $('#myModal #Nome_Area').val(),
         Role: $('#myModal #Role').val()
     }
-    console.log(dataString)
     $.ajax({
         type: "POST",
         url: "Usuarios/Edit",
@@ -152,4 +162,28 @@ function Excluir() {
             $("#myModal").modal('hide');
         }
     });
+}
+function VerificaRole(){
+    var Role = $('#Role').val();
+    if (Role !== 'Coordenador') {
+        $('#divCurso').css('display', 'none');
+        $('#Curso').val('');
+    }
+    else {
+        $.ajax({
+            type: "POST",
+            url: "Cursos/GetCursos",
+            success: function (dados) {
+                var tamanho = dados.length;
+                $('#Curso').html('');
+                for (var i = 0; i < tamanho; i++) {
+                    $('#Curso').append('<option value= "' + dados[i].id_Curso + '">' + dados[i].nome_Curso + '</option>');
+                    $("#Curso").select2({
+                        placeholder: "Selecione o Curso"
+                    });
+                }
+            }
+        });
+        $('#divCurso').css('display', 'block');
+    }
 }

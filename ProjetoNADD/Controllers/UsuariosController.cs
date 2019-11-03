@@ -74,13 +74,14 @@ namespace ProjetoNADD.Controllers
             return p;
         }
         [HttpPost]
-        public async  Task<object> Create(string Email, string Nome, string Senha, string Role)
+        public async  Task<object> Create(string Email, string Nome, string Senha, string Role, int Curso)
         {
             var user = new Usuario
             {
                 UserName = Email,
                 Nome_User = Nome,
-                Email = Email
+                Email = Email,
+                Curso = Curso
             };
             var result = await userManager.CreateAsync(user, Senha);
             if (result.Succeeded)

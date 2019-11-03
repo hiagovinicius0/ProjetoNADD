@@ -9,6 +9,6 @@ namespace ProjetoNADD.Models
         [Required(ErrorMessage = "O Campo {0} é Obrigatório")]
         public string Nome_User { get; set; }
         [Display(Name = "Curso")]
-        public int Curso { get; set; }
+        public int? Curso { get; set; }
     }
 }
