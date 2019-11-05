@@ -204,6 +204,8 @@ namespace ProjetoNADD.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Avaliador_Avaliacao");
+
                     b.Property<bool>("Clareza_Avaliacao");
 
                     b.Property<string>("Complexidade_Avaliacao");
@@ -374,7 +376,7 @@ namespace ProjetoNADD.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<int>("Curso");
+                    b.Property<int?>("Curso");
 
                     b.Property<string>("Nome_User")
                         .IsRequired();
