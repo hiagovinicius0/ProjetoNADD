@@ -25,5 +25,6 @@ namespace ProjetoNADD.Data
             modelBuilder.Entity<DisciplinaProfessor>().HasKey(dp =>
                 new { dp.Disciplina_id, dp.Professor_id });
         }
+        public DbSet<ProjetoNADD.Models.Ano> Ano { get; set; }
     }
 }

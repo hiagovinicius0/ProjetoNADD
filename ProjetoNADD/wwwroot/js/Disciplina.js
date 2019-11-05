@@ -89,7 +89,7 @@ function Salvar() {
         professores: professores,
         Nome_Disciplina: $('#Nome_Disciplinacad').val(),
         Periodo_Disciplina: $('#Periodo_Disciplinacad').val(),
-        Ano_Disciplina: $('#Ano_Disciplinacad').val(),
+        Ano_Disciplina: $('#Ano_Disciplina').val(),
         CursoId: $('#CursoIdcad').val()
     }
     $.ajax({
@@ -115,6 +115,7 @@ function BuscaModal(ID, TIPO) {
                 $("#myModal .modal-footer").html('<button type = "button" class= "btn btn-primary" onclick="Salvar()">Cadatrar Disciplina</button>')
                 $('#myModal').modal('show')
                 SelectProfessor()
+                GetAnos()
             }
         });
     }
@@ -210,6 +211,41 @@ function Excluir() {
         success: function (dados) {
             ListarDisciplinas();
             $("#myModal").modal('hide');
+        }
+    });
+}
+function BuscarAnos() {
+    $("#ModalPequeno .modal-title").html("Adicionar Ano")
+    $("#ModalPequeno .modal-body").html('<div class="row"><div class= "col-md-12"><div class="form-group"><label for="Ano" class="control-label">Ano</label><input class="form-control" id="Ano"/></div></div></div>');
+    $("#ModalPequeno .modal-footer").html('<button type = "button" class= "btn btn-primary" onclick="SalvarAno()">Cadatrar Ano</button>')
+    $('#ModalPequeno').modal('show')
+}
+function GetAnos() {
+    $.ajax({
+        type: "POST",
+        url: "Anos/GetAnos",
+        success: function (dados) {
+            $('#myModal #Ano_Disciplina').html('')
+            if (dados.length > 0) {
+                var tamanho = dados.length;
+                for (var i = 0; i < tamanho; i++) {
+                    $('#myModal #Ano_Disciplina').append('<option value="' + dados[i].ano + '">' + dados[i].ano+'</option>');
+                }
+            }
+        }
+    });
+}
+function SalvarAno() {
+    var ano = $('#ModalPequeno #Ano').val()
+    $.ajax({
+        type: "POST",
+        url: "Anos/Create",
+        data: {
+            Ano: ano
+        },
+        success: function (dados) {
+            $("#ModalPequeno").modal('hide');
+            GetAnos()
         }
     });
 }

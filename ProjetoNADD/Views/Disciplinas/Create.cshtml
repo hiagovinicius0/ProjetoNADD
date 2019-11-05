@@ -18,10 +18,16 @@
                 <input asp-for="Periodo_Disciplina" class="form-control" id="Periodo_Disciplinacad" />
                 <span asp-validation-for="Periodo_Disciplina" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Ano_Disciplina" class="control-label"></label>
-                <input asp-for="Ano_Disciplina" class="form-control" id="Ano_Disciplinacad" />
-                <span asp-validation-for="Ano_Disciplina" class="text-danger"></span>
+            <label asp-for="Ano_Disciplina" class="control-label"></label>
+            <div class="row">
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-success" onclick="BuscarAnos()">+</button>
+                </div>
+                <div class="col-md-11">
+                    <select asp-for="Ano_Disciplina" class="form-control">
+
+                    </select>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="CursoId" class="control-label"></label>
