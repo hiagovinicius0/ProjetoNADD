@@ -90,7 +90,6 @@ function BuscaRelatorio() {
             Id_Avaliacao: avaliacao
         },
         success: function (dados) {
-            console.log(dados)
             $('#Semestre').html(dados[0].ano)
             $('#Curso').html(dados[0].curso)
             $('#Area').html(dados[0].area)
@@ -121,7 +120,8 @@ function BuscaRelatorio() {
             $('#EquilibrioValores').html(dados[0].equilibrioDistribuicaoValores === true ? "Apresenta adequadamente" : "Não Apresenta Adequadamente")
             $('#DiversificacaoAvaliacao').html(dados[0].diversificacao === true ? "Sim" : "Não")
             $('#QuestaoContextualizadaAvaliacao').html(dados[0].questaoContextualizada === true ? "Sim" : "Não")
-            $('#ObservacoesAvaliacao').html(dados[0].Observacoes)
+            $('#ObservacoesAvaliacao').html(dados[0].observacoes)
+            $('#AvaliadorAvaliacao').html(dados[0].avaliador[0].avaliador)
             $.ajax({
                 type: "POST",
                 url: "../Relatorios/BuscaQuestoes",

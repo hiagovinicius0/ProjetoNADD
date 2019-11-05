@@ -40,7 +40,9 @@ namespace ProjetoNADD.Models
         [Display(Name = "Observações")]
         public string Observacoes_Avaliacao { get; set; } //Observações
         [Display(Name = "Disciplina")]
-        public int DisciplinaId { get; set; }
+        public int DisciplinaId { get; set; } // Disciplina
+        [Display(Name = "Avaliador")]
+        public string Avaliador_Avaliacao { get; set; } // Avaliador
         public Disciplina Disciplina { get; set; }
         public ICollection<Questao> Questoes { get; set; }
     }

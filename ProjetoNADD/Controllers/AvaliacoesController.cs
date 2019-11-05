@@ -45,7 +45,6 @@ namespace ProjetoNADD.Controllers
             {
                 return NotFound();
             }
-
             var avaliacao = await _context.Avaliacao
                 .Include(a => a.Disciplina)
                 .FirstOrDefaultAsync(m => m.Id_Avaliacao == id);
@@ -53,7 +52,8 @@ namespace ProjetoNADD.Controllers
             {
                 return NotFound();
             }
-
+            var avaliador = _context.Usuario.Where(u => u.Id == avaliacao.Avaliador_Avaliacao).Select(u => new { Nome_Avaliador = u.Nome_User}).First();
+            ViewData["Avaliador"] = avaliador.Nome_Avaliador;
             return View(avaliacao);
         }
 
@@ -68,7 +68,7 @@ namespace ProjetoNADD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public string Create(string Nome_Avaliacao, bool ValorExplicitoProva_Avaliacao, bool ValorExplicitoQuestoes_Avaliacao, bool SomatorioQuestoes_Avaliacao, bool Referencias_Avaliacao, double ValorProva_Avaliacao, bool EquilibrioValorQuestoes_Avaliacao, bool Diversificacao_Avaliacao, bool Contextualidade_Avaliacao, string Observacoes_Avaliacao, int DisciplinaId, bool Clareza_Avaliacao)
+        public string Create(string Nome_Avaliacao, bool ValorExplicitoProva_Avaliacao, bool ValorExplicitoQuestoes_Avaliacao, bool SomatorioQuestoes_Avaliacao, bool Referencias_Avaliacao, double ValorProva_Avaliacao, bool EquilibrioValorQuestoes_Avaliacao, bool Diversificacao_Avaliacao, bool Contextualidade_Avaliacao, string Observacoes_Avaliacao, int DisciplinaId, bool Clareza_Avaliacao, string Avaliador_Avaliacao)
         {
             Avaliacao avaliacao = new Avaliacao();
             avaliacao.Nome_Avaliacao = Nome_Avaliacao;
@@ -85,7 +85,8 @@ namespace ProjetoNADD.Controllers
             avaliacao.Observacoes_Avaliacao = Observacoes_Avaliacao;
             avaliacao.DisciplinaId = DisciplinaId;
             avaliacao.Complexidade_Avaliacao = "Sem Questões";
-            avaliacao.Clareza_Avaliacao = Clareza_Avaliacao;
+            avaliacao.Clareza_Avaliacao = false;
+            avaliacao.Avaliador_Avaliacao = Avaliador_Avaliacao;
             _context.Add(avaliacao);
             _context.SaveChanges();
             return "SUCCESS";

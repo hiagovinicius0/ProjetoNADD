@@ -60,12 +60,14 @@ function Salvar() {
         SomatorioQuestoes_Avaliacao: $('#myModal #SomatorioQuestoes_Avaliacao').prop("checked") === true ? true : false,
         Referencias_Avaliacao: $('#myModal #Referencias_Avaliacao').prop("checked") === true ? true : false,
         NumeroQuestoes_Avaliacao: $('#myModal #NumeroQuestoes_Avaliacao').val(),
+        ValorProva_Avaliacao: $('#myModal #ValorProva_Avaliacao').val(),
         EquilibrioValorQuestoes_Avaliacao: $('#myModal #EquilibrioValorQuestoes_Avaliacao').prop("checked") === true ? true : false,
         Diversificacao_Avaliacao: $('#myModal #Diversificacao_Avaliacao').prop("checked") === true ? true : false,
         Contextualidade_Avaliacao: $('#myModal #Contextualidade_Avaliacao').prop("checked") === true ? true : false,
         Observacoes_Avaliacao: $('#myModal #Observacoes_Avaliacao').val(),
         DisciplinaId: $('#myModal #DisciplinaId').val(),
-        Clareza_Avaliacao: $('#myModal #Clareza_Avaliacao').prop("checked") === true ? true : false
+        Clareza_Avaliacao: $('#myModal #Clareza_Avaliacao').prop("checked") === true ? true : false,
+        Avaliador_Avaliacao: $('#myModal #Avaliador_Avaliacao').val()
     }
     $.ajax({
         type: "POST",
@@ -83,12 +85,25 @@ function BuscaModal(ID, TIPO) {
             url: 'Avaliacoes/Create',
             type: 'GET',
             success: function (res) {
-                var cabecalho = $(res).find("#cabecalho")
-                $("#myModal .modal-title").html(cabecalho)
-                var conteudo = $(res).find("#conteudo_create")
-                $("#myModal .modal-body").html(conteudo);
-                $("#myModal .modal-footer").html('<button type = "button" class= "btn btn-primary" onclick="Salvar()">Cadatrar Avaliação</button>')
-                $('#myModal').modal('show')
+                $.ajax({
+                    url: 'Usuarios/GetUsuariosNADD',
+                    type: 'POST',
+                    success: function (data) {
+                        var cabecalho = $(res).find("#cabecalho")
+                        $("#myModal .modal-title").html(cabecalho)
+                        var conteudo = $(res).find("#conteudo_create")
+                        $("#myModal .modal-body").html(conteudo);
+                        $("#myModal .modal-footer").html('<button type = "button" class= "btn btn-primary" onclick="Salvar()">Cadatrar Avaliação</button>')
+                        $('#myModal').modal('show')
+                        if (data.length > 0) {
+                            var tamanho = data.length;
+                            $('#myModal #Avaliador_Avaliacao').html('')
+                            for (var i = 0; i < tamanho; i++) {
+                                $('#myModal #Avaliador_Avaliacao').append('<option value ="' + data[i].id_Usuario + '">' + data[i].nome_Usuario+'</option>')
+                            }
+                        }
+                    }
+                });
             }
         });
     }
@@ -144,6 +159,7 @@ function Editar() {
         SomatorioQuestoes_Avaliacao: $('#myModal #SomatorioQuestoes_Avaliacao').prop("checked") === true ? true : false,
         Referencias_Avaliacao: $('#myModal #Referencias_Avaliacao').prop("checked") === true ? true : false,
         NumeroQuestoes_Avaliacao: $('#myModal #NumeroQuestoes_Avaliacao').val(),
+        ValorProva_Avaliacao: $('#myModal #ValorProva_Avaliacao').val(),
         EquilibrioValorQuestoes_Avaliacao: $('#myModal #EquilibrioValorQuestoes_Avaliacao').prop("checked") === true ? true : false,
         Diversificacao_Avaliacao: $('#myModal #Diversificacao_Avaliacao').prop("checked") === true ? true : false,
         Contextualidade_Avaliacao: $('#myModal #Contextualidade_Avaliacao').prop("checked") === true ? true : false,

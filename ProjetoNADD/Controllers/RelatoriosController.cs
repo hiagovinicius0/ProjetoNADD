@@ -113,7 +113,11 @@ namespace ProjetoNADD.Controllers
                             Diversificacao = av.Diversificacao_Avaliacao,
                             QuestaoContextualizada = av.Contextualidade_Avaliacao,
                             Observacoes = av.Observacoes_Avaliacao,
-                            Coordenador = us.Nome_User
+                            Coordenador = us.Nome_User,
+                            Avaliador = (from u in _context.Usuario
+                                         where u.Id == av.Avaliador_Avaliacao
+                                         select new {Avaliador = u.Nome_User}
+                                         )
                         };
             return query;
         }

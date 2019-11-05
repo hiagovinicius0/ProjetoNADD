@@ -188,5 +188,23 @@ namespace ProjetoNADD.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Login", "Usuarios");
         }
+        [HttpPost]
+        public async Task<object> GetUsuariosNADD()
+        {
+            var usuariosRole = await userManager.GetUsersInRoleAsync("NADD");
+            if(usuariosRole.Count >0)
+            {
+                var usuarios = _context.Usuario.Where(u => usuariosRole.Contains(u))
+                                .Select(s => new {
+                                    Id_Usuario = s.Id,
+                                    Nome_Usuario = s.Nome_User
+                                }).ToList();
+                return usuarios;
+            }
+            else
+            {
+                return usuariosRole;
+            }
+        }
     }
 }
