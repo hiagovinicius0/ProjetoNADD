@@ -83,6 +83,7 @@ namespace ProjetoNADD.Controllers
                         join d in _context.Disciplina on av.DisciplinaId equals d.Id_Disciplina
                         join c in _context.Curso on d.CursoId equals c.Id_Curso
                         join ar in _context.Area on c.AreaId equals ar.Id_Area
+                        join us in _context.Usuario on c.Id_Curso equals us.Curso
                         where c.Id_Curso == Id_Curso
                         where d.Id_Disciplina == Id_Disciplina
                         select new
@@ -111,7 +112,8 @@ namespace ProjetoNADD.Controllers
                             EquilibrioDistribuicaoValores = av.EquilibrioValorQuestoes_Avaliacao,
                             Diversificacao = av.Diversificacao_Avaliacao,
                             QuestaoContextualizada = av.Contextualidade_Avaliacao,
-                            Observacoes = av.Observacoes_Avaliacao
+                            Observacoes = av.Observacoes_Avaliacao,
+                            Coordenador = us.Nome_User
                         };
             return query;
         }
@@ -121,6 +123,7 @@ namespace ProjetoNADD.Controllers
             var query = from q in _context.Questao
                         join c in _context.Complexidade on q.ComplexidadeID equals c.Id_Complexidade
                         where q.Id_Avaliacao == Id_Avaliacao
+                        orderby q.Id_Numero ascending
                         select new
                         {
                             Numero = q.Id_Numero,

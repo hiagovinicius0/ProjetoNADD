@@ -108,7 +108,8 @@ function BuscaRelatorio() {
                     }
                 }
             }
-            $('#Professor').html(stringProfessor)
+            $('#ProfessorAssinatura').html(stringProfessor)
+            $('#CoordenadorAssinatura').html(dados[0].coordenador)
             $('#PeriodoAno').html(dados[0].periodo)
             $('#ValorExplicito').html(dados[0].valorProvaExplicito === true ? "Apresenta adequadamente" : "Não Apresenta Adequadamente")
             $('#ValorQuestoes').html(dados[0].valorQuestoes === true ? "Apresenta adequadamente" : "Não Apresenta Adequadamente")
@@ -137,7 +138,7 @@ function BuscaRelatorio() {
                                 var contextualizacao = dados1[i].contextualizacao === true ? "Sim" : "Não"
                                 var clareza = dados1[i].clareza === true ? "Sim" : "Não"
                                 // Linha 1 - 20
-                                var linhaInserida = 19 + (i *3)
+                                var linhaInserida = 18 + (i *3)
                                 var linha = tabela.insertRow(linhaInserida);
                                 var celula1 = linha.insertCell(0);
                                 var celula2 = linha.insertCell(1);
@@ -145,7 +146,7 @@ function BuscaRelatorio() {
                                 celula2.innerHTML = contextualizacao;
 
                                 // Linha2 - 21
-                                var linhaInserida = 19 + (i * 3) + 1
+                                var linhaInserida = 18 + (i * 3) + 1
                                 var linha = tabela.insertRow(linhaInserida);
                                 var celula1 = linha.insertCell(0);
                                 var celula2 = linha.insertCell(1);
@@ -153,7 +154,7 @@ function BuscaRelatorio() {
                                 celula2.innerHTML = clareza;
 
                                 // Linha 3 - 22
-                                var linhaInserida = 19 + (i * 3) + 1
+                                var linhaInserida = 18 + (i * 3) + 1
                                 var linha = tabela.insertRow(linhaInserida);
                                 var celula1 = linha.insertCell(0);
                                 var celula2 = linha.insertCell(1);
@@ -164,7 +165,7 @@ function BuscaRelatorio() {
                                 var contextualizacao = dados1[i].contextualizacao === true ? "Sim" : "Não"
                                 var clareza = dados1[i].clareza === true ? "Sim" : "Não"
                                 // Linha 1 - 20
-                                var linhaInserida = 19 + i
+                                var linhaInserida = 18 + i
                                 var linha = tabela.insertRow(linhaInserida);
                                 var celula1 = linha.insertCell(0);
                                 var celula2 = linha.insertCell(1);
@@ -172,7 +173,7 @@ function BuscaRelatorio() {
                                 celula2.innerHTML = contextualizacao;
 
                                 // Linha2 - 21
-                                var linhaInserida = 19 + i + 1
+                                var linhaInserida = 18 + i + 1
                                 var linha = tabela.insertRow(linhaInserida);
                                 var celula1 = linha.insertCell(0);
                                 var celula2 = linha.insertCell(1);
@@ -180,7 +181,7 @@ function BuscaRelatorio() {
                                 celula2.innerHTML = clareza;
 
                                 // Linha 3 - 22
-                                var linhaInserida = 19 + i + 1
+                                var linhaInserida = 18 + i + 1
                                 var linha = tabela.insertRow(linhaInserida);
                                 var celula1 = linha.insertCell(0);
                                 var celula2 = linha.insertCell(1);
