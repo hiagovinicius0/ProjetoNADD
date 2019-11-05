@@ -40,13 +40,30 @@
                     </div>
 
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" id="RelatoriosNADD" style="display: none;">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Relatórios
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                         <a asp-area="" asp-controller="Relatorios" asp-action="Avaliacoes" class="dropdown-item">Avaliações</a>
                         <a asp-area="" asp-controller="Relatorios" asp-action="Professor" class="dropdown-item">Professor</a>
+                        <a asp-area="" asp-controller="Relatorios" asp-action="Coordenador" class="dropdown-item">Coordenador</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown" id="RelatoriosCoordenador" style="display: none;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Relatórios
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                        <a asp-area="" asp-controller="Relatorios" asp-action="Coordenador" class="dropdown-item">Coordenador</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown" id="RelatoriosReitoria" style="display: none;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Relatórios
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+
                     </div>
                 </li>
             </ul>

@@ -25,6 +25,10 @@ namespace ProjetoNADD.Controllers
         {
             return View();
         }
+        public IActionResult Coordenador()
+        {
+            return View();
+        }
         [HttpPost]
         public object GetCursos()
         {
