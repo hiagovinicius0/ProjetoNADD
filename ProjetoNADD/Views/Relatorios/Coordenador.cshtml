@@ -1,8 +1,74 @@
 ﻿
 @{
-    ViewData["Title"] = "Coordenador";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Relatório Professor";
+}
+@section Styles{
+
+    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
+    <link href="~/css/site.css" />
+    <script src="~/lib/select2/js/select2.js"></script>
+    <link rel="stylesheet" href="~/lib/DataTables/datatables.css" />
+    <script src="~/lib/DataTables/datatables.min.js"></script>
+
+}
+<h2>Relatório de Coordenador</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="control-label" style="font-weight: bold;">Curso</label>
+            <select id="Id_Curso" class="form-control" onchange="BuscaAnos()"></select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group" id="divAno" style="display: none;">
+            <label class="control-label" style="font-weight: bold;">Ano</label>
+            <select id="Id_Ano" class="form-control" onchange="BuscaRelatorio()" style="width:100%"></select>
+        </div>
+    </div>
+    <hr />
+    <div class="col-md-2">
+    </div>
+    <style>
+    </style>
+    <div id="conteudo_relatorio" class="col-md-12" align="center" style="display: none;">
+        <table id="tabelaRelatorio" style="cursor: pointer;" class="table table-striped table-hover table-bordered" >
+            <thead>
+                <tr>
+                    <th>Ano</th>
+                    <th>Curso</th>
+                    <th>Período</th>
+                    <th>Área</th>
+                    <th>Contextualização</th>
+                    <th>Clareza</th>
+                    <th>Complexidade</th>
+                </tr>
+            </thead>
+            <tbody id="corpoTabela">
+
+            </tbody>
+        </table>
+    </div>
+    <div id="divErro">
+
+    </div>
+</div>
+
+@section ScriptPage{
+    <environment include="Development">
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/DataTables/datatables.min.js"></script>
+    </environment>
+    <link rel="stylesheet" href="~/lib/DataTables/datatables.css" />
+
+    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
+    <script src="~/lib/select2/js/select2.js"></script>
+    <script src="~/js/Relatorios/Coordenador.js"></script>
+    <script>
+        $(document).ready(function () {
+            GetCursos();
+        })
+    </script>
 }
 
-<h2>Coordenador</h2>
 

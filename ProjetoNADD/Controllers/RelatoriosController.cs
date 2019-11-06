@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using Newtonsoft.Json;
 using ProjetoNADD.Data;
+using ProjetoNADD.Models;
 using System.Linq;
 
 namespace ProjetoNADD.Controllers
@@ -29,14 +30,37 @@ namespace ProjetoNADD.Controllers
         {
             return View();
         }
+        public IActionResult Reitoria()
+        {
+            return View();
+        }
         [HttpPost]
         public object GetCursos()
         {
-            var query = _context.Curso.Select(st => new {
-                Id = st.Id_Curso,
-                Nome = st.Nome_Curso
-            }).ToList();
-            return query;
+            var email = User.Identity.Name;
+            var usuario = _context.Usuario.Where(u => u.UserName == email).First();
+            int? curso = usuario.Curso;
+            if (curso == null || curso == 0)
+            {
+                var cursos = from c in _context.Curso
+                             select new
+                             {
+                                 Id = c.Id_Curso,
+                                 Nome = c.Nome_Curso
+                             };
+                return cursos;
+            }
+            else
+            {
+                var cursos = from c in _context.Curso
+                             where c.Id_Curso == usuario.Curso
+                             select new
+                             {
+                                 Id = c.Id_Curso,
+                                 Nome = c.Nome_Curso
+                             };
+                return cursos;
+            }
         }
         [HttpPost]
         public object BuscaDisciplinas(int Id_Curso)
@@ -138,6 +162,39 @@ namespace ProjetoNADD.Controllers
                             Contextualizacao = q.Contextualizacao_Questao,
                             Clareza = q.Clareza_Questao,
                             Complexidade = c.Nome_Complexidade
+                        };
+            return query;
+        }
+        [HttpPost]
+        public object BuscaAnos(int Id_Curso)
+        {
+            var query = from anos in _context.Ano
+                        join d in _context.Disciplina on anos.Ano_id equals d.Ano_Disciplina
+                        where d.CursoId == Id_Curso
+                        select new
+                        {
+                            Ano = anos.Ano_id
+                        };
+            return query;
+        }
+        [HttpPost]
+        public object BuscaRelatorioCoordenador(int Id_Curso, string Id_Ano)
+        {
+            var query = from av in _context.Avaliacao
+                        join d in _context.Disciplina on av.DisciplinaId equals d.Id_Disciplina
+                        join c in _context.Curso on d.CursoId equals c.Id_Curso
+                        join a in _context.Area on c.AreaId equals a.Id_Area
+                        where d.CursoId == Id_Curso
+                        where d.Ano_Disciplina == Id_Ano
+                        select new
+                        {
+                            Ano = d.Ano_Disciplina,
+                            Curso = c.Nome_Curso,
+                            Periodo = d.Periodo_Disciplina,
+                            Area = a.Nome_Area,
+                            Contextualizacao = av.Contextualidade_Avaliacao,
+                            Clareza = av.Clareza_Avaliacao,
+                            Complexidade = av.Complexidade_Avaliacao
                         };
             return query;
         }
