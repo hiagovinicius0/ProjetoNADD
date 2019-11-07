@@ -1,0 +1,322 @@
+﻿
+@{
+    ViewBag.Title = "Relatório Reitoria";
+}
+@section Styles{
+
+    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
+    <link href="~/css/site.css" />
+    <script src="~/lib/select2/js/select2.js"></script>
+    <link rel="stylesheet" href="~/lib/DataTables/datatables.css" />
+    <script src="~/lib/DataTables/datatables.min.js"></script>
+
+}
+<h2>Relatório Reitoria</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group" id="divAno" style="display: none;">
+            <label class="control-label" style="font-weight: bold;">Ano</label>
+            <select id="Id_Ano" class="form-control" onchange="BuscaRelatorio()" style="width:100%"></select>
+        </div>
+    </div>
+    <div class="col-md-6"></div>
+    <hr />
+    
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <h6>Dados relativos a formatação das provas avaliadas</h6>
+        <table border="1">
+            <thead>
+                <tr style="text-align:center;">
+                    <th style="width:532px;">Critérios de análise</th>
+                    <th colspan="2">Apresenta adequadamente</th>
+                    <th colspan="2">Não apresenta adequadamente</th>
+                    <th>Total Geral</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Valor da prova explícito</td>
+                    <td id="valorExplicito" style="text-align:center">XX</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XX%</td>
+                    <td id="valorExplicitoP" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center; width:120px;">X</td>
+                </tr>
+                <tr>
+                    <td>Valor das questões explícito</td>
+                    <td id="valorExplicito" style="text-align:center">XX</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XX%</td>
+                    <td id="valorExplicitoP" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center; width:120px;">X</td>
+                </tr>
+                <tr>
+                    <td>Somatório dos valores das questões</td>
+                    <td id="valorExplicito" style="text-align:center">XX</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XX%</td>
+                    <td id="valorExplicitoP" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center; width:120px;">X</td>
+                </tr>
+                <tr>
+                    <td>Referências bibliográficas</td>
+                    <td id="valorExplicito" style="text-align:center">XX</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XX%</td>
+                    <td id="valorExplicitoP" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center; width:120px;">X</td>
+                </tr>
+                <tr>
+                    <td>Equilíbrio na distribuição dos valores das questões</td>
+                    <td id="valorExplicito" style="text-align:center">XX</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XX%</td>
+                    <td id="valorExplicitoP" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center; width:120px;">X</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <h6>Análise de aspectos pedagógicos</h6>
+        <table border="1" style="width:920px;">
+            <thead>
+                <tr style="text-align:center;">
+                    <th style="width:532px;">Critérios de análise</th>
+                    <th colspan="2">Não</th>
+                    <th colspan="2">Sim</th>
+                    <th>Total Geral</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Possui questões de Múltipla escolha e Discursivas</td>
+                    <td id="valorExplicito" style="text-align:center">XX</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XX%</td>
+                    <td id="valorExplicitoP" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center; width:120px;">X</td>
+                </tr>
+                <tr>
+                    <td>
+                        Apresenta, explicitamente, diversificação na
+                        avaliação?
+                    </td>
+                    <td id="valorExplicito" style="text-align:center">XX</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XX%</td>
+                    <td id="valorExplicitoP" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center; width:120px;">X</td>
+                </tr>
+                <tr>
+                    <td>
+                        A prova possui, pelo menos, uma questão
+                        contextualizada?
+                    </td>
+                    <td id="valorExplicito" style="text-align:center">XX</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XX%</td>
+                    <td id="valorExplicitoP" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center; width:120px;">X</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr />
+        <h6>Contagem de complexidade</h6>
+        <table border="1" style="width:920px;">
+            <thead>
+                <tr style="text-align:center;">
+                    <th style="width:532px;">Grau de complexidade</th>
+                    <th>N</th>
+                    <th>%</th>
+                    <th>N</th>
+                    <th>%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Conhecimento</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;"></td>
+                </tr>
+                <tr>
+                    <td>Compreensão</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center">XXX</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XXX%</td>
+                </tr>
+                <tr>
+                    <td>Aplicação</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;"></td>
+                </tr>
+                <tr>
+                    <td>Análise</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;"></td>
+                </tr>
+                <tr>
+                    <td>Síntese</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;"></td>
+                </tr>
+                <tr>
+                    <td>Avaliação</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;"></td>
+                </tr>
+            </tbody>
+            <tfooter>
+                <tr>
+                    <td>Total Geral</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XXX%</td>
+                    <td id="valorExplicitoP" style="text-align:center">XXX</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">100%</td>
+                </tr>
+            </tfooter>
+        </table>
+        <hr />
+        <h6>Contagem de complexidade nas questões por área</h6>
+        <table border="1" style="width:920px;">
+            <thead>
+                <tr style="text-align:center;">
+                    <th style="width:532px;">Grau de complexidade</th>
+                    <th>N</th>
+                    <th>Exatas %</th>
+                    <th></th>
+                    <th>N</th>
+                    <th>Humanas %</th>
+                    <th></th>
+                    <th>N</th>
+                    <th>Saúde %</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Conhecimento</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                </tr>
+                <tr>
+                    <td>Compreensão</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center">X%</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center">X%</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center">x%</td>
+                </tr>
+                <tr>
+                    <td>Aplicação</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                </tr>
+                <tr>
+                    <td>Análise</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                </tr>
+                <tr>
+                    <td>Síntese</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center">X%</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center">X%</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center">x%</td>
+                </tr>
+                <tr>
+                    <td>Avaliação</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                </tr>
+            </tbody>
+            <tfooter>
+                <tr>
+                    <td>Total Geral</td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;"></td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;"></td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="valorExplicitoP" style="text-align:center;width:60px;"></td>
+                    <td id="valorExplicitoP" style="text-align:center"></td>
+                </tr>
+            </tfooter>
+        </table>
+    </div>
+    <div class="col-md-1"></div>
+    <div id="divErro">
+
+    </div>
+</div>
+
+@section ScriptPage{
+    <environment include="Development">
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/DataTables/datatables.min.js"></script>
+    </environment>
+    <link rel="stylesheet" href="~/lib/DataTables/datatables.css" />
+
+    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
+    <script src="~/lib/select2/js/select2.js"></script>
+    <script src="~/js/Relatorios/Coordenador.js"></script>
+    <script>
+        $(document).ready(function () {
+            GetCursos();
+        })
+    </script>
+}
+
+
