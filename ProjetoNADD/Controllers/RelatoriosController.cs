@@ -320,11 +320,71 @@ namespace ProjetoNADD.Controllers
                                                 where q1.ComplexidadeID == 1
                                                 select q1
                                                 ).Count(),
+                            ConhecimentoExatas = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 1
+                                                where ar1.Nome_Area == "Exatas"
+                                                select q1
+                                                ).Count(),
+                            ConhecimentoHumanas = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 1
+                                                where ar1.Nome_Area == "Humanas"
+                                                select q1
+                                                ).Count(),
+                            ConhecimentoSaude = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 1
+                                                where ar1.Nome_Area == "Saúde"
+                                                select q1
+                                                ).Count(),
                             Compreensao = (from q1 in _context.Questao
                                                 join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
                                                 join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
                                                 where d1.Ano_Disciplina == Id_Ano
                                                 where q1.ComplexidadeID == 2
+                                                select q1
+                                                ).Count(),
+                            CompreensaoExatas = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 2
+                                                where ar1.Nome_Area == "Exatas"
+                                                select q1
+                                                ).Count(),
+                            CompreensaoHumanas = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 2
+                                                where ar1.Nome_Area == "Humanas"
+                                                select q1
+                                                ).Count(),
+                            CompreensaoSaude = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 2
+                                                where ar1.Nome_Area == "Saúde"
                                                 select q1
                                                 ).Count(),
                             Aplicacao = (from q1 in _context.Questao
@@ -334,11 +394,71 @@ namespace ProjetoNADD.Controllers
                                                 where q1.ComplexidadeID == 3
                                                 select q1
                                                 ).Count(),
+                            AplicacaoExatas = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 3
+                                                where ar1.Nome_Area == "Exatas"
+                                                select q1
+                                                ).Count(),
+                            AplicacaoHumanas = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 3
+                                                where ar1.Nome_Area == "Humanas"
+                                                select q1
+                                                ).Count(),
+                            AplicacaoSaude = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 3
+                                                where ar1.Nome_Area == "Saúde"
+                                                select q1
+                                                ).Count(),
                             Analise = (from q1 in _context.Questao
                                                 join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
                                                 join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
                                                 where d1.Ano_Disciplina == Id_Ano
                                                 where q1.ComplexidadeID == 4
+                                                select q1
+                                                ).Count(),
+                            AnaliseExatas = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 4
+                                                where ar1.Nome_Area == "Exatas"
+                                                select q1
+                                                ).Count(),
+                            AnaliseHumanas = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 4
+                                                where ar1.Nome_Area == "Humanas"
+                                                select q1
+                                                ).Count(),
+                            AnaliseSaude = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 4
+                                                where ar1.Nome_Area == "Saúde"
                                                 select q1
                                                 ).Count(),
                             Sintese = (from q1 in _context.Questao
@@ -348,11 +468,71 @@ namespace ProjetoNADD.Controllers
                                                 where q1.ComplexidadeID == 5
                                                 select q1
                                                 ).Count(),
+                            SinteseExatas = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 5
+                                                where ar1.Nome_Area == "Exatas"
+                                                select q1
+                                                ).Count(),
+                            SinteseHumanas = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 5
+                                                where ar1.Nome_Area == "Humanas"
+                                                select q1
+                                                ).Count(),
+                            SinteseSaude = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 5
+                                                where ar1.Nome_Area == "Saúde"
+                                                select q1
+                                                ).Count(),
                             Avaliacao = (from q1 in _context.Questao
                                                 join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
                                                 join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
                                                 where d1.Ano_Disciplina == Id_Ano
                                                 where q1.ComplexidadeID == 6
+                                                select q1
+                                                ).Count(),
+                            AvaliacaoExatas = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 6
+                                                where ar1.Nome_Area == "Exatas"
+                                                select q1
+                                                ).Count(),
+                            AvaliacaoHumanas = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 6
+                                                where ar1.Nome_Area == "Humanas"
+                                                select q1
+                                                ).Count(),
+                            AvaliacaoSaude = (from q1 in _context.Questao
+                                                join av1 in _context.Avaliacao on q1.Id_Avaliacao equals av1.Id_Avaliacao
+                                                join d1 in _context.Disciplina on av1.DisciplinaId equals d1.Id_Disciplina
+                                                join cur1 in _context.Curso on d1.CursoId equals cur1.Id_Curso
+                                                join ar1 in _context.Area on cur1.AreaId equals ar1.Id_Area
+                                                where d1.Ano_Disciplina == Id_Ano
+                                                where q1.ComplexidadeID == 6
+                                                where ar1.Nome_Area == "Saúde"
                                                 select q1
                                                 ).Count(),
                         };

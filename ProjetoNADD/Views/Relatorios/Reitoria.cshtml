@@ -24,7 +24,7 @@
     <hr />
 
     <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div class="col-md-10" id="conteudoRelatorio" style="display:none;">
         <h6>Dados relativos a formatação das provas avaliadas</h6>
         <table border="1">
             <thead>
@@ -196,100 +196,97 @@
                 <tr style="text-align:center;">
                     <th style="width:532px;">Grau de complexidade</th>
                     <th>N</th>
-                    <th>Exatas %</th>
-                    <th></th>
+                    <th colspan="2">Exatas %</th>
                     <th>N</th>
-                    <th>Humanas %</th>
-                    <th></th>
+                    <th colspan="2">Humanas %</th>
                     <th>N</th>
-                    <th>Saúde %</th>
-                    <th></th>
+                    <th colspan="2">Saúde %</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Conhecimento</td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="conhecimentoNumeroExatas" style="text-align:center">X</td>
+                    <td id="conhecimentoPorcentagemExatas" style="text-align:center;width:60px;">X%</td>
                     <td id="valorExplicitoP" style="text-align:center"></td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
-                    <td id="valorExplicitoP" style="text-align:center"></td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="conhecimentoNumeroHumanas" style="text-align:center">X</td>
+                    <td id="conhecimentoPorcentagemHumanas" style="text-align:center;width:60px;">X%</td>
+                    <td id="" style="text-align:center"></td>
+                    <td id="conhecimentoNumeroSaude" style="text-align:center">X</td>
+                    <td id="conhecimentoPorcentagemSaude" style="text-align:center;width:60px;">X%</td>
                     <td id="valorExplicitoP" style="text-align:center"></td>
                 </tr>
                 <tr>
                     <td>Compreensão</td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
-                    <td id="valorExplicitoP" style="text-align:center">X%</td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
-                    <td id="valorExplicitoP" style="text-align:center">X%</td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
-                    <td id="valorExplicitoP" style="text-align:center">x%</td>
+                    <td id="compreensaoNumeroExatas" style="text-align:center">X</td>
+                    <td id="compreensaoPorcentagemExatas" style="text-align:center;width:60px;">X%</td>
+                    <td id="numero13Exatas" style="text-align:center">X%</td>
+                    <td id="compreensaoNumeroHumanas" style="text-align:center">X</td>
+                    <td id="compreensaoPorcentagemHumanas" style="text-align:center;width:60px;">X%</td>
+                    <td id="numero13Humanas" style="text-align:center">X%</td>
+                    <td id="compreensaoNumeroSaude" style="text-align:center">X</td>
+                    <td id="compreensaoPorcentagemSaude" style="text-align:center;width:60px;">X%</td>
+                    <td id="numero13Saude" style="text-align:center">x%</td>
                 </tr>
                 <tr>
                     <td>Aplicação</td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="aplicacaoNumeroExatas" style="text-align:center">X</td>
+                    <td id="aplicacaoPorcentagemExatas" style="text-align:center;width:60px;">X%</td>
                     <td id="valorExplicitoP" style="text-align:center"></td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="aplicacaoNumeroHumanas" style="text-align:center">X</td>
+                    <td id="aplicacaoPorcentagemHumanas" style="text-align:center;width:60px;">X%</td>
                     <td id="valorExplicitoP" style="text-align:center"></td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="aplicacaoNumeroSaude" style="text-align:center">X</td>
+                    <td id="aplicacaoPorcentagemSaude" style="text-align:center;width:60px;">X%</td>
                     <td id="valorExplicitoP" style="text-align:center"></td>
                 </tr>
                 <tr>
                     <td>Análise</td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="analiseNumeroExatas" style="text-align:center">X</td>
+                    <td id="analisePorcentagemExatas" style="text-align:center;width:60px;">X%</td>
                     <td id="valorExplicitoP" style="text-align:center"></td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="analiseNumeroHumanas" style="text-align:center">X</td>
+                    <td id="analisePorcentagemHumanas" style="text-align:center;width:60px;">X%</td>
                     <td id="valorExplicitoP" style="text-align:center"></td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="analiseNumeroSaude" style="text-align:center">X</td>
+                    <td id="analisePorcentagemSaude" style="text-align:center;width:60px;">X%</td>
                     <td id="valorExplicitoP" style="text-align:center"></td>
                 </tr>
                 <tr>
                     <td>Síntese</td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
-                    <td id="valorExplicitoP" style="text-align:center">X%</td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
-                    <td id="valorExplicitoP" style="text-align:center">X%</td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
-                    <td id="valorExplicitoP" style="text-align:center">x%</td>
+                    <td id="sinteseNumeroExatas" style="text-align:center">X</td>
+                    <td id="sintesePorcentagemExatas" style="text-align:center;width:60px;">X%</td>
+                    <td id="numero23Exatas" style="text-align:center">X%</td>
+                    <td id="sinteseNumeroHumanas" style="text-align:center">X</td>
+                    <td id="sintesePorcentagemHumanas" style="text-align:center;width:60px;">X%</td>
+                    <td id="numero23Humanas" style="text-align:center">X%</td>
+                    <td id="sinteseNumeroSaude" style="text-align:center">X</td>
+                    <td id="sintesePorcentagemSaude" style="text-align:center;width:60px;">X%</td>
+                    <td id="numero23Saude" style="text-align:center">x%</td>
                 </tr>
                 <tr>
                     <td>Avaliação</td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="avaliacaoNumeroExatas" style="text-align:center">X</td>
+                    <td id="avaliacaoPorcentagemExatas" style="text-align:center;width:60px;">X%</td>
                     <td id="valorExplicitoP" style="text-align:center"></td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="avaliacaoNumeroHumanas" style="text-align:center">X</td>
+                    <td id="avaliacaoPorcentagemHumanas" style="text-align:center;width:60px;">X%</td>
                     <td id="valorExplicitoP" style="text-align:center"></td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
+                    <td id="avaliacaoNumeroSaude" style="text-align:center">X</td>
+                    <td id="avaliacaoPorcentagemSaude" style="text-align:center;width:60px;">X%</td>
                     <td id="valorExplicitoP" style="text-align:center"></td>
                 </tr>
             </tbody>
             <tfooter>
                 <tr>
                     <td>Total Geral</td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="totalGeralNumeroExatas" style="text-align:center">X</td>
                     <td id="valorExplicitoP" style="text-align:center;width:60px;"></td>
                     <td id="valorExplicitoP" style="text-align:center"></td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="totalGeralNumeroHumanas" style="text-align:center">X</td>
                     <td id="valorExplicitoP" style="text-align:center;width:60px;"></td>
                     <td id="valorExplicitoP" style="text-align:center"></td>
-                    <td id="valorExplicito" style="text-align:center">X</td>
+                    <td id="totalGeralNumeroSaude" style="text-align:center">X</td>
                     <td id="valorExplicitoP" style="text-align:center;width:60px;"></td>
                     <td id="valorExplicitoP" style="text-align:center"></td>
                 </tr>
