@@ -178,6 +178,17 @@ namespace ProjetoNADD.Controllers
             return query;
         }
         [HttpPost]
+        public object BuscaAnosReitoria()
+        {
+            var query = from anos in _context.Ano
+                        join d in _context.Disciplina on anos.Ano_id equals d.Ano_Disciplina
+                        select new
+                        {
+                            Ano = anos.Ano_id
+                        };
+            return query;
+        }
+        [HttpPost]
         public object BuscaRelatorioCoordenador(int Id_Curso, string Id_Ano)
         {
             var query = from av in _context.Avaliacao
@@ -195,6 +206,77 @@ namespace ProjetoNADD.Controllers
                             Contextualizacao = av.Contextualidade_Avaliacao,
                             Clareza = av.Clareza_Avaliacao,
                             Complexidade = av.Complexidade_Avaliacao
+                        };
+            return query;
+        }
+        [HttpPost]
+        public object BuscaRelatorioReitoria(string Id_Ano)
+        {
+            var query = from av in _context.Avaliacao
+                        join d in _context.Disciplina on av.DisciplinaId equals d.Id_Disciplina
+                        where d.Ano_Disciplina == Id_Ano
+                        select new
+                        {
+                            ValorExplicitoProvaTrue = (from av1 in _context.Avaliacao
+                                                   join d in _context.Disciplina on av.DisciplinaId equals d.Id_Disciplina
+                                                   where d.Ano_Disciplina == Id_Ano
+                                                   where av1.ValorExplicitoProva_Avaliacao == true
+                                                   select av1
+                                                   ).Count(),
+                            ValorExplicitoProvaFalse = (from av1 in _context.Avaliacao
+                                                   join d in _context.Disciplina on av.DisciplinaId equals d.Id_Disciplina
+                                                   where d.Ano_Disciplina == Id_Ano
+                                                   where av1.ValorExplicitoProva_Avaliacao == false
+                                                   select av1
+                                                   ).Count(),
+                            ValorQuestoesExplicitoTrue = (from av1 in _context.Avaliacao
+                                                       join d in _context.Disciplina on av.DisciplinaId equals d.Id_Disciplina
+                                                       where d.Ano_Disciplina == Id_Ano
+                                                       where av1.ValorExplicitoQuestoes_Avaliacao == true
+                                                       select av1
+                                                   ).Count(),
+                            ValorQuestoesExplicitoFalse = (from av1 in _context.Avaliacao
+                                                        join d in _context.Disciplina on av.DisciplinaId equals d.Id_Disciplina
+                                                        where d.Ano_Disciplina == Id_Ano
+                                                        where av1.ValorExplicitoQuestoes_Avaliacao == false
+                                                        select av1
+                                                   ).Count(),
+                            SomatorioValoresTrue = (from av1 in _context.Avaliacao
+                                                          join d in _context.Disciplina on av.DisciplinaId equals d.Id_Disciplina
+                                                          where d.Ano_Disciplina == Id_Ano
+                                                          where av1.SomatorioQuestoes_Avaliacao == true
+                                                          select av1
+                                                   ).Count(),
+                            SomatorioValoresFalse = (from av1 in _context.Avaliacao
+                                                           join d in _context.Disciplina on av.DisciplinaId equals d.Id_Disciplina
+                                                           where d.Ano_Disciplina == Id_Ano
+                                                           where av1.SomatorioQuestoes_Avaliacao == false
+                                                           select av1
+                                                   ).Count(),
+                            ReferenciasTrue = (from av1 in _context.Avaliacao
+                                                    join d in _context.Disciplina on av.DisciplinaId equals d.Id_Disciplina
+                                                    where d.Ano_Disciplina == Id_Ano
+                                                    where av1.Referencias_Avaliacao == true
+                                                    select av1
+                                                   ).Count(),
+                            ReferenciasFalse = (from av1 in _context.Avaliacao
+                                                     join d in _context.Disciplina on av.DisciplinaId equals d.Id_Disciplina
+                                                     where d.Ano_Disciplina == Id_Ano
+                                                     where av1.Referencias_Avaliacao == false
+                                                     select av1
+                                                   ).Count(),
+                            EquilibrioTrue = (from av1 in _context.Avaliacao
+                                               join d in _context.Disciplina on av.DisciplinaId equals d.Id_Disciplina
+                                               where d.Ano_Disciplina == Id_Ano
+                                               where av1.EquilibrioValorQuestoes_Avaliacao == true
+                                               select av1
+                                                   ).Count(),
+                            EquilibrioFalse = (from av1 in _context.Avaliacao
+                                                join d in _context.Disciplina on av.DisciplinaId equals d.Id_Disciplina
+                                                where d.Ano_Disciplina == Id_Ano
+                                                where av1.EquilibrioValorQuestoes_Avaliacao == false
+                                                select av1
+                                                   ).Count(),
                         };
             return query;
         }

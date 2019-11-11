@@ -15,14 +15,14 @@
 <hr />
 <div class="row">
     <div class="col-md-6">
-        <div class="form-group" id="divAno" style="display: none;">
+        <div class="form-group" id="divAno" style="display: block;">
             <label class="control-label" style="font-weight: bold;">Ano</label>
             <select id="Id_Ano" class="form-control" onchange="BuscaRelatorio()" style="width:100%"></select>
         </div>
     </div>
     <div class="col-md-6"></div>
     <hr />
-    
+
     <div class="col-md-1"></div>
     <div class="col-md-10">
         <h6>Dados relativos a formatação das provas avaliadas</h6>
@@ -38,43 +38,43 @@
             <tbody>
                 <tr>
                     <td>Valor da prova explícito</td>
-                    <td id="valorExplicito" style="text-align:center">XX</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XX%</td>
-                    <td id="valorExplicitoP" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
-                    <td id="valorExplicitoP" style="text-align:center; width:120px;">X</td>
+                    <td id="valorExplicitoTrueNumero" style="text-align:center"></td>
+                    <td id="valorExplicitoTruePorcentagem" style="text-align:center;width:60px;"></td>
+                    <td id="valorExplicitoFalseNumero" style="text-align:center"></td>
+                    <td id="valorExplicitoFalsePorcentagem" style="text-align:center;width:60px;"></td>
+                    <td id="valorExplicitoTotal" style="text-align:center; width:120px;"></td>
                 </tr>
                 <tr>
                     <td>Valor das questões explícito</td>
-                    <td id="valorExplicito" style="text-align:center">XX</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XX%</td>
-                    <td id="valorExplicitoP" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
-                    <td id="valorExplicitoP" style="text-align:center; width:120px;">X</td>
+                    <td id="valorQuestoesExplicitoTrueNumero" style="text-align:center"></td>
+                    <td id="valorQuestoesExplicitoTruePorcentagem" style="text-align:center;width:60px;"></td>
+                    <td id="ValorQuestoesExplicitoFalseNumero" style="text-align:center"></td>
+                    <td id="ValorQuestoesExplicitoFalsePorcentagem" style="text-align:center;width:60px;"></td>
+                    <td id="ValorQuestoesExplicitoTotal" style="text-align:center; width:120px;"></td>
                 </tr>
                 <tr>
                     <td>Somatório dos valores das questões</td>
-                    <td id="valorExplicito" style="text-align:center">XX</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XX%</td>
-                    <td id="valorExplicitoP" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
-                    <td id="valorExplicitoP" style="text-align:center; width:120px;">X</td>
+                    <td id="somatorioValoresTrueNumero" style="text-align:center"></td>
+                    <td id="somatorioValoresTruePorcentagem" style="text-align:center;width:60px;"></td>
+                    <td id="somatorioValoresFalseNumero" style="text-align:center"></td>
+                    <td id="somatorioValoresFalsePorcentagem" style="text-align:center;width:60px;"></td>
+                    <td id="somatorioValoresTotal" style="text-align:center; width:120px;"></td>
                 </tr>
                 <tr>
                     <td>Referências bibliográficas</td>
-                    <td id="valorExplicito" style="text-align:center">XX</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XX%</td>
-                    <td id="valorExplicitoP" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
-                    <td id="valorExplicitoP" style="text-align:center; width:120px;">X</td>
+                    <td id="referenciasTrueNumero" style="text-align:center">XX</td>
+                    <td id="referenciasTruePorcentagem" style="text-align:center;width:60px;">XX%</td>
+                    <td id="referenciasFalseNumero" style="text-align:center">X</td>
+                    <td id="referenciasFalsePorcentagem" style="text-align:center;width:60px;">X%</td>
+                    <td id="referenciasTotal" style="text-align:center; width:120px;">X</td>
                 </tr>
                 <tr>
                     <td>Equilíbrio na distribuição dos valores das questões</td>
-                    <td id="valorExplicito" style="text-align:center">XX</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">XX%</td>
-                    <td id="valorExplicitoP" style="text-align:center">X</td>
-                    <td id="valorExplicitoP" style="text-align:center;width:60px;">X%</td>
-                    <td id="valorExplicitoP" style="text-align:center; width:120px;">X</td>
+                    <td id="equilibrioTrueNumero" style="text-align:center">XX</td>
+                    <td id="equilibrioTruePorcentagem" style="text-align:center;width:60px;">XX%</td>
+                    <td id="equilibrioFalseNumero" style="text-align:center">X</td>
+                    <td id="equilibrioFalsePorcentagem" style="text-align:center;width:60px;">X%</td>
+                    <td id="equilibrioTotal" style="text-align:center; width:120px;">X</td>
                 </tr>
             </tbody>
         </table>
@@ -311,10 +311,10 @@
 
     <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
     <script src="~/lib/select2/js/select2.js"></script>
-    <script src="~/js/Relatorios/Coordenador.js"></script>
+    <script src="~/js/Relatorios/Reitoria.js"></script>
     <script>
         $(document).ready(function () {
-            GetCursos();
+            BuscaAnos();
         })
     </script>
 }
