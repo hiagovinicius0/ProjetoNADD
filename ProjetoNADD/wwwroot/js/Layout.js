@@ -11,10 +11,10 @@ function GetRolesLogado() {
                 $("#MenuCadastrar").css('display', 'block');
                 $('#RelatoriosNADD').css('display', 'block');
             }
-            else if (res == "Coordenador") {
+            else if (res === "Coordenador") {
                 $('#RelatoriosCoordenador').css('display', 'block');
             }
-            else if (res == "Pró-Reitoria") {
+            else if (res === "Pro-Reitoria") {
                 $('#RelatoriosReitoria').css('display', 'block');
             }
         },
