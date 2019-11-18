@@ -55,11 +55,19 @@ namespace ProjetoNADD.Controllers
         [HttpPost]
         public string Create(string Ano)
         {
-            var novoAno = new Ano();
-            novoAno.Ano_id = Ano;
-            _context.Add(novoAno);
-            _context.SaveChanges();
-            return "SUCCESS";
+            var anoteste = _context.Ano.Where(a => a.Ano_id == Ano).ToList();
+            if(anoteste.Count == 0)
+            {
+                var novoAno = new Ano();
+                novoAno.Ano_id = Ano;
+                _context.Add(novoAno);
+                _context.SaveChanges();
+                return "SUCCESS";
+            }
+            else
+            {
+                return "ERRO";
+            }
         }
 
         // GET: Anos/Edit/5

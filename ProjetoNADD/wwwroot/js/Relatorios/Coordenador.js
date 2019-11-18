@@ -31,8 +31,15 @@ function BuscaAnos() {
             $('#Id_Ano').append('<option value =""></option>');
             if (dados.length > 0) {
                 var limite = dados.length;
+                var anos = new Array();
                 for (var i = 0; i < limite; i++) {
-                    $('#Id_Ano').append('<option value ="' + dados[i].ano + '">' + dados[i].ano + '</option>');
+                    anos[i] = dados[i].ano
+                }
+                anos = anos.filter(function (elem, pos, self) {
+                    return self.indexOf(elem) == pos;
+                })
+                for (var i = 0; i < anos.length; i++) {
+                    $('#Id_Ano').append('<option value ="' + anos[i] + '">' + anos[i] + '</option>');
                 }
             }
             $("#Id_Ano").select2({
@@ -62,6 +69,9 @@ function BuscaRelatorio() {
             Id_Ano: ano
         },
         success: function (dados) {
+            if ($.fn.DataTable.isDataTable('#tabelaRelatorio')) {
+                $('#tabelaRelatorio').DataTable().destroy();
+            }
             $('#conteudo_relatorio').css('display', 'block')
             $("#corpoTabela").html('')
             if (dados.length > 0) {

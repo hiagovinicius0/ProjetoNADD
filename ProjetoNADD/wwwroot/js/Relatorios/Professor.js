@@ -108,6 +108,7 @@ function BuscaRelatorio() {
                 }
             }
             $('#ProfessorAssinatura').html(stringProfessor)
+            $('#Professor1').html(stringProfessor)
             $('#CoordenadorAssinatura').html(dados[0].coordenador)
             $('#PeriodoAno').html(dados[0].periodo)
             $('#ValorExplicito').html(dados[0].valorProvaExplicito === true ? "Apresenta adequadamente" : "Não Apresenta Adequadamente")

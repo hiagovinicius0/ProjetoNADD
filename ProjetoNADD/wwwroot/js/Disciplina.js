@@ -244,8 +244,13 @@ function SalvarAno() {
             Ano: ano
         },
         success: function (dados) {
-            $("#ModalPequeno").modal('hide');
-            GetAnos()
+            if (dados === 'ERRO') {
+                alert("Ano Duplicado");
+            }
+            else {
+                $("#ModalPequeno").modal('hide');
+                GetAnos()
+            }
         }
     });
 }

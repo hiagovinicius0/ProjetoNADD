@@ -6,9 +6,16 @@
             $('#Id_Ano').html('');
             $('#Id_Ano').append('<option value =""></option>');
             if (dados.length > 0) {
-                var limite = dados.length;
+                var limite = dados.length
+                var anos = new Array();
                 for (var i = 0; i < limite; i++) {
-                    $('#Id_Ano').append('<option value ="' + dados[i].ano + '">' + dados[i].ano + '</option>');
+                    anos[i] = dados[i].ano
+                }
+                anos = anos.filter(function (elem, pos, self) {
+                    return self.indexOf(elem) == pos;
+                })
+                for (var i = 0; i < anos.length; i++) {
+                    $('#Id_Ano').append('<option value ="' + anos[i] + '">' + anos[i] + '</option>');
                 }
             }
             $("#Id_Ano").select2({
@@ -32,6 +39,7 @@ function BuscaRelatorio() {
             Id_Ano: ano
         },
         success: function (dados) {
+            console.log(dados)
             if (dados.length > 0) {
                 var valorExplicitoProvaTrue = dados[0].valorExplicitoProvaTrue;
                 var valorExplicitoProvaFalse = dados[0].valorExplicitoProvaFalse;
@@ -113,7 +121,7 @@ function BuscaRelatorio() {
                 $('#contextualizacaoTotal').html(contextualizacaoTotal)
 
                 //Tabela 3 - Coluna 1
-                var total = dados[0].conhecimento + dados[0].aplicacao + dados[0].aplicacao + dados[0].analise + dados[0].sintese + dados[0].avaliacao;
+                var total = dados[0].conhecimento + dados[0].compreensao + dados[0].aplicacao + dados[0].analise + dados[0].sintese + dados[0].avaliacao;
                 $('#conhecimentoNumero').html(dados[0].conhecimento)
                 $('#compreensaoNumero').html(dados[0].compreensao)
                 $('#aplicacaoNumero').html(dados[0].aplicacao)
@@ -132,7 +140,7 @@ function BuscaRelatorio() {
                 $('#avaliacaoPorcentagem').html(total === 0 ? 0 : ((dados[0].avaliacao / total) * 100).toFixed(2) + "%")
 
                 //Tabela 3 - Coluna 3
-                var total13 = dados[0].conhecimento + dados[0].aplicacao + dados[0].aplicacao
+                var total13 = dados[0].conhecimento + dados[0].aplicacao + dados[0].compreensao
                 var total23 = dados[0].analise + dados[0].sintese + dados[0].avaliacao
                 $('#numero13').html(total13)
                 $('#numero23').html(total23)
@@ -142,7 +150,7 @@ function BuscaRelatorio() {
                 $('#numero23porcentagem').html(((total23 / total) * 100).toFixed(2) + "%")
 
                 //Tabela 4 - Coluna 1
-                var totalExatas = dados[0].conhecimentoExatas + dados[0].aplicacaoExatas + dados[0].aplicacaoExatas + dados[0].analiseExatas + dados[0].sinteseExatas + dados[0].avaliacaoExatas;
+                var totalExatas = dados[0].conhecimentoExatas + dados[0].compreensaoExatas + dados[0].aplicacaoExatas + dados[0].analiseExatas + dados[0].sinteseExatas + dados[0].avaliacaoExatas;
                 $('#conhecimentoNumeroExatas').html(dados[0].conhecimentoExatas)
                 $('#compreensaoNumeroExatas').html(dados[0].compreensaoExatas)
                 $('#aplicacaoNumeroExatas').html(dados[0].aplicacaoExatas)
@@ -160,13 +168,13 @@ function BuscaRelatorio() {
                 $('#avaliacaoPorcentagemExatas').html(totalExatas === 0 ? (0).toFixed(2) + "%" : ((dados[0].avaliacaoExatas / totalExatas) * 100).toFixed(2) + "%")
 
                 //Tabela 4 - Coluna 3
-                var total13Exatas = dados[0].conhecimentoExatas + dados[0].aplicacaoExatas + dados[0].aplicacaoExatas
+                var total13Exatas = dados[0].conhecimentoExatas + dados[0].compreensaoExatas + dados[0].aplicacaoExatas
                 var total23Exatas = dados[0].analiseExatas + dados[0].sinteseExatas + dados[0].avaliacaoExatas
                 $('#numero13Exatas').html(((total13Exatas / totalExatas) * 100).toFixed(2) + "%")
                 $('#numero23Exatas').html(((total23Exatas / totalExatas) * 100).toFixed(2) + "%")
 
                 //Tabela 4 - Coluna 4
-                var totalHumanas = dados[0].conhecimentoHumanas + dados[0].aplicacaoHumanas + dados[0].aplicacaoHumanas + dados[0].analiseHumanas + dados[0].sinteseHumanas + dados[0].avaliacaoHumanas;
+                var totalHumanas = dados[0].conhecimentoHumanas  + dados[0].compreensaoHumanas + dados[0].aplicacaoHumanas + dados[0].analiseHumanas + dados[0].sinteseHumanas + dados[0].sinteseHumanas;
                 $('#conhecimentoNumeroHumanas').html(dados[0].conhecimentoHumanas)
                 $('#compreensaoNumeroHumanas').html(dados[0].compreensaoHumanas)
                 $('#aplicacaoNumeroHumanas').html(dados[0].aplicacaoHumanas)
@@ -177,20 +185,20 @@ function BuscaRelatorio() {
 
                 //Tabela 4 - Coluna 5
                 $('#conhecimentoPorcentagemHumanas').html(totalHumanas === 0 ? (0).toFixed(2) + "%" : ((dados[0].conhecimentoHumanas / totalHumanas) * 100).toFixed(2) + "%")
-                $('#compreensaoPorcentagemHumanas').html(totalHumanas === 0 ? (0).toFixed(2) + "%" : ((dados[0].conhecimentoHumanas / totalHumanas) * 100).toFixed(2) + "%")
-                $('#aplicacaoPorcentagemHumanas').html(totalHumanas === 0 ? (0).toFixed(2) + "%" : ((dados[0].conhecimentoHumanas / totalHumanas) * 100).toFixed(2) + "%")
-                $('#analisePorcentagemHumanas').html(totalHumanas === 0 ? (0).toFixed(2) + "%" : ((dados[0].conhecimentoHumanas / totalHumanas) * 100).toFixed(2) + "%")
-                $('#sintesePorcentagemHumanas').html(totalHumanas === 0 ? (0).toFixed(2) + "%" : ((dados[0].conhecimentoHumanas / totalHumanas) * 100).toFixed(2) + "%")
-                $('#avaliacaoPorcentagemHumanas').html(totalHumanas === 0 ? (0).toFixed(2) + "%" : ((dados[0].conhecimentoHumanas / totalHumanas) * 100).toFixed(2) + "%")
+                $('#compreensaoPorcentagemHumanas').html(totalHumanas === 0 ? (0).toFixed(2) + "%" : ((dados[0].compreensaoHumanas / totalHumanas) * 100).toFixed(2) + "%")
+                $('#aplicacaoPorcentagemHumanas').html(totalHumanas === 0 ? (0).toFixed(2) + "%" : ((dados[0].aplicacaoHumanas / totalHumanas) * 100).toFixed(2) + "%")
+                $('#analisePorcentagemHumanas').html(totalHumanas === 0 ? (0).toFixed(2) + "%" : ((dados[0].analiseHumanas / totalHumanas) * 100).toFixed(2) + "%")
+                $('#sintesePorcentagemHumanas').html(totalHumanas === 0 ? (0).toFixed(2) + "%" : ((dados[0].sinteseHumanas / totalHumanas) * 100).toFixed(2) + "%")
+                $('#avaliacaoPorcentagemHumanas').html(totalHumanas === 0 ? (0).toFixed(2) + "%" : ((dados[0].avaliacaoHumanas / totalHumanas) * 100).toFixed(2) + "%")
 
                 //Tabela 4 - Coluna 6
-                var total13Humanas = dados[0].conhecimentoHumanas + dados[0].aplicacaoHumanas + dados[0].aplicacaoHumanas
+                var total13Humanas = dados[0].conhecimentoHumanas + dados[0].compreensaoHumanas + dados[0].aplicacaoHumanas
                 var total23Humanas = dados[0].analiseHumanas + dados[0].sinteseHumanas + dados[0].avaliacaoHumanas
                 $('#numero13Humanas').html(totalHumanas === 0 ? (0).toFixed(2) + "%" : ((total13Humanas / totalHumanas) * 100).toFixed(2) + "%")
                 $('#numero23Humanas').html(totalHumanas === 0 ? (0).toFixed(2) + "%" : ((total23Humanas / totalHumanas) * 100).toFixed(2) + "%")
 
                 //Tabela 4 - Coluna 7
-                var totalSaude = dados[0].conhecimentoSaude + dados[0].aplicacaoSaude + dados[0].aplicacaoSaude + dados[0].analiseSaude + dados[0].sinteseSaude + dados[0].avaliacaoSaude;
+                var totalSaude = dados[0].conhecimentoSaude  + dados[0].compreensaoSaude + dados[0].aplicacaoSaude + dados[0].analiseSaude + dados[0].sinteseSaude + dados[0].avaliacaoSaude;
                 $('#conhecimentoNumeroSaude').html(dados[0].conhecimentoSaude)
                 $('#compreensaoNumeroSaude').html(dados[0].compreensaoSaude)
                 $('#aplicacaoNumeroSaude').html(dados[0].aplicacaoSaude)
@@ -201,14 +209,14 @@ function BuscaRelatorio() {
 
                 //Tabela 4 - Coluna 8
                 $('#conhecimentoPorcentagemSaude').html(totalSaude === 0 ? (0).toFixed(2) + "%" : ((dados[0].conhecimentoSaude / totalSaude) * 100).toFixed(2) + "%")
-                $('#compreensaoPorcentagemSaude').html(totalSaude === 0 ? (0).toFixed(2) + "%" : ((dados[0].conhecimentoSaude / totalSaude) * 100).toFixed(2) + "%")
-                $('#aplicacaoPorcentagemSaude').html(totalSaude === 0 ? (0).toFixed(2) + "%" : ((dados[0].conhecimentoSaude / totalSaude) * 100).toFixed(2) + "%")
-                $('#analisePorcentagemSaude').html(totalSaude === 0 ? (0).toFixed(2) + "%" : ((dados[0].conhecimentoSaude / totalSaude) * 100).toFixed(2) + "%")
-                $('#sintesePorcentagemSaude').html(totalSaude === 0 ? (0).toFixed(2) + "%" : ((dados[0].conhecimentoSaude / totalSaude) * 100).toFixed(2) + "%")
-                $('#avaliacaoPorcentagemSaude').html(totalSaude === 0 ? (0).toFixed(2) + "%" : ((dados[0].conhecimentoSaude / totalSaude) * 100).toFixed(2) + "%")
+                $('#compreensaoPorcentagemSaude').html(totalSaude === 0 ? (0).toFixed(2) + "%" : ((dados[0].compreensaoSaude / totalSaude) * 100).toFixed(2) + "%")
+                $('#aplicacaoPorcentagemSaude').html(totalSaude === 0 ? (0).toFixed(2) + "%" : ((dados[0].aplicacaoSaude / totalSaude) * 100).toFixed(2) + "%")
+                $('#analisePorcentagemSaude').html(totalSaude === 0 ? (0).toFixed(2) + "%" : ((dados[0].analiseSaude / totalSaude) * 100).toFixed(2) + "%")
+                $('#sintesePorcentagemSaude').html(totalSaude === 0 ? (0).toFixed(2) + "%" : ((dados[0].sinteseSaude / totalSaude) * 100).toFixed(2) + "%")
+                $('#avaliacaoPorcentagemSaude').html(totalSaude === 0 ? (0).toFixed(2) + "%" : ((dados[0].avaliacaoSaude / totalSaude) * 100).toFixed(2) + "%")
 
                 //Tabela 4 - Coluna 9
-                var total13Saude = dados[0].conhecimentoSaude + dados[0].aplicacaoSaude + dados[0].aplicacaoSaude
+                var total13Saude = dados[0].conhecimentoSaude + dados[0].aplicacaoSaude + dados[0].compreensaoSaude
                 var total23Saude = dados[0].analiseSaude + dados[0].sinteseSaude + dados[0].avaliacaoSaude
                 $('#numero13Saude').html(totalSaude === 0 ? (0).toFixed(2) + "%" : ((total13Saude / totalSaude) * 100).toFixed(2) + "%")
                 $('#numero23Saude').html(totalSaude === 0 ? (0).toFixed(2) + "%" : ((total23Saude / totalSaude) * 100).toFixed(2) + "%")
